@@ -41,6 +41,16 @@ body {
   width: 100%;
   height: 100%;
   z-index: 0;
+  filter: contrast(1.02) saturate(1.05);
+}
+
+#map::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  box-shadow: inset 0 0 120px rgba(0,0,0,0.08), inset 0 0 40px rgba(0,0,0,0.04);
 }
 
 /* Mountain Background */
@@ -703,22 +713,22 @@ body {
 .mountain-icon svg {
   width: 100%;
   height: 100%;
-  filter: drop-shadow(0 1px 3px rgba(184,148,78,0.2));
+  filter: drop-shadow(0 2px 4px rgba(138,106,48,0.2));
 }
 
 .mountain-label {
   position: absolute;
-  bottom: -16px;
+  bottom: -18px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 0.5rem;
+  font-size: 0.52rem;
   font-weight: 700;
-  letter-spacing: 1px;
-  color: #b8944e;
-  opacity: 0.6;
+  letter-spacing: 1.2px;
+  color: #8a6a30;
+  opacity: 0.7;
   white-space: nowrap;
   text-transform: uppercase;
-  text-shadow: 0 0 4px rgba(255,255,255,0.8);
+  text-shadow: 0 0 6px rgba(255,255,255,0.9), 0 1px 2px rgba(255,255,255,0.6);
 }
 
 .marker-wrapper {

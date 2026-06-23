@@ -318,6 +318,11 @@
     });
     L.control.zoom({ position: 'topright' }).addTo(map);
     tileLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(map);
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Elevation/World_Hillshade/MapServer/tile/{z}/{y}/{x}', {
+      maxZoom: 19,
+      opacity: 0.35,
+      attribution: '© Esri'
+    }).addTo(map);
     map.fitBounds(BALI_BOUNDS, { padding: [30, 30] });
   }
 
@@ -403,87 +408,110 @@
   }
 
   function addMountainMarkers() {
+    var defs = '<defs>' +
+      '<linearGradient id="mtn-grad-agung" x1="0" y1="0" x2="1" y2="1">' +
+        '<stop offset="0%" stop-color="#c9a96e" stop-opacity="0.45"/>' +
+        '<stop offset="50%" stop-color="#b8944e" stop-opacity="0.25"/>' +
+        '<stop offset="100%" stop-color="#8a6a30" stop-opacity="0.15"/>' +
+      '</linearGradient>' +
+      '<linearGradient id="mtn-grad-batur" x1="0" y1="0" x2="0.8" y2="1">' +
+        '<stop offset="0%" stop-color="#c9a96e" stop-opacity="0.4"/>' +
+        '<stop offset="60%" stop-color="#b8944e" stop-opacity="0.2"/>' +
+        '<stop offset="100%" stop-color="#8a6a30" stop-opacity="0.12"/>' +
+      '</linearGradient>' +
+      '<linearGradient id="mtn-grad-generic" x1="0.2" y1="0" x2="0.8" y2="1">' +
+        '<stop offset="0%" stop-color="#c9a96e" stop-opacity="0.38"/>' +
+        '<stop offset="100%" stop-color="#8a6a30" stop-opacity="0.12"/>' +
+      '</linearGradient>' +
+      '<filter id="mtn-shadow" x="-20%" y="-20%" width="140%" height="140%">' +
+        '<feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#8a6a30" flood-opacity="0.15"/>' +
+      '</filter>' +
+      '<filter id="mtn-glow" x="-10%" y="-10%" width="120%" height="120%">' +
+        '<feGaussianBlur in="SourceGraphic" stdDeviation="0.8" result="blur"/>' +
+        '<feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>' +
+      '</filter>' +
+      '</defs>';
+
     var mountains = [
       {
         name: 'Gunung Agung',
         lat: -8.3427, lng: 115.5081,
-        size: [80, 70],
-        svg: '<svg viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">' +
-          '<path d="M50 6 Q52 12 56 20 Q62 32 68 42 Q74 52 82 58 L88 62 L18 62 L24 58 Q30 52 36 42 Q42 32 46 20 Q48 12 50 6Z" ' +
-          'stroke="#b8944e" stroke-width="1.4" fill="none" opacity="0.55"/>' +
-          '<path d="M50 6 Q51 10 53 16 Q56 24 60 32 Q64 38 68 44" stroke="#c9a96e" stroke-width="0.6" fill="none" opacity="0.3"/>' +
-          '<path d="M50 6 Q49 10 47 16 Q44 24 40 32 Q36 38 32 44" stroke="#c9a96e" stroke-width="0.6" fill="none" opacity="0.3"/>' +
-          '<path d="M36 30 Q42 28 48 29 Q54 30 60 29 Q66 28 72 30" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.2"/>' +
-          '<path d="M42 22 Q46 20 50 21 Q54 22 58 21" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.18"/>' +
-          '<path d="M50 6 L51 4 L53 6" stroke="#c9a96e" stroke-width="0.5" fill="none" opacity="0.25"/>' +
-          '<circle cx="50" cy="3" r="1.5" fill="#c9a96e" opacity="0.12"/>' +
-          '<path d="M48 25 Q50 23 52 25" stroke="#c9a96e" stroke-width="0.3" fill="none" opacity="0.15"/>' +
-          '<path d="M34 38 Q40 36 46 37" stroke="#c9a96e" stroke-width="0.3" fill="none" opacity="0.12"/>' +
-          '<path d="M54 37 Q60 36 66 38" stroke="#c9a96e" stroke-width="0.3" fill="none" opacity="0.12"/>' +
+        size: [90, 80],
+        svg: '<svg viewBox="0 0 100 85" xmlns="http://www.w3.org/2000/svg">' + defs +
+          '<path d="M50 5 Q53 14 58 24 Q64 36 70 46 Q76 54 84 60 L90 64 L10 64 L16 60 Q24 54 30 46 Q36 36 42 24 Q47 14 50 5Z" ' +
+          'fill="url(#mtn-grad-agung)" stroke="#b8944e" stroke-width="1.2" filter="url(#mtn-shadow)"/>' +
+          '<path d="M50 5 Q52 12 55 20 Q60 32 66 42 Q72 50 78 56" stroke="#dfc89a" stroke-width="0.6" fill="none" opacity="0.35"/>' +
+          '<path d="M50 5 Q48 12 45 20 Q40 32 34 42 Q28 50 22 56" stroke="#8a6a30" stroke-width="0.5" fill="none" opacity="0.2"/>' +
+          '<path d="M38 26 Q44 24 50 25 Q56 26 62 25 Q68 24 74 26" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.22"/>' +
+          '<path d="M44 18 Q48 16 52 18" stroke="#dfc89a" stroke-width="0.35" fill="none" opacity="0.25"/>' +
+          '<path d="M50 5 L51 2" stroke="#dfc89a" stroke-width="0.5" fill="none" opacity="0.3" filter="url(#mtn-glow)"/>' +
+          '<path d="M40 34 Q46 32 52 33" stroke="#c9a96e" stroke-width="0.3" fill="none" opacity="0.15"/>' +
+          '<path d="M48 33 Q54 32 60 34" stroke="#c9a96e" stroke-width="0.3" fill="none" opacity="0.12"/>' +
+          '<path d="M20 58 Q32 56 44 58" stroke="#8a6a30" stroke-width="0.25" fill="none" opacity="0.1"/>' +
+          '<path d="M56 57 Q68 56 80 59" stroke="#8a6a30" stroke-width="0.25" fill="none" opacity="0.1"/>' +
           '</svg>'
       },
       {
         name: 'Gunung Batur',
         lat: -8.2407, lng: 115.3773,
-        size: [72, 58],
-        svg: '<svg viewBox="0 0 100 70" fill="none" xmlns="http://www.w3.org/2000/svg">' +
-          '<path d="M50 14 Q53 20 58 28 Q64 36 72 44 Q78 50 85 54 L90 58 L10 58 L15 54 Q22 50 28 44 Q34 36 40 28 Q45 20 50 14Z" ' +
-          'stroke="#b8944e" stroke-width="1.2" fill="none" opacity="0.5"/>' +
-          '<path d="M42 22 Q48 20 54 22 Q60 24 66 22" stroke="#c9a96e" stroke-width="0.5" fill="none" opacity="0.22"/>' +
-          '<path d="M35 32 Q42 29 48 31 Q54 33 62 30 Q68 29 75 32" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.18"/>' +
-          '<path d="M50 14 Q51 17 53 21" stroke="#c9a96e" stroke-width="0.5" fill="none" opacity="0.25"/>' +
-          '<path d="M50 14 Q49 17 47 21" stroke="#c9a96e" stroke-width="0.5" fill="none" opacity="0.25"/>' +
-          '<path d="M44 18 Q48 16 52 18 Q56 16 60 18" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.2"/>' +
-          '<ellipse cx="50" cy="22" rx="4" ry="2" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.18"/>' +
-          '<path d="M28 42 Q36 40 44 42" stroke="#c9a96e" stroke-width="0.3" fill="none" opacity="0.12"/>' +
-          '<path d="M56 41 Q64 40 72 43" stroke="#c9a96e" stroke-width="0.3" fill="none" opacity="0.12"/>' +
+        size: [80, 65],
+        svg: '<svg viewBox="0 0 100 75" xmlns="http://www.w3.org/2000/svg">' + defs +
+          '<path d="M50 12 Q54 20 60 30 Q66 40 74 48 Q80 54 88 58 L92 62 L8 62 L12 58 Q20 54 26 48 Q34 40 40 30 Q46 20 50 12Z" ' +
+          'fill="url(#mtn-grad-batur)" stroke="#b8944e" stroke-width="1.1" filter="url(#mtn-shadow)"/>' +
+          '<path d="M50 12 Q52 18 56 26 Q62 36 68 44 Q74 50 80 54" stroke="#dfc89a" stroke-width="0.5" fill="none" opacity="0.3"/>' +
+          '<path d="M50 12 Q48 18 44 26 Q38 36 32 44 Q26 50 20 54" stroke="#8a6a30" stroke-width="0.45" fill="none" opacity="0.18"/>' +
+          '<path d="M42 22 Q48 20 54 22 Q60 24 66 22" stroke="#c9a96e" stroke-width="0.45" fill="none" opacity="0.22"/>' +
+          '<ellipse cx="50" cy="20" rx="6" ry="3" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.2"/>' +
+          '<path d="M36 32 Q44 29 52 31 Q60 33 68 30 Q74 29 82 32" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.16"/>' +
+          '<path d="M22 50 Q34 48 46 50" stroke="#8a6a30" stroke-width="0.25" fill="none" opacity="0.1"/>' +
+          '<path d="M54 49 Q66 48 78 51" stroke="#8a6a30" stroke-width="0.25" fill="none" opacity="0.1"/>' +
           '</svg>'
       },
       {
         name: 'Gunung Batukaru',
         lat: -8.3100, lng: 115.1267,
-        size: [68, 60],
-        svg: '<svg viewBox="0 0 100 75" fill="none" xmlns="http://www.w3.org/2000/svg">' +
-          '<path d="M50 10 Q54 18 58 26 Q64 36 70 44 Q76 52 82 56 L88 60 L12 60 L18 56 Q24 52 30 44 Q36 36 42 26 Q46 18 50 10Z" ' +
-          'stroke="#b8944e" stroke-width="1.3" fill="none" opacity="0.52"/>' +
-          '<path d="M50 10 Q52 16 55 22 Q58 28 62 34 Q66 40 70 46" stroke="#c9a96e" stroke-width="0.55" fill="none" opacity="0.28"/>' +
-          '<path d="M50 10 Q48 16 45 22 Q42 28 38 34 Q34 40 30 46" stroke="#c9a96e" stroke-width="0.55" fill="none" opacity="0.28"/>' +
-          '<path d="M40 24 Q46 22 50 23 Q54 22 60 24" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.2"/>' +
-          '<path d="M32 34 Q40 31 48 33 Q54 35 62 32 Q68 31 76 34" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.16"/>' +
-          '<path d="M46 16 Q50 14 54 16" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.2"/>' +
-          '<path d="M50 10 Q50.5 8 51 6" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.2"/>' +
-          '<path d="M24 48 Q34 46 44 48" stroke="#c9a96e" stroke-width="0.3" fill="none" opacity="0.1"/>' +
-          '<path d="M56 47 Q66 46 76 49" stroke="#c9a96e" stroke-width="0.3" fill="none" opacity="0.1"/>' +
+        size: [76, 68],
+        svg: '<svg viewBox="0 0 100 80" xmlns="http://www.w3.org/2000/svg">' + defs +
+          '<path d="M50 8 Q54 18 58 28 Q64 38 70 48 Q76 56 84 60 L90 64 L10 64 L16 60 Q24 56 30 48 Q36 38 42 28 Q46 18 50 8Z" ' +
+          'fill="url(#mtn-grad-generic)" stroke="#b8944e" stroke-width="1.2" filter="url(#mtn-shadow)"/>' +
+          '<path d="M50 8 Q52 16 56 24 Q60 32 64 40 Q68 46 72 50" stroke="#dfc89a" stroke-width="0.55" fill="none" opacity="0.32"/>' +
+          '<path d="M50 8 Q48 16 44 24 Q40 32 36 40 Q32 46 28 50" stroke="#8a6a30" stroke-width="0.45" fill="none" opacity="0.18"/>' +
+          '<path d="M40 22 Q46 20 50 21 Q54 20 60 22" stroke="#dfc89a" stroke-width="0.4" fill="none" opacity="0.22"/>' +
+          '<path d="M34 32 Q42 29 50 31 Q58 33 66 30 Q72 29 80 32" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.16"/>' +
+          '<path d="M46 14 Q50 12 54 14" stroke="#dfc89a" stroke-width="0.4" fill="none" opacity="0.22"/>' +
+          '<path d="M50 8 Q50.5 5 51 3" stroke="#dfc89a" stroke-width="0.4" fill="none" opacity="0.25" filter="url(#mtn-glow)"/>' +
+          '<path d="M20 56 Q32 54 44 56" stroke="#8a6a30" stroke-width="0.25" fill="none" opacity="0.1"/>' +
+          '<path d="M56 55 Q68 54 80 57" stroke="#8a6a30" stroke-width="0.25" fill="none" opacity="0.1"/>' +
           '</svg>'
       },
       {
         name: 'Gunung Abang',
         lat: -8.3500, lng: 115.4700,
-        size: [60, 50],
-        svg: '<svg viewBox="0 0 90 65" fill="none" xmlns="http://www.w3.org/2000/svg">' +
-          '<path d="M45 12 Q48 18 52 26 Q56 34 62 42 Q68 50 75 54 L80 58 L10 58 L15 54 Q22 50 28 42 Q34 34 38 26 Q42 18 45 12Z" ' +
-          'stroke="#b8944e" stroke-width="1.1" fill="none" opacity="0.48"/>' +
-          '<path d="M45 12 Q46 16 48 22 Q50 28 54 34 Q58 40 62 46" stroke="#c9a96e" stroke-width="0.5" fill="none" opacity="0.25"/>' +
-          '<path d="M45 12 Q44 16 42 22 Q40 28 36 34 Q32 40 28 46" stroke="#c9a96e" stroke-width="0.5" fill="none" opacity="0.25"/>' +
-          '<path d="M36 28 Q42 26 48 27 Q54 28 60 27 Q66 26 72 28" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.18"/>' +
-          '<path d="M42 20 Q45 18 48 20" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.18"/>' +
-          '<path d="M20 50 Q30 48 40 50" stroke="#c9a96e" stroke-width="0.3" fill="none" opacity="0.1"/>' +
-          '<path d="M50 49 Q60 48 70 51" stroke="#c9a96e" stroke-width="0.3" fill="none" opacity="0.1"/>' +
+        size: [66, 56],
+        svg: '<svg viewBox="0 0 90 70" xmlns="http://www.w3.org/2000/svg">' + defs +
+          '<path d="M45 10 Q48 18 52 28 Q56 38 62 46 Q68 52 76 56 L82 60 L8 60 L14 56 Q22 52 28 46 Q34 38 38 28 Q42 18 45 10Z" ' +
+          'fill="url(#mtn-grad-generic)" stroke="#b8944e" stroke-width="1" filter="url(#mtn-shadow)"/>' +
+          '<path d="M45 10 Q47 16 50 24 Q54 34 58 42 Q62 48 66 52" stroke="#dfc89a" stroke-width="0.5" fill="none" opacity="0.28"/>' +
+          '<path d="M45 10 Q43 16 40 24 Q36 34 32 42 Q28 48 24 52" stroke="#8a6a30" stroke-width="0.4" fill="none" opacity="0.16"/>' +
+          '<path d="M36 26 Q42 24 48 25 Q54 26 60 25 Q66 24 72 26" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.18"/>' +
+          '<path d="M42 18 Q45 16 48 18" stroke="#dfc89a" stroke-width="0.35" fill="none" opacity="0.2"/>' +
+          '<path d="M18 52 Q30 50 42 52" stroke="#8a6a30" stroke-width="0.25" fill="none" opacity="0.1"/>' +
+          '<path d="M48 51 Q60 50 72 53" stroke="#8a6a30" stroke-width="0.25" fill="none" opacity="0.1"/>' +
           '</svg>'
       },
       {
         name: 'Gunung Merbuk',
         lat: -8.1500, lng: 115.0500,
-        size: [56, 46],
-        svg: '<svg viewBox="0 0 85 60" fill="none" xmlns="http://www.w3.org/2000/svg">' +
-          '<path d="M42 14 Q46 20 50 28 Q54 36 60 42 Q66 48 72 52 L78 56 L8 56 L14 52 Q20 48 26 42 Q32 36 36 28 Q40 20 42 14Z" ' +
-          'stroke="#b8944e" stroke-width="1" fill="none" opacity="0.45"/>' +
-          '<path d="M42 14 Q43 18 45 24 Q47 30 50 36 Q53 40 56 44" stroke="#c9a96e" stroke-width="0.5" fill="none" opacity="0.24"/>' +
-          '<path d="M42 14 Q41 18 39 24 Q37 30 34 36 Q31 40 28 44" stroke="#c9a96e" stroke-width="0.5" fill="none" opacity="0.24"/>' +
-          '<path d="M34 26 Q38 24 42 25 Q46 26 50 25 Q54 24 58 26" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.18"/>' +
-          '<path d="M40 20 Q42 18 44 20" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.18"/>' +
-          '<path d="M16 48 Q26 46 36 48" stroke="#c9a96e" stroke-width="0.25" fill="none" opacity="0.1"/>' +
-          '<path d="M48 47 Q58 46 68 49" stroke="#c9a96e" stroke-width="0.25" fill="none" opacity="0.1"/>' +
+        size: [62, 52],
+        svg: '<svg viewBox="0 0 85 65" xmlns="http://www.w3.org/2000/svg">' + defs +
+          '<path d="M42 12 Q46 20 50 30 Q54 38 60 44 Q66 50 72 54 L78 58 L8 58 L14 54 Q20 50 26 44 Q32 38 36 30 Q40 20 42 12Z" ' +
+          'fill="url(#mtn-grad-generic)" stroke="#b8944e" stroke-width="0.9" filter="url(#mtn-shadow)"/>' +
+          '<path d="M42 12 Q44 18 47 26 Q50 34 54 40 Q58 46 62 50" stroke="#dfc89a" stroke-width="0.45" fill="none" opacity="0.26"/>' +
+          '<path d="M42 12 Q40 18 37 26 Q34 34 30 40 Q26 46 22 50" stroke="#8a6a30" stroke-width="0.4" fill="none" opacity="0.15"/>' +
+          '<path d="M34 24 Q38 22 42 23 Q46 24 50 23 Q54 22 58 24" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.18"/>' +
+          '<path d="M40 18 Q42 16 44 18" stroke="#dfc89a" stroke-width="0.35" fill="none" opacity="0.2"/>' +
+          '<path d="M14 50 Q26 48 38 50" stroke="#8a6a30" stroke-width="0.2" fill="none" opacity="0.08"/>' +
+          '<path d="M46 49 Q58 48 70 51" stroke="#8a6a30" stroke-width="0.2" fill="none" opacity="0.08"/>' +
           '</svg>'
       }
     ];
