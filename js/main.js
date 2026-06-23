@@ -280,7 +280,7 @@
   function updateSpotCount(count) {
     var countEl = document.getElementById('spot-count');
     if (countEl) {
-      countEl.textContent = count + ' lokasi wisata';
+      countEl.textContent = count + ' location';
     }
   }
 
