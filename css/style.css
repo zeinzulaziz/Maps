@@ -62,7 +62,6 @@ body {
   height: 50vh;
   z-index: 1;
   pointer-events: none;
-  overflow: hidden;
 }
 
 #mountain-bg svg {
@@ -539,7 +538,7 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 60px;
+  height: 1rem;
   background: linear-gradient(transparent, var(--cream));
   pointer-events: none;
 }
@@ -579,18 +578,19 @@ body {
 .panel-content { padding: 1rem 1.5rem 1.5rem; }
 
 .panel-area {
-  font-size: 0.65rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--green);
-  margin-bottom: 0.5rem;
-  font-weight: 600;
+color: #00834D;
+font-size: 12px;
+font-style: normal;
+font-weight: 700;
+line-height: 110%; /* 13.2px */
+letter-spacing: 2.4px;
+text-transform: uppercase;
 }
 
 #panel-title {
   font-size: 1.5rem;
   font-weight: 400;
-  margin-top: 0.2rem;
+  margin-top: 0.4rem;
   margin-bottom: 0.5rem;
   line-height: 1.2;
   color: var(--ink);
