@@ -85,8 +85,6 @@
     await loadAllData();
     setupEvents();
     revealUI();
-    setTimeout(addWaterWaves, 500);
-    map.on('moveend zoomend', function() { setTimeout(addWaterWaves, 100); });
   }
 
   function decodeEntities(str) {
@@ -363,80 +361,8 @@
       });
     });
     maskLayer = L.polygon([worldBounds].concat(allRings), {
-      color: '#d8e4ee', weight: 0, fillColor: '#e8eef4', fillOpacity: 1, interactive: false
+      color: '#f5f3ef', weight: 0, fillColor: '#f5f3ef', fillOpacity: 1, interactive: false
     }).addTo(map);
-  }
-
-  function addWaterWaves() {
-    if (!geoData) return;
-    var container = document.getElementById('water-waves');
-    var rings = [];
-    geoData.features.forEach(function(feature) {
-      var geom = feature.geometry;
-      var coords = geom.type === 'MultiPolygon' ? geom.coordinates : [geom.coordinates];
-      coords.forEach(function(polygon) {
-        rings.push(polygon[0].map(function(c) { return [c[1], c[0]]; }));
-      });
-    });
-    if (!rings.length) return;
-
-    var longest = rings.reduce(function(a, b) { return a.length > b.length ? a : b; });
-    var simplified = [];
-    var step = Math.max(1, Math.floor(longest.length / 120));
-    for (var i = 0; i < longest.length; i += step) simplified.push(longest[i]);
-
-    var svgNS = 'http://www.w3.org/2000/svg';
-    var svg = document.createElementNS(svgNS, 'svg');
-    svg.setAttribute('viewBox', '0 0 100 100');
-    svg.setAttribute('preserveAspectRatio', 'none');
-    svg.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;';
-
-    function project(lat, lng) {
-      var pt = map.latLngToContainerPoint(L.latLng(lat, lng));
-      var size = map.getSize();
-      return [(pt.x / size.x) * 100, (pt.y / size.y) * 100];
-    }
-
-    var colors = [
-      'rgba(90,140,180,0.18)',
-      'rgba(90,140,180,0.12)',
-      'rgba(90,140,180,0.08)'
-    ];
-
-    for (var w = 0; w < 3; w++) {
-      var pathEl = document.createElementNS(svgNS, 'path');
-      var d = '';
-      var offset = (w + 1) * 3;
-      for (var i = 0; i < simplified.length; i++) {
-        var pt = project(simplified[i][0], simplified[i][1]);
-        var nx = i < simplified.length - 1 ? project(simplified[i + 1][0], simplified[i + 1][1]) : pt;
-        var dx = nx[0] - pt[0];
-        var dy = nx[1] - pt[1];
-        var len = Math.sqrt(dx * dx + dy * dy) || 1;
-        var ox = (-dy / len) * offset;
-        var oy = (dx / len) * offset;
-        var x = pt[0] + ox;
-        var y = pt[1] + oy;
-        d += (i === 0 ? 'M' : 'L') + x.toFixed(2) + ',' + y.toFixed(2);
-      }
-      d += 'Z';
-      pathEl.setAttribute('d', d);
-      pathEl.setAttribute('fill', 'none');
-      pathEl.setAttribute('stroke', colors[w]);
-      pathEl.setAttribute('stroke-width', '0.15');
-      pathEl.setAttribute('stroke-dasharray', '0.8 0.4');
-      var animEl = document.createElementNS(svgNS, 'animate');
-      animEl.setAttribute('attributeName', 'stroke-dashoffset');
-      animEl.setAttribute('from', '0');
-      animEl.setAttribute('to', '2.4');
-      animEl.setAttribute('dur', (4 + w * 2) + 's');
-      animEl.setAttribute('repeatCount', 'indefinite');
-      pathEl.appendChild(animEl);
-      svg.appendChild(pathEl);
-    }
-
-    container.innerHTML = '';
-    container.appendChild(svg);
   }
 
   function createMarkerIcon(location, name) {
