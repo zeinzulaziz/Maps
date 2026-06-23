@@ -81,6 +81,7 @@
     simulateLoading();
     initMap();
     await loadGeoJSON();
+    addMountainMarkers();
     await loadAllData();
     setupEvents();
     revealUI();
@@ -398,6 +399,104 @@
       iconSize: [28, 40],
       iconAnchor: [14, 40],
       popupAnchor: [0, -40]
+    });
+  }
+
+  function addMountainMarkers() {
+    var mountains = [
+      {
+        name: 'Gunung Agung',
+        lat: -8.3427, lng: 115.5081,
+        size: [80, 70],
+        svg: '<svg viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+          '<path d="M50 6 Q52 12 56 20 Q62 32 68 42 Q74 52 82 58 L88 62 L18 62 L24 58 Q30 52 36 42 Q42 32 46 20 Q48 12 50 6Z" ' +
+          'stroke="#b8944e" stroke-width="1.4" fill="none" opacity="0.55"/>' +
+          '<path d="M50 6 Q51 10 53 16 Q56 24 60 32 Q64 38 68 44" stroke="#c9a96e" stroke-width="0.6" fill="none" opacity="0.3"/>' +
+          '<path d="M50 6 Q49 10 47 16 Q44 24 40 32 Q36 38 32 44" stroke="#c9a96e" stroke-width="0.6" fill="none" opacity="0.3"/>' +
+          '<path d="M36 30 Q42 28 48 29 Q54 30 60 29 Q66 28 72 30" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.2"/>' +
+          '<path d="M42 22 Q46 20 50 21 Q54 22 58 21" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.18"/>' +
+          '<path d="M50 6 L51 4 L53 6" stroke="#c9a96e" stroke-width="0.5" fill="none" opacity="0.25"/>' +
+          '<circle cx="50" cy="3" r="1.5" fill="#c9a96e" opacity="0.12"/>' +
+          '<path d="M48 25 Q50 23 52 25" stroke="#c9a96e" stroke-width="0.3" fill="none" opacity="0.15"/>' +
+          '<path d="M34 38 Q40 36 46 37" stroke="#c9a96e" stroke-width="0.3" fill="none" opacity="0.12"/>' +
+          '<path d="M54 37 Q60 36 66 38" stroke="#c9a96e" stroke-width="0.3" fill="none" opacity="0.12"/>' +
+          '</svg>'
+      },
+      {
+        name: 'Gunung Batur',
+        lat: -8.2407, lng: 115.3773,
+        size: [72, 58],
+        svg: '<svg viewBox="0 0 100 70" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+          '<path d="M50 14 Q53 20 58 28 Q64 36 72 44 Q78 50 85 54 L90 58 L10 58 L15 54 Q22 50 28 44 Q34 36 40 28 Q45 20 50 14Z" ' +
+          'stroke="#b8944e" stroke-width="1.2" fill="none" opacity="0.5"/>' +
+          '<path d="M42 22 Q48 20 54 22 Q60 24 66 22" stroke="#c9a96e" stroke-width="0.5" fill="none" opacity="0.22"/>' +
+          '<path d="M35 32 Q42 29 48 31 Q54 33 62 30 Q68 29 75 32" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.18"/>' +
+          '<path d="M50 14 Q51 17 53 21" stroke="#c9a96e" stroke-width="0.5" fill="none" opacity="0.25"/>' +
+          '<path d="M50 14 Q49 17 47 21" stroke="#c9a96e" stroke-width="0.5" fill="none" opacity="0.25"/>' +
+          '<path d="M44 18 Q48 16 52 18 Q56 16 60 18" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.2"/>' +
+          '<ellipse cx="50" cy="22" rx="4" ry="2" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.18"/>' +
+          '<path d="M28 42 Q36 40 44 42" stroke="#c9a96e" stroke-width="0.3" fill="none" opacity="0.12"/>' +
+          '<path d="M56 41 Q64 40 72 43" stroke="#c9a96e" stroke-width="0.3" fill="none" opacity="0.12"/>' +
+          '</svg>'
+      },
+      {
+        name: 'Gunung Batukaru',
+        lat: -8.3100, lng: 115.1267,
+        size: [68, 60],
+        svg: '<svg viewBox="0 0 100 75" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+          '<path d="M50 10 Q54 18 58 26 Q64 36 70 44 Q76 52 82 56 L88 60 L12 60 L18 56 Q24 52 30 44 Q36 36 42 26 Q46 18 50 10Z" ' +
+          'stroke="#b8944e" stroke-width="1.3" fill="none" opacity="0.52"/>' +
+          '<path d="M50 10 Q52 16 55 22 Q58 28 62 34 Q66 40 70 46" stroke="#c9a96e" stroke-width="0.55" fill="none" opacity="0.28"/>' +
+          '<path d="M50 10 Q48 16 45 22 Q42 28 38 34 Q34 40 30 46" stroke="#c9a96e" stroke-width="0.55" fill="none" opacity="0.28"/>' +
+          '<path d="M40 24 Q46 22 50 23 Q54 22 60 24" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.2"/>' +
+          '<path d="M32 34 Q40 31 48 33 Q54 35 62 32 Q68 31 76 34" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.16"/>' +
+          '<path d="M46 16 Q50 14 54 16" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.2"/>' +
+          '<path d="M50 10 Q50.5 8 51 6" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.2"/>' +
+          '<path d="M24 48 Q34 46 44 48" stroke="#c9a96e" stroke-width="0.3" fill="none" opacity="0.1"/>' +
+          '<path d="M56 47 Q66 46 76 49" stroke="#c9a96e" stroke-width="0.3" fill="none" opacity="0.1"/>' +
+          '</svg>'
+      },
+      {
+        name: 'Gunung Abang',
+        lat: -8.3500, lng: 115.4700,
+        size: [60, 50],
+        svg: '<svg viewBox="0 0 90 65" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+          '<path d="M45 12 Q48 18 52 26 Q56 34 62 42 Q68 50 75 54 L80 58 L10 58 L15 54 Q22 50 28 42 Q34 34 38 26 Q42 18 45 12Z" ' +
+          'stroke="#b8944e" stroke-width="1.1" fill="none" opacity="0.48"/>' +
+          '<path d="M45 12 Q46 16 48 22 Q50 28 54 34 Q58 40 62 46" stroke="#c9a96e" stroke-width="0.5" fill="none" opacity="0.25"/>' +
+          '<path d="M45 12 Q44 16 42 22 Q40 28 36 34 Q32 40 28 46" stroke="#c9a96e" stroke-width="0.5" fill="none" opacity="0.25"/>' +
+          '<path d="M36 28 Q42 26 48 27 Q54 28 60 27 Q66 26 72 28" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.18"/>' +
+          '<path d="M42 20 Q45 18 48 20" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.18"/>' +
+          '<path d="M20 50 Q30 48 40 50" stroke="#c9a96e" stroke-width="0.3" fill="none" opacity="0.1"/>' +
+          '<path d="M50 49 Q60 48 70 51" stroke="#c9a96e" stroke-width="0.3" fill="none" opacity="0.1"/>' +
+          '</svg>'
+      },
+      {
+        name: 'Gunung Merbuk',
+        lat: -8.1500, lng: 115.0500,
+        size: [56, 46],
+        svg: '<svg viewBox="0 0 85 60" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+          '<path d="M42 14 Q46 20 50 28 Q54 36 60 42 Q66 48 72 52 L78 56 L8 56 L14 52 Q20 48 26 42 Q32 36 36 28 Q40 20 42 14Z" ' +
+          'stroke="#b8944e" stroke-width="1" fill="none" opacity="0.45"/>' +
+          '<path d="M42 14 Q43 18 45 24 Q47 30 50 36 Q53 40 56 44" stroke="#c9a96e" stroke-width="0.5" fill="none" opacity="0.24"/>' +
+          '<path d="M42 14 Q41 18 39 24 Q37 30 34 36 Q31 40 28 44" stroke="#c9a96e" stroke-width="0.5" fill="none" opacity="0.24"/>' +
+          '<path d="M34 26 Q38 24 42 25 Q46 26 50 25 Q54 24 58 26" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.18"/>' +
+          '<path d="M40 20 Q42 18 44 20" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.18"/>' +
+          '<path d="M16 48 Q26 46 36 48" stroke="#c9a96e" stroke-width="0.25" fill="none" opacity="0.1"/>' +
+          '<path d="M48 47 Q58 46 68 49" stroke="#c9a96e" stroke-width="0.25" fill="none" opacity="0.1"/>' +
+          '</svg>'
+      }
+    ];
+
+    mountains.forEach(function(mt) {
+      var icon = L.divIcon({
+        className: 'mountain-icon',
+        html: '<div class="mountain-label">' + mt.name.replace('Gunung ', '') + '</div>' + mt.svg,
+        iconSize: mt.size,
+        iconAnchor: [mt.size[0] / 2, mt.size[1]],
+        interactive: false
+      });
+      L.marker([mt.lat, mt.lng], { icon: icon, interactive: false }).addTo(map);
     });
   }
 
