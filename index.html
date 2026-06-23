@@ -7,7 +7,7 @@
   <meta name="description" content="Journey Exploring Discovery - Peta interaktif wisata Bali">
   <link rel="icon" href="https://b2016199.smushcdn.com/2016199/wp-content/uploads/2026/04/cropped-favicon-32x32.png?lossy=1&strip=1&avif=1" sizes="32x32">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="css/style.css?v=5">
+  <link rel="stylesheet" href="css/style.css?v=6">
   <link href="https://use.typekit.net/tbe2zvv.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -35,144 +35,109 @@
   <!-- Bali temple sketch background decoration -->
   <div id="mountain-bg">
     <svg viewBox="0 0 1920 700" preserveAspectRatio="xMidYMax meet" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="temple-glow" x1="0.5" y1="0" x2="0.5" y2="1">
-          <stop offset="0%" stop-color="#c9a96e" stop-opacity="0.12"/>
-          <stop offset="100%" stop-color="#c9a96e" stop-opacity="0"/>
-        </linearGradient>
-      </defs>
 
       <!-- Ground line -->
-      <path d="M0 660 Q240 650 480 655 Q720 660 960 652 Q1200 644 1440 650 Q1680 656 1920 648" stroke="#c9a96e" stroke-width="0.5" fill="none" opacity="0.12"/>
+      <path d="M0 660 Q240 650 480 655 Q720 660 960 652 Q1200 644 1440 650 Q1680 656 1920 648" stroke="#c9a96e" stroke-width="1" opacity="0.4"/>
 
       <!-- ====== TANAH LOT (left) ====== -->
-      <!-- Rock base -->
-      <path d="M180 660 Q190 640 200 620 Q210 600 230 590 Q250 580 270 590 Q290 600 300 620 Q310 640 320 660" stroke="#c9a96e" stroke-width="0.8" fill="none" opacity="0.18"/>
-      <!-- Rock texture -->
-      <path d="M210 630 Q220 625 230 628" stroke="#c9a96e" stroke-width="0.3" fill="none" opacity="0.1"/>
-      <path d="M250 615 Q260 610 270 614" stroke="#c9a96e" stroke-width="0.3" fill="none" opacity="0.1"/>
-      <!-- Temple structure on rock -->
-      <path d="M235 590 L235 570 Q240 565 245 560 Q250 555 255 550 Q260 555 265 560 Q270 565 275 570 L275 590" stroke="#c9a96e" stroke-width="0.7" fill="none" opacity="0.2"/>
-      <!-- Meru tower (3 tiers) -->
-      <path d="M250 550 L250 535 Q255 530 258 525 Q260 520 260 515" stroke="#c9a96e" stroke-width="0.6" fill="none" opacity="0.18"/>
-      <path d="M245 535 L275 535" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.15"/>
-      <path d="M247 525 L273 525" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.15"/>
-      <path d="M249 515 L271 515" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.15"/>
-      <path d="M252 515 L260 505 L268 515" stroke="#c9a96e" stroke-width="0.5" fill="none" opacity="0.16"/>
-      <!-- Waves around rock -->
-      <path d="M140 665 Q160 660 180 663 Q200 666 220 662 Q240 658 260 662 Q280 666 300 662 Q320 658 340 663 Q360 668 380 664" stroke="#c9a96e" stroke-width="0.3" fill="none" opacity="0.08"/>
+      <path d="M180 660 Q190 640 200 620 Q210 600 230 590 Q250 580 270 590 Q290 600 300 620 Q310 640 320 660" stroke="#c9a96e" stroke-width="1.5" opacity="0.5"/>
+      <path d="M210 630 Q220 625 230 628" stroke="#c9a96e" stroke-width="0.6" opacity="0.3"/>
+      <path d="M250 615 Q260 610 270 614" stroke="#c9a96e" stroke-width="0.6" opacity="0.3"/>
+      <path d="M235 590 L235 570 Q240 565 245 560 Q250 555 255 550 Q260 555 265 560 Q270 565 275 570 L275 590" stroke="#c9a96e" stroke-width="1.2" opacity="0.55"/>
+      <path d="M250 550 L250 535 Q255 530 258 525 Q260 520 260 515" stroke="#c9a96e" stroke-width="1" opacity="0.5"/>
+      <path d="M245 535 L275 535" stroke="#c9a96e" stroke-width="0.8" opacity="0.45"/>
+      <path d="M247 525 L273 525" stroke="#c9a96e" stroke-width="0.8" opacity="0.45"/>
+      <path d="M249 515 L271 515" stroke="#c9a96e" stroke-width="0.8" opacity="0.45"/>
+      <path d="M252 515 L260 505 L268 515" stroke="#c9a96e" stroke-width="0.9" opacity="0.5"/>
+      <path d="M140 665 Q160 660 180 663 Q200 666 220 662 Q240 658 260 662 Q280 666 300 662 Q320 658 340 663 Q360 668 380 664" stroke="#c9a96e" stroke-width="0.6" opacity="0.3"/>
 
       <!-- ====== BESAKIH / MOTHER TEMPLE (center-left) ====== -->
-      <!-- Terraced base -->
-      <path d="M520 660 L520 640 L680 640 L680 660" stroke="#c9a96e" stroke-width="0.5" fill="none" opacity="0.12"/>
-      <path d="M540 640 L540 620 L660 620 L660 640" stroke="#c9a96e" stroke-width="0.5" fill="none" opacity="0.12"/>
-      <path d="M555 620 L555 600 L645 600 L645 620" stroke="#c9a96e" stroke-width="0.5" fill="none" opacity="0.12"/>
-      <!-- Gate -->
-      <path d="M585 600 L585 580 Q600 570 615 580 L615 600" stroke="#c9a96e" stroke-width="0.6" fill="none" opacity="0.16"/>
-      <!-- Split gateway (candi bentar) -->
-      <path d="M575 600 L575 575 Q578 570 580 568" stroke="#c9a96e" stroke-width="0.5" fill="none" opacity="0.14"/>
-      <path d="M625 600 L625 575 Q622 570 620 568" stroke="#c9a96e" stroke-width="0.5" fill="none" opacity="0.14"/>
-      <!-- Meru towers (5 tiers - main) -->
-      <path d="M595 570 L595 540 Q600 535 605 530 Q608 525 610 520" stroke="#c9a96e" stroke-width="0.7" fill="none" opacity="0.2"/>
-      <path d="M588 540 L622 540" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.14"/>
-      <path d="M590 530 L620 530" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.14"/>
-      <path d="M592 520 L618 520" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.14"/>
-      <path d="M594 510 L616 510" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.14"/>
-      <path d="M596 500 L614 500" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.14"/>
-      <path d="M600 500 L605 490 L610 500" stroke="#c9a96e" stroke-width="0.5" fill="none" opacity="0.16"/>
-      <!-- Side meru (3 tiers) -->
-      <path d="M545 600 L545 580 Q548 575 550 570" stroke="#c9a96e" stroke-width="0.5" fill="none" opacity="0.14"/>
-      <path d="M540 580 L560 580" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.12"/>
-      <path d="M542 570 L558 570" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.12"/>
-      <path d="M544 560 L556 560" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.12"/>
-      <path d="M547 560 L550 552 L553 560" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.13"/>
-      <!-- Another side meru -->
-      <path d="M655 600 L655 580 Q658 575 660 570" stroke="#c9a96e" stroke-width="0.5" fill="none" opacity="0.14"/>
-      <path d="M650 580 L670 580" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.12"/>
-      <path d="M652 570 L668 570" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.12"/>
-      <path d="M654 560 L666 560" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.12"/>
-      <path d="M657 560 L660 552 L663 560" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.13"/>
+      <path d="M520 660 L520 640 L680 640 L680 660" stroke="#c9a96e" stroke-width="1" opacity="0.4"/>
+      <path d="M540 640 L540 620 L660 620 L660 640" stroke="#c9a96e" stroke-width="1" opacity="0.4"/>
+      <path d="M555 620 L555 600 L645 600 L645 620" stroke="#c9a96e" stroke-width="1" opacity="0.4"/>
+      <path d="M585 600 L585 580 Q600 570 615 580 L615 600" stroke="#c9a96e" stroke-width="1.1" opacity="0.5"/>
+      <path d="M575 600 L575 575 Q578 570 580 568" stroke="#c9a96e" stroke-width="0.9" opacity="0.45"/>
+      <path d="M625 600 L625 575 Q622 570 620 568" stroke="#c9a96e" stroke-width="0.9" opacity="0.45"/>
+      <path d="M595 570 L595 540 Q600 535 605 530 Q608 525 610 520" stroke="#c9a96e" stroke-width="1.2" opacity="0.55"/>
+      <path d="M588 540 L622 540" stroke="#c9a96e" stroke-width="0.7" opacity="0.4"/>
+      <path d="M590 530 L620 530" stroke="#c9a96e" stroke-width="0.7" opacity="0.4"/>
+      <path d="M592 520 L618 520" stroke="#c9a96e" stroke-width="0.7" opacity="0.4"/>
+      <path d="M594 510 L616 510" stroke="#c9a96e" stroke-width="0.7" opacity="0.4"/>
+      <path d="M596 500 L614 500" stroke="#c9a96e" stroke-width="0.7" opacity="0.4"/>
+      <path d="M600 500 L605 490 L610 500" stroke="#c9a96e" stroke-width="0.9" opacity="0.45"/>
+      <path d="M545 600 L545 580 Q548 575 550 570" stroke="#c9a96e" stroke-width="0.9" opacity="0.4"/>
+      <path d="M540 580 L560 580" stroke="#c9a96e" stroke-width="0.6" opacity="0.35"/>
+      <path d="M542 570 L558 570" stroke="#c9a96e" stroke-width="0.6" opacity="0.35"/>
+      <path d="M544 560 L556 560" stroke="#c9a96e" stroke-width="0.6" opacity="0.35"/>
+      <path d="M547 560 L550 552 L553 560" stroke="#c9a96e" stroke-width="0.7" opacity="0.38"/>
+      <path d="M655 600 L655 580 Q658 575 660 570" stroke="#c9a96e" stroke-width="0.9" opacity="0.4"/>
+      <path d="M650 580 L670 580" stroke="#c9a96e" stroke-width="0.6" opacity="0.35"/>
+      <path d="M652 570 L668 570" stroke="#c9a96e" stroke-width="0.6" opacity="0.35"/>
+      <path d="M654 560 L666 560" stroke="#c9a96e" stroke-width="0.6" opacity="0.35"/>
+      <path d="M657 560 L660 552 L663 560" stroke="#c9a96e" stroke-width="0.7" opacity="0.38"/>
 
       <!-- ====== ULUN DANU BATUR (center - lakeside) ====== -->
-      <!-- Lake reflection line -->
-      <path d="M880 660 Q920 655 960 658 Q1000 661 1040 656 Q1080 651 1120 655" stroke="#c9a96e" stroke-width="0.3" fill="none" opacity="0.08"/>
-      <!-- Temple on water edge -->
-      <path d="M940 660 L940 635 Q950 625 960 618 Q970 625 980 635 L980 660" stroke="#c9a96e" stroke-width="0.6" fill="none" opacity="0.18"/>
-      <!-- Meru (11 tiers - iconic) -->
-      <path d="M955 618 L955 580 Q960 575 962 570" stroke="#c9a96e" stroke-width="0.6" fill="none" opacity="0.18"/>
-      <path d="M948 580 L972 580" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.13"/>
-      <path d="M949 572 L971 572" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.13"/>
-      <path d="M950 564 L970 564" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.13"/>
-      <path d="M951 556 L969 556" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.13"/>
-      <path d="M952 548 L968 548" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.13"/>
-      <path d="M953 540 L967 540" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.13"/>
-      <path d="M954 532 L966 532" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.13"/>
-      <path d="M955 524 L965 524" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.13"/>
-      <path d="M956 516 L964 516" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.13"/>
-      <path d="M957 508 L963 508" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.13"/>
-      <path d="M958 500 L962 500" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.13"/>
-      <path d="M958 500 L960 492 L962 500" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.15"/>
-      <!-- Reflection -->
-      <path d="M955 665 L955 685 Q960 690 962 695" stroke="#c9a96e" stroke-width="0.3" fill="none" opacity="0.06"/>
-      <path d="M948 685 L972 685" stroke="#c9a96e" stroke-width="0.25" fill="none" opacity="0.05"/>
+      <path d="M880 660 Q920 655 960 658 Q1000 661 1040 656 Q1080 651 1120 655" stroke="#c9a96e" stroke-width="0.6" opacity="0.3"/>
+      <path d="M940 660 L940 635 Q950 625 960 618 Q970 625 980 635 L980 660" stroke="#c9a96e" stroke-width="1.1" opacity="0.5"/>
+      <path d="M955 618 L955 580 Q960 575 962 570" stroke="#c9a96e" stroke-width="1" opacity="0.5"/>
+      <path d="M948 580 L972 580" stroke="#c9a96e" stroke-width="0.6" opacity="0.38"/>
+      <path d="M949 572 L971 572" stroke="#c9a96e" stroke-width="0.6" opacity="0.38"/>
+      <path d="M950 564 L970 564" stroke="#c9a96e" stroke-width="0.6" opacity="0.38"/>
+      <path d="M951 556 L969 556" stroke="#c9a96e" stroke-width="0.6" opacity="0.38"/>
+      <path d="M952 548 L968 548" stroke="#c9a96e" stroke-width="0.6" opacity="0.38"/>
+      <path d="M953 540 L967 540" stroke="#c9a96e" stroke-width="0.6" opacity="0.38"/>
+      <path d="M954 532 L966 532" stroke="#c9a96e" stroke-width="0.6" opacity="0.38"/>
+      <path d="M955 524 L965 524" stroke="#c9a96e" stroke-width="0.6" opacity="0.38"/>
+      <path d="M956 516 L964 516" stroke="#c9a96e" stroke-width="0.6" opacity="0.38"/>
+      <path d="M957 508 L963 508" stroke="#c9a96e" stroke-width="0.6" opacity="0.38"/>
+      <path d="M958 500 L962 500" stroke="#c9a96e" stroke-width="0.6" opacity="0.38"/>
+      <path d="M958 500 L960 492 L962 500" stroke="#c9a96e" stroke-width="0.7" opacity="0.42"/>
+      <path d="M955 665 L955 685 Q960 690 962 695" stroke="#c9a96e" stroke-width="0.5" opacity="0.2"/>
+      <path d="M948 685 L972 685" stroke="#c9a96e" stroke-width="0.4" opacity="0.15"/>
 
       <!-- ====== TAMAN AYUN (center-right) ====== -->
-      <!-- Outer wall -->
-      <path d="M1240 660 L1240 630 L1380 630 L1380 660" stroke="#c9a96e" stroke-width="0.5" fill="none" opacity="0.12"/>
-      <!-- Inner wall -->
-      <path d="M1260 630 L1260 610 L1360 610 L1360 630" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.1"/>
-      <!-- Gate -->
-      <path d="M1295 610 L1295 590 Q1310 580 1325 590 L1325 610" stroke="#c9a96e" stroke-width="0.6" fill="none" opacity="0.16"/>
-      <!-- Meru towers (3 tiers) -->
-      <path d="M1305 580 L1305 555 Q1310 550 1315 545" stroke="#c9a96e" stroke-width="0.5" fill="none" opacity="0.16"/>
-      <path d="M1298 555 L1322 555" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.13"/>
-      <path d="M1300 545 L1320 545" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.13"/>
-      <path d="M1302 535 L1318 535" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.13"/>
-      <path d="M1307 535 L1310 527 L1313 535" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.14"/>
-      <!-- Garden pond -->
-      <path d="M1260 650 Q1310 645 1360 650" stroke="#c9a96e" stroke-width="0.3" fill="none" opacity="0.07"/>
+      <path d="M1240 660 L1240 630 L1380 630 L1380 660" stroke="#c9a96e" stroke-width="1" opacity="0.4"/>
+      <path d="M1260 630 L1260 610 L1360 610 L1360 630" stroke="#c9a96e" stroke-width="0.8" opacity="0.35"/>
+      <path d="M1295 610 L1295 590 Q1310 580 1325 590 L1325 610" stroke="#c9a96e" stroke-width="1.1" opacity="0.5"/>
+      <path d="M1305 580 L1305 555 Q1310 550 1315 545" stroke="#c9a96e" stroke-width="0.9" opacity="0.45"/>
+      <path d="M1298 555 L1322 555" stroke="#c9a96e" stroke-width="0.6" opacity="0.38"/>
+      <path d="M1300 545 L1320 545" stroke="#c9a96e" stroke-width="0.6" opacity="0.38"/>
+      <path d="M1302 535 L1318 535" stroke="#c9a96e" stroke-width="0.6" opacity="0.38"/>
+      <path d="M1307 535 L1310 527 L1313 535" stroke="#c9a96e" stroke-width="0.7" opacity="0.4"/>
+      <path d="M1260 650 Q1310 645 1360 650" stroke="#c9a96e" stroke-width="0.5" opacity="0.25"/>
 
       <!-- ====== LEMPUYANG / GATEWAY OF HEAVEN (right) ====== -->
-      <!-- Stairs going up -->
-      <path d="M1560 660 L1560 640 L1580 640 L1580 660" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.1"/>
-      <path d="M1555 640 L1555 620 L1585 620 L1585 640" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.1"/>
-      <path d="M1550 620 L1550 600 L1590 600 L1590 620" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.1"/>
-      <!-- The iconic split gate (candi bentar) -->
-      <path d="M1565 600 L1565 560 Q1568 550 1570 545" stroke="#c9a96e" stroke-width="0.7" fill="none" opacity="0.2"/>
-      <path d="M1575 600 L1575 560 Q1572 550 1570 545" stroke="#c9a96e" stroke-width="0.7" fill="none" opacity="0.2"/>
-      <!-- Gate top ornament -->
-      <path d="M1565 560 Q1568 555 1570 552 Q1572 555 1575 560" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.15"/>
-      <!-- Gate tiers -->
-      <path d="M1563 575 L1577 575" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.12"/>
-      <path d="M1562 585 L1578 585" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.12"/>
-      <path d="M1561 595 L1579 595" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.12"/>
-      <!-- Background mountain through gate -->
-      <path d="M1570 545 L1570 530 Q1575 520 1580 530 L1580 545" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.1"/>
+      <path d="M1560 660 L1560 640 L1580 640 L1580 660" stroke="#c9a96e" stroke-width="0.8" opacity="0.35"/>
+      <path d="M1555 640 L1555 620 L1585 620 L1585 640" stroke="#c9a96e" stroke-width="0.8" opacity="0.35"/>
+      <path d="M1550 620 L1550 600 L1590 600 L1590 620" stroke="#c9a96e" stroke-width="0.8" opacity="0.35"/>
+      <path d="M1565 600 L1565 560 Q1568 550 1570 545" stroke="#c9a96e" stroke-width="1.3" opacity="0.55"/>
+      <path d="M1575 600 L1575 560 Q1572 550 1570 545" stroke="#c9a96e" stroke-width="1.3" opacity="0.55"/>
+      <path d="M1565 560 Q1568 555 1570 552 Q1572 555 1575 560" stroke="#c9a96e" stroke-width="0.7" opacity="0.42"/>
+      <path d="M1563 575 L1577 575" stroke="#c9a96e" stroke-width="0.6" opacity="0.38"/>
+      <path d="M1562 585 L1578 585" stroke="#c9a96e" stroke-width="0.6" opacity="0.38"/>
+      <path d="M1561 595 L1579 595" stroke="#c9a96e" stroke-width="0.6" opacity="0.38"/>
+      <path d="M1570 545 L1570 530 Q1575 520 1580 530 L1580 545" stroke="#c9a96e" stroke-width="0.7" opacity="0.35"/>
 
       <!-- ====== TIRTA EMPUL (far right) ====== -->
-      <!-- Pool walls -->
-      <path d="M1740 660 L1740 640 L1840 640 L1840 660" stroke="#c9a96e" stroke-width="0.5" fill="none" opacity="0.12"/>
-      <!-- Water spouts -->
-      <path d="M1760 640 L1760 630 Q1762 628 1765 630" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.12"/>
-      <path d="M1780 640 L1780 630 Q1782 628 1785 630" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.12"/>
-      <path d="M1800 640 L1800 630 Q1802 628 1805 630" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.12"/>
-      <path d="M1820 640 L1820 630 Q1822 628 1825 630" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.12"/>
-      <!-- Water flow lines -->
-      <path d="M1760 642 Q1762 648 1765 652" stroke="#c9a96e" stroke-width="0.25" fill="none" opacity="0.08"/>
-      <path d="M1780 642 Q1782 648 1785 652" stroke="#c9a96e" stroke-width="0.25" fill="none" opacity="0.08"/>
-      <path d="M1800 642 Q1802 648 1805 652" stroke="#c9a96e" stroke-width="0.25" fill="none" opacity="0.08"/>
-      <path d="M1820 642 Q1822 648 1825 652" stroke="#c9a96e" stroke-width="0.25" fill="none" opacity="0.08"/>
-      <!-- Small meru behind -->
-      <path d="M1785 630 L1785 615 Q1788 610 1790 605" stroke="#c9a96e" stroke-width="0.5" fill="none" opacity="0.14"/>
-      <path d="M1780 615 L1800 615" stroke="#c9a96e" stroke-width="0.3" fill="none" opacity="0.11"/>
-      <path d="M1782 608 L1798 608" stroke="#c9a96e" stroke-width="0.3" fill="none" opacity="0.11"/>
-      <path d="M1787 608 L1790 600 L1793 608" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.12"/>
+      <path d="M1740 660 L1740 640 L1840 640 L1840 660" stroke="#c9a96e" stroke-width="1" opacity="0.4"/>
+      <path d="M1760 640 L1760 630 Q1762 628 1765 630" stroke="#c9a96e" stroke-width="0.7" opacity="0.4"/>
+      <path d="M1780 640 L1780 630 Q1782 628 1785 630" stroke="#c9a96e" stroke-width="0.7" opacity="0.4"/>
+      <path d="M1800 640 L1800 630 Q1802 628 1805 630" stroke="#c9a96e" stroke-width="0.7" opacity="0.4"/>
+      <path d="M1820 640 L1820 630 Q1822 628 1825 630" stroke="#c9a96e" stroke-width="0.7" opacity="0.4"/>
+      <path d="M1760 642 Q1762 648 1765 652" stroke="#c9a96e" stroke-width="0.4" opacity="0.25"/>
+      <path d="M1780 642 Q1782 648 1785 652" stroke="#c9a96e" stroke-width="0.4" opacity="0.25"/>
+      <path d="M1800 642 Q1802 648 1805 652" stroke="#c9a96e" stroke-width="0.4" opacity="0.25"/>
+      <path d="M1820 642 Q1822 648 1825 652" stroke="#c9a96e" stroke-width="0.4" opacity="0.25"/>
+      <path d="M1785 630 L1785 615 Q1788 610 1790 605" stroke="#c9a96e" stroke-width="0.9" opacity="0.42"/>
+      <path d="M1780 615 L1800 615" stroke="#c9a96e" stroke-width="0.5" opacity="0.35"/>
+      <path d="M1782 608 L1798 608" stroke="#c9a96e" stroke-width="0.5" opacity="0.35"/>
+      <path d="M1787 608 L1790 600 L1793 608" stroke="#c9a96e" stroke-width="0.6" opacity="0.38"/>
 
-      <!-- Decorative frangipani petals scattered -->
-      <path d="M400 640 Q410 635 420 640 Q410 645 400 640Z" stroke="#c9a96e" stroke-width="0.3" fill="none" opacity="0.08"/>
-      <path d="M750 650 Q760 645 770 650 Q760 655 750 650Z" stroke="#c9a96e" stroke-width="0.3" fill="none" opacity="0.08"/>
-      <path d="M1150 645 Q1160 640 1170 645 Q1160 650 1150 645Z" stroke="#c9a96e" stroke-width="0.3" fill="none" opacity="0.08"/>
-      <path d="M1650 655 Q1660 650 1670 655 Q1660 660 1650 655Z" stroke="#c9a96e" stroke-width="0.3" fill="none" opacity="0.08"/>
+      <!-- Decorative petals -->
+      <path d="M400 640 Q410 635 420 640 Q410 645 400 640Z" stroke="#c9a96e" stroke-width="0.5" opacity="0.3"/>
+      <path d="M750 650 Q760 645 770 650 Q760 655 750 650Z" stroke="#c9a96e" stroke-width="0.5" opacity="0.3"/>
+      <path d="M1150 645 Q1160 640 1170 645 Q1160 650 1150 645Z" stroke="#c9a96e" stroke-width="0.5" opacity="0.3"/>
+      <path d="M1650 655 Q1660 650 1670 655 Q1660 660 1650 655Z" stroke="#c9a96e" stroke-width="0.5" opacity="0.3"/>
     </svg>
   </div>
 
