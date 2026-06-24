@@ -607,30 +607,26 @@
     var container = document.querySelector('.panel-slider');
     var track = document.getElementById('panel-slider-track');
     var startX = 0;
-    var currentX = 0;
     var isDragging = false;
 
     container.addEventListener('touchstart', function(e) {
       stopAutoSlide();
       startX = e.touches[0].clientX;
-      currentX = startX;
       isDragging = true;
-      track.style.transition = 'none';
+      gsap.killTweensOf(track);
     }, { passive: true });
 
     container.addEventListener('touchmove', function(e) {
       if (!isDragging) return;
-      currentX = e.touches[0].clientX;
-      var diff = currentX - startX;
-      var offset = -(currentSlide * 100) + (diff / container.offsetWidth * 100);
-      track.style.transform = 'translateX(' + offset + '%)';
+      var diff = e.touches[0].clientX - startX;
+      var offset = -(currentSlide * container.offsetWidth) + diff;
+      gsap.set(track, { x: offset });
     }, { passive: true });
 
     container.addEventListener('touchend', function(e) {
       if (!isDragging) return;
       isDragging = false;
-      track.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-      var diff = currentX - startX;
+      var diff = e.changedTouches[0].clientX - startX;
       if (diff < -40 && currentSlide < totalSlides - 1) {
         currentSlide++;
       } else if (diff > 40 && currentSlide > 0) {
@@ -643,7 +639,11 @@
 
   function updateSlider() {
     var track = document.getElementById('panel-slider-track');
-    track.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
+    gsap.to(track, {
+      x: -(currentSlide * 100) + '%',
+      duration: 0.5,
+      ease: 'power2.out'
+    });
     document.querySelectorAll('.slider-dot').forEach(function(dot, i) {
       dot.classList.toggle('active', i === currentSlide);
     });
