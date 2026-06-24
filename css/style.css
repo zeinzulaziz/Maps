@@ -774,7 +774,7 @@ body {
 
 .panel-image {
   position: relative;
-  height: 180px;
+  height: calc(200rem/16);
   overflow: hidden;
 }
 
@@ -1225,7 +1225,7 @@ text-transform: uppercase;
     left: 0.5rem;
     width: auto;
     top: auto;
-    bottom: 5.5rem;
+    bottom: 6.5rem;
     transform: none;
   }
 
@@ -1235,7 +1235,7 @@ text-transform: uppercase;
     font-size: 0.7rem;
   }
 
-  .panel-image { height: 7rem; }
+  .panel-image { height: 200px; }
   .slider-arrow { width: 1.6rem; height: 1.6rem; font-size: 0.65rem; }
   .slider-prev { left: 0.3rem; }
   .slider-next { right: 0.3rem; }
@@ -1258,7 +1258,7 @@ text-transform: uppercase;
 
   .leaflet-control-zoom {
     position: fixed !important;
-    bottom: 5.5rem !important;
+    bottom: 6.5rem !important;
     right: 0.5rem !important;
     left: auto !important;
     top: auto !important;
