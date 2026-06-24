@@ -408,118 +408,37 @@
   }
 
   function addMountainMarkers() {
-    var defs = '<defs>' +
-      '<linearGradient id="mtn-grad-agung" x1="0" y1="0" x2="1" y2="1">' +
-        '<stop offset="0%" stop-color="#c9a96e" stop-opacity="0.45"/>' +
-        '<stop offset="50%" stop-color="#b8944e" stop-opacity="0.25"/>' +
-        '<stop offset="100%" stop-color="#8a6a30" stop-opacity="0.15"/>' +
-      '</linearGradient>' +
-      '<linearGradient id="mtn-grad-batur" x1="0" y1="0" x2="0.8" y2="1">' +
-        '<stop offset="0%" stop-color="#c9a96e" stop-opacity="0.4"/>' +
-        '<stop offset="60%" stop-color="#b8944e" stop-opacity="0.2"/>' +
-        '<stop offset="100%" stop-color="#8a6a30" stop-opacity="0.12"/>' +
-      '</linearGradient>' +
-      '<linearGradient id="mtn-grad-generic" x1="0.2" y1="0" x2="0.8" y2="1">' +
-        '<stop offset="0%" stop-color="#c9a96e" stop-opacity="0.38"/>' +
-        '<stop offset="100%" stop-color="#8a6a30" stop-opacity="0.12"/>' +
-      '</linearGradient>' +
-      '<filter id="mtn-shadow" x="-20%" y="-20%" width="140%" height="140%">' +
-        '<feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#8a6a30" flood-opacity="0.15"/>' +
-      '</filter>' +
-      '<filter id="mtn-glow" x="-10%" y="-10%" width="120%" height="120%">' +
-        '<feGaussianBlur in="SourceGraphic" stdDeviation="0.8" result="blur"/>' +
-        '<feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>' +
-      '</filter>' +
-      '</defs>';
+    var C = '#8a7a68';
+    var Cl = '#a09080';
+
+    var mtnPaths = [
+      'M428.97 227.25C414.1 215.37 399.53 203.72 385 192.01C382.09 189.67 378.75 188.22 375.4 186.74C364.73 182.04 353.96 177.55 343.42 172.57C335.76 168.95 330.62 162.03 324.3 156.65C315.17 148.89 306.39 140.69 297.52 132.62C295.56 130.84 294.05 130.28 291.51 132.08C281.32 139.31 271.1 146.52 260.55 153.2C250.45 159.59 243.55 169.07 235.62 177.55C228.11 185.57 220.89 193.88 213.62 202.12C211.89 204.09 209.72 205.17 207.38 206.1C194.37 211.24 181.4 216.49 168.33 221.48C164.1 223.1 161.11 226.22 157.91 229.07C145.48 240.16 133.19 251.41 120.85 262.6C120.23 263.16 119.62 263.73 118.95 264.22C117.5 265.27 115.98 266.93 114.18 265.06C112.34 263.16 113.35 261.42 115.01 259.92C130.12 246.32 145.2 232.69 160.37 219.17C161.82 217.88 163.78 217.09 165.62 216.35C177.68 211.53 189.78 206.79 201.86 202.01C203.56 201.33 205.31 200.72 206.89 199.82C210.45 197.78 213.22 194.62 215.11 191.25C217.88 186.31 211.81 185.41 209.95 182.56C200.98 168.75 185.4 167.89 171.68 163.55C167.93 162.36 164.62 160.95 161.67 158.31C156.08 153.31 150.13 148.73 144.62 143.65C141 140.32 138.37 139.9 134.85 143.97C130.08 149.51 124.7 154.53 119.51 159.7C118.03 161.17 116.33 163.37 114.08 161.1C111.94 158.94 113.8 157.17 115.36 155.6C122.03 148.85 128.8 142.18 135.36 135.32C138.01 132.55 140.31 132.56 143.11 134.92C150.1 140.85 157.28 146.55 164.16 152.6C167.26 155.33 170.54 157.35 174.56 158.17C175.38 158.33 176.17 158.62 176.98 158.78C192.96 162.07 207.58 167.73 217.56 181.66C218.13 182.45 218.98 183.05 219.74 183.7C219.98 183.9 220.33 183.99 220.98 184.29C227.23 179 232.74 172.67 237.69 166.15C246.01 155.21 257.32 148.29 268.26 140.75C275.8 135.54 283.45 130.5 290.9 125.17C293.89 123.03 296.04 123.19 298.75 125.68C312.27 138.06 326.01 150.18 339.47 162.61C343.28 166.13 347.76 168.06 352.34 170.06C354.47 170.99 356.26 169.94 358.12 169.4C389.06 160.49 418.05 147.21 445.41 130.35C448.83 128.25 451.64 128.21 455.13 130.08C463.06 134.32 470.91 138.9 479.27 142.1C494.39 147.88 506.08 157.9 516.61 169.68C517.6 170.79 518.86 171.75 518.93 173.4C518.98 174.5 518.38 175.31 517.44 175.81C515.82 176.68 514.52 175.88 513.42 174.79C508.43 169.88 503.46 164.96 498.53 159.98C496.64 158.07 494.57 156.45 492.15 155.25C479.46 148.95 466.79 142.63 454.12 136.29C451.97 135.21 450.1 134.55 447.61 135.92C434.05 143.39 421.03 151.82 406.63 157.78C392.49 163.63 378.44 169.7 362.86 174.09C366.61 177.1 370.38 178.35 373.96 179.62C382.13 182.51 389 187.31 395.61 192.75C407.18 202.28 419 211.51 430.6 221.01C434.1 223.88 438.34 224.84 442.36 226.33C455.47 231.21 468.63 235.95 481.84 240.55C485.81 241.94 488.48 244.92 491.63 247.33C496.92 251.37 502.13 255.54 507.33 259.7C508.95 260.99 510.54 262.58 508.85 264.74C507.11 266.94 505.09 265.79 503.67 264.32C484.52 244.44 458.3 238.71 433.89 229.36C432.34 228.77 430.82 228.09 428.97 227.25Z',
+      'M313.55 176.91C312.18 173.74 313.41 173.73 315.16 175.37C318.32 178.32 321.39 181.39 324.24 184.64C326.65 187.39 329.48 189.04 333 189.99C343.77 192.89 354.33 196.49 364.71 200.59C366.09 201.14 367.78 201.55 368.65 202.6C375.11 210.38 381.71 218.08 386.98 226.8C385.27 228.14 384.61 226.78 383.88 226.11C382.16 224.54 380.26 223.06 378.92 221.19C370.45 209.41 358.78 202.74 344.91 199.47C344.75 199.43 344.59 199.37 344.42 199.34C330.86 196.56 320.26 189.68 313.55 176.91Z',
+      'M207.86 226.72C212.17 225.78 216.03 224.32 219.95 224.14C229 223.73 235.28 218.64 241.48 212.94C244.91 209.78 248.37 206.52 253.51 203.66C252.22 208.66 248.82 210.58 246.72 213.39C239.97 222.4 232 229.37 219.87 230.06C208.64 230.7 198.53 234.62 189.85 241.98C188.79 242.88 187.6 244.01 184.61 242.93C192.45 237 197.03 228.08 207.86 226.72Z',
+      'M444.01 253.93C433.74 248.77 423.58 244.18 414.46 237.68C413.68 237.13 412.69 236.69 412.63 235.45C413.55 234.04 414.63 234.95 415.64 235.3C426.68 239.08 437.23 243.95 447.37 249.7C453.03 252.92 454.83 259.16 458.12 264.33C452.16 262.69 449.57 256.59 444.01 253.93Z',
+      'M177.62 174.17C187.94 175.12 193.7 181.54 198.91 189.21C196.61 190.47 195.52 189.01 194.54 188.13C188.64 182.85 181.64 180.25 173.9 179.25C164.45 178.03 157.23 173.51 153.11 164.29C160.51 169.25 168.24 173.31 177.62 174.17Z',
+      'M486.67 183.28C482.23 177.87 477.9 172.82 473.91 167.52C471.38 164.14 467.63 162.7 464.36 160.47C461.31 158.38 457.93 156.69 455.5 153.32C470.76 154.46 488.63 171.12 491.23 186.35C489 186.58 488.28 184.55 486.67 183.28Z'
+    ];
+
+    var mtnSvg = '<svg viewBox="0 0 608 352" xmlns="http://www.w3.org/2000/svg">';
+    mtnPaths.forEach(function(d) {
+      mtnSvg += '<path fill="' + C + '" opacity="0.55" stroke="none" d="' + d + '"/>';
+    });
+    mtnSvg += '<path fill="none" stroke="' + Cl + '" stroke-width="1.5" opacity="0.3" d="' + mtnPaths[0] + '"/>';
+    mtnSvg += '</svg>';
 
     var mountains = [
-      {
-        name: 'Gunung Agung',
-        lat: -8.3427, lng: 115.5081,
-        size: [90, 80],
-        svg: '<svg viewBox="0 0 100 85" xmlns="http://www.w3.org/2000/svg">' + defs +
-          '<path d="M50 5 Q53 14 58 24 Q64 36 70 46 Q76 54 84 60 L90 64 L10 64 L16 60 Q24 54 30 46 Q36 36 42 24 Q47 14 50 5Z" ' +
-          'fill="url(#mtn-grad-agung)" stroke="#b8944e" stroke-width="1.2" filter="url(#mtn-shadow)"/>' +
-          '<path d="M50 5 Q52 12 55 20 Q60 32 66 42 Q72 50 78 56" stroke="#dfc89a" stroke-width="0.6" fill="none" opacity="0.35"/>' +
-          '<path d="M50 5 Q48 12 45 20 Q40 32 34 42 Q28 50 22 56" stroke="#8a6a30" stroke-width="0.5" fill="none" opacity="0.2"/>' +
-          '<path d="M38 26 Q44 24 50 25 Q56 26 62 25 Q68 24 74 26" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.22"/>' +
-          '<path d="M44 18 Q48 16 52 18" stroke="#dfc89a" stroke-width="0.35" fill="none" opacity="0.25"/>' +
-          '<path d="M50 5 L51 2" stroke="#dfc89a" stroke-width="0.5" fill="none" opacity="0.3" filter="url(#mtn-glow)"/>' +
-          '<path d="M40 34 Q46 32 52 33" stroke="#c9a96e" stroke-width="0.3" fill="none" opacity="0.15"/>' +
-          '<path d="M48 33 Q54 32 60 34" stroke="#c9a96e" stroke-width="0.3" fill="none" opacity="0.12"/>' +
-          '<path d="M20 58 Q32 56 44 58" stroke="#8a6a30" stroke-width="0.25" fill="none" opacity="0.1"/>' +
-          '<path d="M56 57 Q68 56 80 59" stroke="#8a6a30" stroke-width="0.25" fill="none" opacity="0.1"/>' +
-          '</svg>'
-      },
-      {
-        name: 'Gunung Batur',
-        lat: -8.2407, lng: 115.3773,
-        size: [80, 65],
-        svg: '<svg viewBox="0 0 100 75" xmlns="http://www.w3.org/2000/svg">' + defs +
-          '<path d="M50 12 Q54 20 60 30 Q66 40 74 48 Q80 54 88 58 L92 62 L8 62 L12 58 Q20 54 26 48 Q34 40 40 30 Q46 20 50 12Z" ' +
-          'fill="url(#mtn-grad-batur)" stroke="#b8944e" stroke-width="1.1" filter="url(#mtn-shadow)"/>' +
-          '<path d="M50 12 Q52 18 56 26 Q62 36 68 44 Q74 50 80 54" stroke="#dfc89a" stroke-width="0.5" fill="none" opacity="0.3"/>' +
-          '<path d="M50 12 Q48 18 44 26 Q38 36 32 44 Q26 50 20 54" stroke="#8a6a30" stroke-width="0.45" fill="none" opacity="0.18"/>' +
-          '<path d="M42 22 Q48 20 54 22 Q60 24 66 22" stroke="#c9a96e" stroke-width="0.45" fill="none" opacity="0.22"/>' +
-          '<ellipse cx="50" cy="20" rx="6" ry="3" stroke="#c9a96e" stroke-width="0.4" fill="none" opacity="0.2"/>' +
-          '<path d="M36 32 Q44 29 52 31 Q60 33 68 30 Q74 29 82 32" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.16"/>' +
-          '<path d="M22 50 Q34 48 46 50" stroke="#8a6a30" stroke-width="0.25" fill="none" opacity="0.1"/>' +
-          '<path d="M54 49 Q66 48 78 51" stroke="#8a6a30" stroke-width="0.25" fill="none" opacity="0.1"/>' +
-          '</svg>'
-      },
-      {
-        name: 'Gunung Batukaru',
-        lat: -8.3100, lng: 115.1267,
-        size: [76, 68],
-        svg: '<svg viewBox="0 0 100 80" xmlns="http://www.w3.org/2000/svg">' + defs +
-          '<path d="M50 8 Q54 18 58 28 Q64 38 70 48 Q76 56 84 60 L90 64 L10 64 L16 60 Q24 56 30 48 Q36 38 42 28 Q46 18 50 8Z" ' +
-          'fill="url(#mtn-grad-generic)" stroke="#b8944e" stroke-width="1.2" filter="url(#mtn-shadow)"/>' +
-          '<path d="M50 8 Q52 16 56 24 Q60 32 64 40 Q68 46 72 50" stroke="#dfc89a" stroke-width="0.55" fill="none" opacity="0.32"/>' +
-          '<path d="M50 8 Q48 16 44 24 Q40 32 36 40 Q32 46 28 50" stroke="#8a6a30" stroke-width="0.45" fill="none" opacity="0.18"/>' +
-          '<path d="M40 22 Q46 20 50 21 Q54 20 60 22" stroke="#dfc89a" stroke-width="0.4" fill="none" opacity="0.22"/>' +
-          '<path d="M34 32 Q42 29 50 31 Q58 33 66 30 Q72 29 80 32" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.16"/>' +
-          '<path d="M46 14 Q50 12 54 14" stroke="#dfc89a" stroke-width="0.4" fill="none" opacity="0.22"/>' +
-          '<path d="M50 8 Q50.5 5 51 3" stroke="#dfc89a" stroke-width="0.4" fill="none" opacity="0.25" filter="url(#mtn-glow)"/>' +
-          '<path d="M20 56 Q32 54 44 56" stroke="#8a6a30" stroke-width="0.25" fill="none" opacity="0.1"/>' +
-          '<path d="M56 55 Q68 54 80 57" stroke="#8a6a30" stroke-width="0.25" fill="none" opacity="0.1"/>' +
-          '</svg>'
-      },
-      {
-        name: 'Gunung Abang',
-        lat: -8.3500, lng: 115.4700,
-        size: [66, 56],
-        svg: '<svg viewBox="0 0 90 70" xmlns="http://www.w3.org/2000/svg">' + defs +
-          '<path d="M45 10 Q48 18 52 28 Q56 38 62 46 Q68 52 76 56 L82 60 L8 60 L14 56 Q22 52 28 46 Q34 38 38 28 Q42 18 45 10Z" ' +
-          'fill="url(#mtn-grad-generic)" stroke="#b8944e" stroke-width="1" filter="url(#mtn-shadow)"/>' +
-          '<path d="M45 10 Q47 16 50 24 Q54 34 58 42 Q62 48 66 52" stroke="#dfc89a" stroke-width="0.5" fill="none" opacity="0.28"/>' +
-          '<path d="M45 10 Q43 16 40 24 Q36 34 32 42 Q28 48 24 52" stroke="#8a6a30" stroke-width="0.4" fill="none" opacity="0.16"/>' +
-          '<path d="M36 26 Q42 24 48 25 Q54 26 60 25 Q66 24 72 26" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.18"/>' +
-          '<path d="M42 18 Q45 16 48 18" stroke="#dfc89a" stroke-width="0.35" fill="none" opacity="0.2"/>' +
-          '<path d="M18 52 Q30 50 42 52" stroke="#8a6a30" stroke-width="0.25" fill="none" opacity="0.1"/>' +
-          '<path d="M48 51 Q60 50 72 53" stroke="#8a6a30" stroke-width="0.25" fill="none" opacity="0.1"/>' +
-          '</svg>'
-      },
-      {
-        name: 'Gunung Merbuk',
-        lat: -8.1500, lng: 115.0500,
-        size: [62, 52],
-        svg: '<svg viewBox="0 0 85 65" xmlns="http://www.w3.org/2000/svg">' + defs +
-          '<path d="M42 12 Q46 20 50 30 Q54 38 60 44 Q66 50 72 54 L78 58 L8 58 L14 54 Q20 50 26 44 Q32 38 36 30 Q40 20 42 12Z" ' +
-          'fill="url(#mtn-grad-generic)" stroke="#b8944e" stroke-width="0.9" filter="url(#mtn-shadow)"/>' +
-          '<path d="M42 12 Q44 18 47 26 Q50 34 54 40 Q58 46 62 50" stroke="#dfc89a" stroke-width="0.45" fill="none" opacity="0.26"/>' +
-          '<path d="M42 12 Q40 18 37 26 Q34 34 30 40 Q26 46 22 50" stroke="#8a6a30" stroke-width="0.4" fill="none" opacity="0.15"/>' +
-          '<path d="M34 24 Q38 22 42 23 Q46 24 50 23 Q54 22 58 24" stroke="#c9a96e" stroke-width="0.35" fill="none" opacity="0.18"/>' +
-          '<path d="M40 18 Q42 16 44 18" stroke="#dfc89a" stroke-width="0.35" fill="none" opacity="0.2"/>' +
-          '<path d="M14 50 Q26 48 38 50" stroke="#8a6a30" stroke-width="0.2" fill="none" opacity="0.08"/>' +
-          '<path d="M46 49 Q58 48 70 51" stroke="#8a6a30" stroke-width="0.2" fill="none" opacity="0.08"/>' +
-          '</svg>'
-      }
+      { name: 'Agung', lat: -8.3427, lng: 115.5081, size: [105, 62] },
+      { name: 'Batur', lat: -8.2407, lng: 115.3773, size: [100, 58] },
+      { name: 'Batukaru', lat: -8.3100, lng: 115.1267, size: [92, 54] },
+      { name: 'Abang', lat: -8.3500, lng: 115.4700, size: [84, 50] },
+      { name: 'Merbuk', lat: -8.2000, lng: 115.1200, size: [76, 44] }
     ];
 
     mountains.forEach(function(mt) {
       var icon = L.divIcon({
         className: 'mountain-icon',
-        html: '<div class="mountain-label">' + mt.name.replace('Gunung ', '') + '</div>' + mt.svg,
+        html: '<div class="mountain-label">' + mt.name + '</div>' + mtnSvg,
         iconSize: mt.size,
         iconAnchor: [mt.size[0] / 2, mt.size[1]],
         interactive: false
