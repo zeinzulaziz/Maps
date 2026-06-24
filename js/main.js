@@ -600,6 +600,44 @@
       img.alt = '';
       track.appendChild(img);
     });
+    setupSliderTouch();
+  }
+
+  function setupSliderTouch() {
+    var track = document.getElementById('panel-slider-track');
+    var startX = 0;
+    var currentX = 0;
+    var isDragging = false;
+
+    track.addEventListener('touchstart', function(e) {
+      stopAutoSlide();
+      startX = e.touches[0].clientX;
+      isDragging = true;
+      track.style.transition = 'none';
+    }, { passive: true });
+
+    track.addEventListener('touchmove', function(e) {
+      if (!isDragging) return;
+      currentX = e.touches[0].clientX;
+      var diff = currentX - startX;
+      var offset = -(currentSlide * 100) + (diff / track.parentElement.offsetWidth * 100);
+      track.style.transform = 'translateX(' + offset + '%)';
+    }, { passive: true });
+
+    track.addEventListener('touchend', function(e) {
+      if (!isDragging) return;
+      isDragging = false;
+      track.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+      var diff = currentX - startX;
+      var threshold = track.parentElement.offsetWidth * 0.2;
+      if (diff < -threshold && currentSlide < totalSlides - 1) {
+        currentSlide++;
+      } else if (diff > threshold && currentSlide > 0) {
+        currentSlide--;
+      }
+      updateSlider();
+      startAutoSlide();
+    }, { passive: true });
   }
 
   function updateSlider() {
