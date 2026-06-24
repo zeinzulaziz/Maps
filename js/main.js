@@ -83,6 +83,7 @@
     await loadGeoJSON();
     addMountainMarkers();
     await loadAllData();
+    setupSearch();
     setupEvents();
     revealUI();
   }
@@ -554,6 +555,122 @@
     document.querySelector('.filter-tab[data-taxonomy="interest"]').classList.add('active');
     buildFilterUI();
     applyFilters();
+  }
+
+  /* ========== SEARCH ========== */
+  function searchSpots(query) {
+    if (!query || query.length < 2) return [];
+    var q = query.toLowerCase();
+    return spots.filter(function(spot) {
+      return (spot.name && spot.name.toLowerCase().indexOf(q) !== -1) ||
+             (spot.location && spot.location.toLowerCase().indexOf(q) !== -1) ||
+             (spot.interest && spot.interest.toLowerCase().indexOf(q) !== -1) ||
+             (spot.description && spot.description.toLowerCase().indexOf(q) !== -1);
+    });
+  }
+
+  function highlightMatch(text, query) {
+    if (!text || !query) return text || '';
+    var idx = text.toLowerCase().indexOf(query.toLowerCase());
+    if (idx === -1) return text;
+    return text.substring(0, idx) + '<mark>' + text.substring(idx, idx + query.length) + '</mark>' + text.substring(idx + query.length);
+  }
+
+  function renderSearchResults(results, query) {
+    var dropdown = document.getElementById('search-dropdown');
+    if (results.length === 0) {
+      dropdown.innerHTML = '<div class="search-empty"><i class="fas fa-search"></i>Tidak ditemukan "' + query + '"</div>';
+      dropdown.classList.remove('hidden');
+      return;
+    }
+    var html = '';
+    results.forEach(function(spot) {
+      var meta = spot.interest || spot.category || '';
+      if (spot.location) meta += (meta ? ' \u2014 ' : '') + spot.location;
+      html += '<div class="search-result" data-lat="' + spot.lat + '" data-lng="' + spot.lng + '" data-id="' + spot.id + '">' +
+        '<div class="search-result-icon"><i class="fas fa-map-marker-alt"></i></div>' +
+        '<div class="search-result-info">' +
+          '<div class="search-result-name">' + highlightMatch(spot.name, query) + '</div>' +
+          '<div class="search-result-meta">' + meta + '</div>' +
+        '</div>' +
+      '</div>';
+    });
+    dropdown.innerHTML = html;
+    dropdown.classList.remove('hidden');
+
+    dropdown.querySelectorAll('.search-result').forEach(function(el) {
+      el.addEventListener('click', function() {
+        var lat = parseFloat(this.dataset.lat);
+        var lng = parseFloat(this.dataset.lng);
+        var id = parseInt(this.dataset.id);
+        var spot = spots.find(function(s) { return s.id === id; });
+        if (spot) {
+          var marker = markers.find(function(m) { return m.spot.id === id; });
+          if (marker) {
+            animateToMarker(spot, marker.layer);
+            map.setView([lat, lng], 14, { animate: true, duration: 0.8 });
+          }
+        }
+        closeSearch();
+      });
+    });
+  }
+
+  function closeSearch() {
+    var dropdown = document.getElementById('search-dropdown');
+    var input = document.getElementById('search-input');
+    var clear = document.getElementById('search-clear');
+    dropdown.classList.add('hidden');
+    dropdown.innerHTML = '';
+    input.value = '';
+    input.blur();
+    clear.classList.remove('visible');
+  }
+
+  function setupSearch() {
+    var input = document.getElementById('search-input');
+    var clear = document.getElementById('search-clear');
+    var wrapper = document.getElementById('search-wrapper');
+
+    input.addEventListener('input', function() {
+      var val = this.value.trim();
+      clear.classList.toggle('visible', val.length > 0);
+      if (val.length >= 2) {
+        var results = searchSpots(val);
+        renderSearchResults(results, val);
+      } else {
+        document.getElementById('search-dropdown').classList.add('hidden');
+      }
+    });
+
+    input.addEventListener('focus', function() {
+      var val = this.value.trim();
+      if (val.length >= 2) {
+        var results = searchSpots(val);
+        renderSearchResults(results, val);
+      }
+    });
+
+    clear.addEventListener('click', function(e) {
+      e.stopPropagation();
+      closeSearch();
+    });
+
+    document.addEventListener('click', function(e) {
+      if (!wrapper.contains(e.target)) {
+        document.getElementById('search-dropdown').classList.add('hidden');
+      }
+    });
+
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeSearch();
+      }
+      if (e.key === 'Enter') {
+        var first = document.querySelector('.search-result');
+        if (first) first.click();
+      }
+    });
   }
 
   function setupEvents() {
