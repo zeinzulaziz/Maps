@@ -60,6 +60,24 @@
   let isLoading = false;
   let currentSlide = 0;
   let totalSlides = 0;
+  let autoSlideTimer = null;
+  let autoSlideDelay = 3500;
+
+  function startAutoSlide() {
+    stopAutoSlide();
+    if (totalSlides <= 1) return;
+    autoSlideTimer = setInterval(function() {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      updateSlider();
+    }, autoSlideDelay);
+  }
+
+  function stopAutoSlide() {
+    if (autoSlideTimer) {
+      clearInterval(autoSlideTimer);
+      autoSlideTimer = null;
+    }
+  }
 
   let taxonomyData = {
     interest: [],
@@ -562,8 +580,10 @@
       dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
       dot.dataset.index = i;
       dot.addEventListener('click', function() {
+        stopAutoSlide();
         currentSlide = parseInt(this.dataset.index);
         updateSlider();
+        startAutoSlide();
       });
       dotsContainer.appendChild(dot);
     }
@@ -629,6 +649,7 @@
 
     initSliderDots();
     updateSlider();
+    startAutoSlide();
 
     spotPanel.classList.remove('hidden');
 
@@ -648,6 +669,7 @@
   }
 
   function closePanel() {
+    stopAutoSlide();
     gsap.to(spotPanel, { clipPath: 'inset(0 0 0 100%)', opacity: 0, duration: 0.4, ease: 'power3.in',
       onComplete: function() { spotPanel.classList.add('hidden'); gsap.set(spotPanel, { clearProps: 'all' }); showDecorations(); }
     });
@@ -838,8 +860,26 @@
 
     document.getElementById('close-panel').addEventListener('click', closePanel);
 
-    document.getElementById('slider-prev').addEventListener('click', sliderPrev);
-    document.getElementById('slider-next').addEventListener('click', sliderNext);
+    document.getElementById('slider-prev').addEventListener('click', function() {
+      stopAutoSlide();
+      sliderPrev();
+      startAutoSlide();
+    });
+    document.getElementById('slider-next').addEventListener('click', function() {
+      stopAutoSlide();
+      sliderNext();
+      startAutoSlide();
+    });
+
+    var sliderArea = document.querySelector('.panel-image');
+    sliderArea.addEventListener('mouseenter', stopAutoSlide);
+    sliderArea.addEventListener('mouseleave', startAutoSlide);
+    sliderArea.addEventListener('touchstart', function() {
+      stopAutoSlide();
+    }, { passive: true });
+    sliderArea.addEventListener('touchend', function() {
+      setTimeout(startAutoSlide, 1000);
+    }, { passive: true });
 
     document.getElementById('btn-reset').addEventListener('click', function() {
       closePanel();

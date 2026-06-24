@@ -367,6 +367,7 @@ body {
   min-width: 30%;
   max-width: 100%;
   transition: all 0.3s ease;
+  font-weight: 300;
 }
 
 .search-wrapper:focus-within {
@@ -396,12 +397,14 @@ body {
   outline: none;
   width: 100%;
   min-width: 0;
+  font-weight: 400;
 }
 
 .search-input::placeholder {
   color: var(--ink-light);
   opacity: 0.6;
   font-size: 1rem;
+  font-weight: 300;
 }
 
 .search-clear {
@@ -563,8 +566,8 @@ body {
   border: 1.5px solid var(--cream-dark);
   border-radius: 6px;
   font-family: var(--font-main);
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: 0.875rem;
+  font-weight: 300;
   color: var(--ink);
   cursor: pointer;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -1268,7 +1271,7 @@ text-transform: uppercase;
   }
 
   .legend-toggle {
-    bottom: 5.5rem;
+    bottom: 6.5rem;
     width: 2rem;
     height: 2rem;
     font-size: 0.85rem;
@@ -1450,7 +1453,7 @@ text-transform: uppercase;
 
 .legend-toggle {
   position: fixed;
-  left: 0.8rem;
+  left: 2rem;
   top: 4.5rem;
   z-index: 999;
   width: 2.2rem;
@@ -1481,27 +1484,71 @@ text-transform: uppercase;
 @media (max-width: 768px) {
   #legend-panel {
     left: 0.5rem;
+    right: 0.5rem;
     top: auto;
-    bottom: 5.5rem;
-    width: 230px;
-    max-height: 50vh;
+    bottom: 6rem;
+    width: auto;
+    max-height: none;
+    border-radius: 10px;
   }
+
+  .legend-header {
+    padding: 0.4rem 0.6rem;
+    border-bottom: 1px solid var(--gold-light);
+  }
+
+  .legend-title-wrap { font-size: 0.65rem; }
+  .legend-close { font-size: 0.7rem; }
+
+  .legend-list {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0.4rem;
+    gap: 0.3rem;
+    scrollbar-width: none;
+  }
+
+  .legend-list::-webkit-scrollbar { display: none; }
+
+  .legend-item {
+    flex: 0 0 auto;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    padding: 0.4rem;
+    border-bottom: none;
+    border-radius: 8px;
+    min-width: 3.5rem;
+    text-align: center;
+  }
+
+  .legend-item:hover { transform: none; }
+
+  .legend-icon {
+    width: 2.2rem;
+    height: 2.2rem;
+    padding: 0.2rem;
+  }
+
+  .legend-item:hover .legend-icon { transform: none; box-shadow: none; }
+
+  .legend-info { display: none; }
+  .legend-name {
+    font-size: 0.55rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 3.5rem;
+  }
+  .legend-desc { display: none; }
 
   .legend-toggle {
     left: 0.5rem;
     top: auto;
-    bottom: 5.5rem;
+    bottom: 6rem;
     width: 36px;
     height: 36px;
     font-size: 0.9rem;
   }
-
-  .legend-icon {
-    width: 30px;
-    height: 30px;
-    padding: 3px;
-  }
-
-  .legend-name { font-size: 0.65rem; }
-  .legend-desc { font-size: 0.55rem; }
 }
