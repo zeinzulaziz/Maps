@@ -67,10 +67,10 @@
   };
 
   let activeFilters = {
-    interest: 'all',
-    season: 'all',
-    location: 'all',
-    duration: 'all'
+    interest: [],
+    season: [],
+    location: [],
+    duration: []
   };
 
   const loadingScreen = document.getElementById('loading-screen');
@@ -167,33 +167,73 @@
   }
 
   function buildFilterUI() {
-    var termsContainer = document.getElementById('filter-terms');
-    var activeTaxonomy = document.querySelector('.filter-tab.active');
-    var taxonomy = activeTaxonomy ? activeTaxonomy.dataset.taxonomy : 'interest';
-    var terms = taxonomyData[taxonomy] || [];
+    var taxonomies = ['interest', 'season', 'location', 'duration'];
+    taxonomies.forEach(function(taxonomy) {
+      var dropdown = document.querySelector('.filter-dropdown[data-taxonomy="' + taxonomy + '"]');
+      if (!dropdown) return;
+      var optionsContainer = dropdown.querySelector('.filter-options');
+      var terms = taxonomyData[taxonomy] || [];
 
-    var html = '<button class="filter-term' + (activeFilters[taxonomy] === 'all' ? ' active' : '') + '" data-taxonomy="' + taxonomy + '" data-id="all">All</button>';
-    terms.forEach(function(term) {
-      var isActive = activeFilters[taxonomy] == term.id ? ' active' : '';
-      html += '<button class="filter-term' + isActive + '" data-taxonomy="' + taxonomy + '" data-id="' + term.id + '">' + term.name + '</button>';
+      optionsContainer.innerHTML = '';
+      if (terms.length === 0) {
+        optionsContainer.innerHTML = '<div class="filter-option" style="opacity:0.5;cursor:default;">No options</div>';
+        return;
+      }
+
+      terms.forEach(function(term) {
+        var opt = document.createElement('div');
+        opt.className = 'filter-option';
+        opt.dataset.id = term.id;
+        opt.innerHTML = '<span class="filter-check"><i class="fas fa-check"></i></span>' + term.name;
+
+        opt.addEventListener('click', function(e) {
+          e.stopPropagation();
+          this.classList.toggle('selected');
+          updateActiveFilters(taxonomy, dropdown);
+          applyFilters();
+        });
+
+        optionsContainer.appendChild(opt);
+      });
+
+      var trigger = dropdown.querySelector('.filter-trigger');
+      trigger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var wasOpen = dropdown.classList.contains('open');
+        document.querySelectorAll('.filter-dropdown.open').forEach(function(d) {
+          d.classList.remove('open');
+        });
+        if (!wasOpen) {
+          dropdown.classList.add('open');
+        }
+      });
     });
-    termsContainer.innerHTML = html;
 
-    termsContainer.querySelectorAll('.filter-term').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        var tax = this.dataset.taxonomy;
-        var id = this.dataset.id;
-        activeFilters[tax] = id;
-        termsContainer.querySelectorAll('.filter-term').forEach(function(b) { b.classList.remove('active'); });
-        this.classList.add('active');
-        gsap.fromTo(this, { scale: 0.9 }, { scale: 1, duration: 0.3, ease: 'back.out(2)' });
-        applyFilters();
+    document.addEventListener('click', function() {
+      document.querySelectorAll('.filter-dropdown.open').forEach(function(d) {
+        d.classList.remove('open');
       });
     });
   }
 
+  function updateActiveFilters(taxonomy, dropdown) {
+    var selected = [];
+    dropdown.querySelectorAll('.filter-option.selected').forEach(function(opt) {
+      selected.push(opt.dataset.id);
+    });
+    activeFilters[taxonomy] = selected;
+
+    var countEl = dropdown.querySelector('.filter-count');
+    if (selected.length > 0) {
+      countEl.textContent = selected.length;
+      countEl.classList.add('visible');
+    } else {
+      countEl.classList.remove('visible');
+    }
+  }
+
   function applyFilters() {
-    var hasActiveFilter = Object.values(activeFilters).some(function(v) { return v !== 'all'; });
+    var hasActiveFilter = Object.values(activeFilters).some(function(v) { return v.length > 0; });
 
     if (hasActiveFilter) {
       hideDecorations();
@@ -205,9 +245,12 @@
     markers.forEach(function(m) {
       var show = true;
       for (var tax in activeFilters) {
-        if (activeFilters[tax] === 'all') continue;
+        if (activeFilters[tax].length === 0) continue;
         var termIds = getTermIds(m.spot.rawItem, tax);
-        if (termIds.indexOf(parseInt(activeFilters[tax])) === -1) {
+        var matched = activeFilters[tax].some(function(id) {
+          return termIds.indexOf(parseInt(id)) !== -1;
+        });
+        if (!matched) {
           show = false;
           break;
         }
@@ -551,11 +594,14 @@
 
   function resetAllFilters() {
     for (var tax in activeFilters) {
-      activeFilters[tax] = 'all';
+      activeFilters[tax] = [];
     }
-    document.querySelectorAll('.filter-tab').forEach(function(t) { t.classList.remove('active'); });
-    document.querySelector('.filter-tab[data-taxonomy="interest"]').classList.add('active');
-    buildFilterUI();
+    document.querySelectorAll('.filter-option.selected').forEach(function(opt) {
+      opt.classList.remove('selected');
+    });
+    document.querySelectorAll('.filter-count').forEach(function(c) {
+      c.classList.remove('visible');
+    });
     applyFilters();
   }
 
@@ -719,14 +765,6 @@
       }
     }, true);
 
-    document.querySelectorAll('.filter-tab').forEach(function(tab) {
-      tab.addEventListener('click', function() {
-        document.querySelectorAll('.filter-tab').forEach(function(t) { t.classList.remove('active'); });
-        this.classList.add('active');
-        buildFilterUI();
-      });
-    });
-
     document.getElementById('btn-filter-reset').addEventListener('click', function() {
       resetAllFilters();
     });
@@ -784,7 +822,7 @@
 
     gsap.fromTo('#filter-bar', { y: 60, opacity: 0 },
       { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out', delay: 2.2 });
-    gsap.fromTo('.filter-tab', { y: 10, opacity: 0 },
+    gsap.fromTo('.filter-dropdown', { y: 10, opacity: 0 },
       { y: 0, opacity: 1, duration: 0.3, ease: 'power2.out', stagger: 0.04, delay: 2.4 });
 
     gsap.fromTo('.deco-floral', { opacity: 0, scale: 0.8 },
