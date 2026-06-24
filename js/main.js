@@ -58,6 +58,8 @@
   let selectedMarkerEl = null;
   let geoData = null;
   let isLoading = false;
+  let currentSlide = 0;
+  let totalSlides = 0;
 
   let taxonomyData = {
     interest: [],
@@ -112,6 +114,19 @@
       if (media.source_url) return media.source_url;
     }
     return PLACEHOLDER_IMG;
+  }
+
+  function getGalleryImage(item) {
+    if (item.meta && item.meta.gallery_explore) {
+      var gallery = item.meta.gallery_explore;
+      if (Array.isArray(gallery) && gallery.length > 0) {
+        return gallery;
+      }
+      if (typeof gallery === 'string' && gallery.length > 0) {
+        return [gallery];
+      }
+    }
+    return [getFeaturedImage(item)];
   }
 
   function getTermNames(item, taxonomy) {
@@ -289,7 +304,7 @@
           location: locationNames.map(function(l) { return l.name; }).join(', '),
           interest: interestNames.map(function(i) { return i.name; }).join(', '),
           link: item.link,
-          image: getFeaturedImage(item),
+          images: getGalleryImage(item),
           rating: 4.5,
           rawItem: item
         };
@@ -539,8 +554,56 @@
     openPanel(spot);
   }
 
+  function initSliderDots() {
+    var dotsContainer = document.getElementById('slider-dots');
+    dotsContainer.innerHTML = '';
+    for (var i = 0; i < totalSlides; i++) {
+      var dot = document.createElement('span');
+      dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+      dot.dataset.index = i;
+      dot.addEventListener('click', function() {
+        currentSlide = parseInt(this.dataset.index);
+        updateSlider();
+      });
+      dotsContainer.appendChild(dot);
+    }
+    document.getElementById('slider-prev').style.display = totalSlides > 1 ? 'flex' : 'none';
+    document.getElementById('slider-next').style.display = totalSlides > 1 ? 'flex' : 'none';
+  }
+
+  function buildSliderTrack(images) {
+    var track = document.getElementById('panel-slider-track');
+    track.innerHTML = '';
+    images.forEach(function(src) {
+      var img = document.createElement('img');
+      img.src = src;
+      img.alt = '';
+      track.appendChild(img);
+    });
+  }
+
+  function updateSlider() {
+    var track = document.getElementById('panel-slider-track');
+    track.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
+    document.querySelectorAll('.slider-dot').forEach(function(dot, i) {
+      dot.classList.toggle('active', i === currentSlide);
+    });
+  }
+
+  function sliderPrev() {
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    updateSlider();
+  }
+
+  function sliderNext() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    updateSlider();
+  }
+
   function openPanel(spot) {
-    document.getElementById('panel-img').src = spot.image;
+    currentSlide = 0;
+    totalSlides = spot.images.length;
+    buildSliderTrack(spot.images);
     document.getElementById('panel-title').textContent = spot.name;
     document.getElementById('panel-desc').textContent = spot.description;
     document.getElementById('panel-rating').textContent = '0';
@@ -564,12 +627,15 @@
       exploreBtn.href = spot.link;
     }
 
+    initSliderDots();
+    updateSlider();
+
     spotPanel.classList.remove('hidden');
 
     var tl = gsap.timeline();
     tl.fromTo(spotPanel, { clipPath: 'inset(0 100% 0 0)', opacity: 0 },
       { clipPath: 'inset(0 0% 0 0)', opacity: 1, duration: 0.5, ease: 'power3.out' });
-    tl.fromTo('.panel-image img', { scale: 1.15 }, { scale: 1, duration: 0.6, ease: 'power2.out' }, '-=0.2');
+    tl.fromTo('.panel-slider-track', { x: 30 }, { x: 0, duration: 0.4, ease: 'power2.out' }, '-=0.2');
     tl.fromTo('.panel-area', { y: 10, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3, ease: 'power2.out' }, '-=0.2');
     tl.fromTo('#panel-title', { y: 10, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: 'power2.out' }, '-=0.15');
     tl.fromTo('#panel-desc', { y: 8, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3, ease: 'power2.out' }, '-=0.1');
@@ -740,6 +806,7 @@
           toggle.classList.remove('hidden');
         }
       });
+      map.fitBounds(BALI_BOUNDS, { padding: [30, 30], animate: true, duration: 0.8 });
     });
 
     var items = panel.querySelectorAll('.legend-item');
@@ -770,6 +837,9 @@
     });
 
     document.getElementById('close-panel').addEventListener('click', closePanel);
+
+    document.getElementById('slider-prev').addEventListener('click', sliderPrev);
+    document.getElementById('slider-next').addEventListener('click', sliderNext);
 
     document.getElementById('btn-reset').addEventListener('click', function() {
       closePanel();
