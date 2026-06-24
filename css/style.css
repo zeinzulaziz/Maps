@@ -1533,15 +1533,13 @@ text-transform: uppercase;
 
   .legend-item:hover .legend-icon { transform: none; box-shadow: none; }
 
-  .legend-info { display: none; }
+  
   .legend-name {
     font-size: 0.55rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 3.5rem;
   }
-  .legend-desc { display: none; }
 
   .legend-toggle {
     left: 0.5rem;
