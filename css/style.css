@@ -534,7 +534,7 @@ body {
   opacity: 0;
   background: rgba(250,248,244,0.95);
   backdrop-filter: blur(12px);
-  border-radius: 16px;
+  border-radius: .5rem;
   box-shadow: 0 4px 20px var(--shadow-dark);
   border: 1px solid var(--cream-dark);
   max-width: 90vw;
@@ -1005,7 +1005,7 @@ text-transform: uppercase;
   padding: 2px 6px;
   border-radius: 3px;
   font-size: 0.55rem;
-  font-weight: 600;
+  font-weight: 400;
   color: var(--ink);
   white-space: nowrap;
   max-width: 120px;
