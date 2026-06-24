@@ -1128,3 +1128,207 @@ text-transform: uppercase;
   .filter-term { font-size: 0.5rem; padding: 0.15rem 0.35rem; }
   .logo-text { font-size: 0.75rem; }
 }
+
+/* ============================================
+   LEGEND / PANDUAN PANEL
+   ============================================ */
+
+#legend-panel {
+  position: fixed;
+  left: 0.8rem;
+  top: 4.5rem;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  width: 260px;
+  max-height: calc(100vh - 6rem);
+  background: var(--cream);
+  border: 1px solid var(--gold-light);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.04);
+  overflow: hidden;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#legend-panel.hidden {
+  opacity: 0;
+  transform: translateX(-10px);
+  pointer-events: none;
+}
+
+.legend-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 0.8rem;
+  background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
+  color: var(--white);
+  border-bottom: 2px solid var(--gold);
+}
+
+.legend-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.legend-title-wrap i {
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.legend-close {
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 0.75rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+  opacity: 0.8;
+}
+
+.legend-close:hover {
+  background: rgba(255,255,255,0.2);
+  opacity: 1;
+}
+
+.legend-list {
+  overflow-y: auto;
+  padding: 0.4rem;
+  max-height: calc(100vh - 10rem);
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-light) transparent;
+}
+
+.legend-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.legend-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.legend-list::-webkit-scrollbar-thumb {
+  background: var(--gold-light);
+  border-radius: 2px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.55rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+  border-bottom: 1px solid rgba(201,169,110,0.15);
+}
+
+.legend-item:last-child {
+  border-bottom: none;
+}
+
+.legend-item:hover {
+  background: rgba(201,169,110,0.12);
+  transform: translateX(3px);
+}
+
+.legend-icon {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  background: var(--white);
+  border: 1px solid rgba(201,169,110,0.3);
+  padding: 4px;
+  object-fit: contain;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.legend-item:hover .legend-icon {
+  transform: scale(1.08);
+  box-shadow: 0 2px 8px rgba(0,147,69,0.2);
+}
+
+.legend-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.legend-name {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.1rem;
+  letter-spacing: 0.3px;
+}
+
+.legend-desc {
+  font-size: 0.58rem;
+  color: var(--ink-light);
+  line-height: 1.3;
+}
+
+.legend-toggle {
+  position: fixed;
+  left: 0.8rem;
+  top: 4.5rem;
+  z-index: 999;
+  width: 40px;
+  height: 40px;
+  background: var(--green);
+  border: 2px solid var(--gold);
+  border-radius: 8px;
+  color: var(--white);
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 12px rgba(0,147,69,0.3);
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.legend-toggle:hover {
+  background: var(--green-dark);
+  transform: scale(1.05);
+  box-shadow: 0 4px 16px rgba(0,147,69,0.4);
+}
+
+.legend-toggle.hidden {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  #legend-panel {
+    left: 0.5rem;
+    top: auto;
+    bottom: 5.5rem;
+    width: 230px;
+    max-height: 50vh;
+  }
+
+  .legend-toggle {
+    left: 0.5rem;
+    top: auto;
+    bottom: 5.5rem;
+    width: 36px;
+    height: 36px;
+    font-size: 0.9rem;
+  }
+
+  .legend-icon {
+    width: 30px;
+    height: 30px;
+    padding: 3px;
+  }
+
+  .legend-name { font-size: 0.65rem; }
+  .legend-desc { font-size: 0.55rem; }
+}

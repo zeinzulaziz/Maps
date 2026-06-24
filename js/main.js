@@ -84,6 +84,7 @@
     addMountainMarkers();
     await loadAllData();
     setupSearch();
+    setupLegend();
     setupEvents();
     revealUI();
   }
@@ -673,6 +674,37 @@
     });
   }
 
+  function setupLegend() {
+    var panel = document.getElementById('legend-panel');
+    var toggle = document.getElementById('legend-toggle');
+    var closeBtn = document.getElementById('legend-close');
+
+    toggle.addEventListener('click', function() {
+      panel.classList.remove('hidden');
+      toggle.classList.add('hidden');
+      gsap.fromTo(panel, { x: -15, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: 'power2.out' });
+    });
+
+    closeBtn.addEventListener('click', function() {
+      gsap.to(panel, {
+        x: -15, opacity: 0, duration: 0.2, ease: 'power2.in',
+        onComplete: function() {
+          panel.classList.add('hidden');
+          toggle.classList.remove('hidden');
+        }
+      });
+    });
+
+    var items = panel.querySelectorAll('.legend-item');
+    items.forEach(function(item) {
+      item.addEventListener('click', function() {
+        var lat = parseFloat(this.getAttribute('data-lat'));
+        var lng = parseFloat(this.getAttribute('data-lng'));
+        map.flyTo([lat, lng], 13, { duration: 1.2, ease: 'power2.inOut' });
+      });
+    });
+  }
+
   function setupEvents() {
     document.getElementById('map').addEventListener('mouseenter', function(e) {
       if (e.target.classList && e.target.classList.contains('marker-label')) {
@@ -747,6 +779,9 @@
       { opacity: 0.5, scaleX: 1, duration: 0.6, ease: 'power2.out', delay: 3.1 });
     gsap.fromTo('.deco-text', { y: 10, opacity: 0 },
       { y: 0, opacity: 0.6, duration: 0.6, ease: 'power2.out', stagger: 0.2, delay: 3.2 });
+
+    gsap.fromTo('#legend-toggle', { scale: 0, opacity: 0 },
+      { scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(2)', delay: 3.5 });
   }
 
   window.addEventListener('DOMContentLoaded', init);
