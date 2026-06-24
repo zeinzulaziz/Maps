@@ -787,6 +787,7 @@ body {
 .panel-slider-track {
   display: flex;
   height: 100%;
+  will-change: transform;
 }
 
 .panel-slider-track img {
