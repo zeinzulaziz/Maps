@@ -172,7 +172,7 @@
     var taxonomy = activeTaxonomy ? activeTaxonomy.dataset.taxonomy : 'interest';
     var terms = taxonomyData[taxonomy] || [];
 
-    var html = '<button class="filter-term' + (activeFilters[taxonomy] === 'all' ? ' active' : '') + '" data-taxonomy="' + taxonomy + '" data-id="all">Semua</button>';
+    var html = '<button class="filter-term' + (activeFilters[taxonomy] === 'all' ? ' active' : '') + '" data-taxonomy="' + taxonomy + '" data-id="all">All</button>';
     terms.forEach(function(term) {
       var isActive = activeFilters[taxonomy] == term.id ? ' active' : '';
       html += '<button class="filter-term' + isActive + '" data-taxonomy="' + taxonomy + '" data-id="' + term.id + '">' + term.name + '</button>';
@@ -277,7 +277,7 @@
 
   function showErrorState() {
     var countEl = document.getElementById('spot-count');
-    if (countEl) countEl.textContent = 'Gagal memuat data';
+    if (countEl) countEl.textContent = 'Failed to load data';
   }
 
   function updateSpotCount(count) {
@@ -319,6 +319,7 @@
       fadeAnimation: false
     });
     L.control.zoom({ position: 'topright' }).addTo(map);
+    L.control.scale({ position: 'bottomleft', imperial: false }).addTo(map);
     tileLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(map);
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Elevation/World_Hillshade/MapServer/tile/{z}/{y}/{x}', {
       maxZoom: 19,
@@ -580,7 +581,7 @@
   function renderSearchResults(results, query) {
     var dropdown = document.getElementById('search-dropdown');
     if (results.length === 0) {
-      dropdown.innerHTML = '<div class="search-empty"><i class="fas fa-search"></i>Tidak ditemukan "' + query + '"</div>';
+      dropdown.innerHTML = '<div class="search-empty"><i class="fas fa-search"></i>No results found for "' + query + '"</div>';
       dropdown.classList.remove('hidden');
       return;
     }
@@ -743,6 +744,21 @@
       if (isLoading) return;
       resetAllFilters();
       loadAllData();
+    });
+
+    document.getElementById('btn-locate').addEventListener('click', function() {
+      if (!navigator.geolocation) return;
+      var btn = this;
+      btn.classList.add('spinning');
+      navigator.geolocation.getCurrentPosition(function(pos) {
+        btn.classList.remove('spinning');
+        map.flyTo([pos.coords.latitude, pos.coords.longitude], 13, { duration: 1.2 });
+        L.circleMarker([pos.coords.latitude, pos.coords.longitude], {
+          radius: 8, color: '#009345', fillColor: '#009345', fillOpacity: 0.8, weight: 3, opacity: 1
+        }).addTo(map).bindPopup('📍 Your Location');
+      }, function() {
+        btn.classList.remove('spinning');
+      }, { enableHighAccuracy: true, timeout: 10000 });
     });
 
     document.getElementById('btn-explore').addEventListener('click', function() {

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JED | Peta Wisata Bali</title>
-  <meta name="description" content="Journey Exploring Discovery - Peta interaktif wisata Bali">
+  <title>JED | Bali Tourism Map</title>
+  <meta name="description" content="Journey Exploring Discovery - Interactive Bali tourism map">
   <link rel="icon" href="https://b2016199.smushcdn.com/2016199/wp-content/uploads/2026/04/cropped-favicon-32x32.png?lossy=1&strip=1&avif=1" sizes="32x32">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="css/style.css?v=7">
@@ -250,7 +250,7 @@
       <strong>BALI</strong>
     </div>
     <div class="deco-text deco-subtitle">
-      <span>Pulau Dewata</span>
+      <span>Island of the Gods</span>
     </div>
   </div>
 
@@ -266,18 +266,19 @@
       </svg>
       <span class="logo-text">JED</span>
       <div class="logo-divider"></div>
-      <span class="logo-sub">Peta Wisata</span>
+      <span class="logo-sub">Tourism Map</span>
     </div>
     <div class="search-wrapper" id="search-wrapper">
       <i class="fas fa-search search-icon"></i>
-      <input type="text" id="search-input" class="search-input" placeholder="Cari spot, desa, lokasi..." autocomplete="off">
-      <button id="search-clear" class="search-clear" title="Hapus"><i class="fas fa-times"></i></button>
+      <input type="text" id="search-input" class="search-input" placeholder="Search spot, village, location..." autocomplete="off">
+      <button id="search-clear" class="search-clear" title="Clear"><i class="fas fa-times"></i></button>
       <div id="search-dropdown" class="search-dropdown hidden"></div>
     </div>
     <div class="controls">
-      <span id="spot-count" class="spot-count">Memuat data...</span>
+      <span id="spot-count" class="spot-count">Loading data...</span>
       <button id="btn-refresh" title="Refresh Data"><i class="fas fa-sync-alt"></i></button>
       <button id="btn-reset" title="Reset View"><i class="fas fa-undo"></i></button>
+      <button id="btn-locate" title="My Location"><i class="fas fa-crosshairs"></i></button>
     </div>
   </header>
 
@@ -300,7 +301,7 @@
       </button>
     </div>
     <div class="filter-terms" id="filter-terms">
-      <button class="filter-term active" data-taxonomy="interest" data-id="all">Semua</button>
+      <button class="filter-term active" data-taxonomy="interest" data-id="all">All</button>
     </div>
   </div>
 
@@ -325,7 +326,7 @@
         <span id="panel-coords"></span>
       </div>
       <a class="btn-explore" id="btn-explore" href="#" target="_blank" rel="noopener">
-        <i class="fas fa-compass"></i> Lihat Detail
+        <i class="fas fa-compass"></i> View Details
       </a>
     </div>
   </div>
@@ -334,70 +335,70 @@
     <div class="legend-header">
       <div class="legend-title-wrap">
         <i class="fas fa-map-marked-alt"></i>
-        <span>Panduan Lokasi</span>
+        <span>Location Guide</span>
       </div>
-      <button id="legend-close" class="legend-close" title="Tutup"><i class="fas fa-times"></i></button>
+      <button id="legend-close" class="legend-close" title="Close"><i class="fas fa-times"></i></button>
     </div>
     <div class="legend-list">
       <div class="legend-item" data-lat="-8.580071" data-lng="115.139204">
         <img src="asset/Nyambu.svg" alt="Nyambu" class="legend-icon">
         <div class="legend-info">
           <div class="legend-name">Nyambu</div>
-          <div class="legend-desc">Desa pertanian sawah & subak</div>
+          <div class="legend-desc">Rice farming & subak village</div>
         </div>
       </div>
       <div class="legend-item" data-lat="-8.236222" data-lng="115.025031">
         <img src="asset/Pedawa.svg" alt="Pedawa" class="legend-icon">
         <div class="legend-info">
           <div class="legend-name">Pedawa</div>
-          <div class="legend-desc">Desa Bali Aga tradisional</div>
+          <div class="legend-desc">Traditional Bali Aga village</div>
         </div>
       </div>
       <div class="legend-item" data-lat="-8.444435" data-lng="115.538783">
         <img src="asset/Dukuh,_Sibetan.svg" alt="Sibetan" class="legend-icon">
         <div class="legend-info">
           <div class="legend-name">Sibetan</div>
-          <div class="legend-desc">Sentra buah salak</div>
+          <div class="legend-desc">Salak fruit center</div>
         </div>
       </div>
       <div class="legend-item" data-lat="-8.295690" data-lng="115.226900">
         <img src="asset/Kiadan,_Pelaga.svg" alt="Pelaga" class="legend-icon">
         <div class="legend-info">
           <div class="legend-name">Kiadan Pelaga</div>
-          <div class="legend-desc">Dataran tinggi & kopi</div>
+          <div class="legend-desc">Highlands & coffee</div>
         </div>
       </div>
       <div class="legend-item" data-lat="-8.733330" data-lng="115.533330">
         <img src="asset/Nusa_Penida.svg" alt="Nusa Penida" class="legend-icon">
         <div class="legend-info">
           <div class="legend-name">Nusa Penida</div>
-          <div class="legend-desc">Konservasi penyu & diving</div>
+          <div class="legend-desc">Turtle conservation & diving</div>
         </div>
       </div>
       <div class="legend-item" data-lat="-8.403367" data-lng="114.617401">
         <img src="asset/Perancak.svg" alt="Perancak" class="legend-icon">
         <div class="legend-info">
           <div class="legend-name">Perancak</div>
-          <div class="legend-desc">Pantai penyu & sungai</div>
+          <div class="legend-desc">Turtle beach & river</div>
         </div>
       </div>
       <div class="legend-item" data-lat="-8.477500" data-lng="115.566390">
         <img src="asset/Tenganan_Pegringsingan.svg" alt="Tenganan" class="legend-icon">
         <div class="legend-info">
           <div class="legend-name">Tenganan</div>
-          <div class="legend-desc">Desa Bali Aga & geringsing</div>
+          <div class="legend-desc">Bali Aga village & geringsing</div>
         </div>
       </div>
       <div class="legend-item" data-lat="-8.150000" data-lng="115.120000">
         <img src="asset/Adat_Dalem_Tamblingan.svg" alt="Tamblingan" class="legend-icon">
         <div class="legend-info">
           <div class="legend-name">Tamblingan</div>
-          <div class="legend-desc">Danau suci & pura kuno</div>
+          <div class="legend-desc">Sacred lake & ancient temple</div>
         </div>
       </div>
     </div>
   </div>
-  <button id="legend-toggle" class="legend-toggle" title="Panduan Lokasi">
+  <button id="legend-toggle" class="legend-toggle" title="Location Guide">
     <i class="fas fa-book-open"></i>
   </button>
 
