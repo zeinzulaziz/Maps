@@ -1413,4 +1413,72 @@
   // }
 
   window.addEventListener('DOMContentLoaded', init);
+
+  // === Water Waves Animation (edge-only, short) ===
+  const canvas = document.getElementById('water-waves');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    let w, h;
+
+    function resize() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    }
+
+    function wave(x, t, freq, speed) {
+      return Math.sin(x * freq + t * speed) * 4 + Math.sin(x * freq * 1.7 + t * speed * 1.3) * 2;
+    }
+
+    function drawWaves(time) {
+      ctx.clearRect(0, 0, w, h);
+      const t = time * 0.001;
+      const gold = 'rgba(201,169,110,';
+      const segW = 180;
+
+      // short wave clusters at edges only
+      const clusters = [
+        // bottom edge
+        { x: segW * 0,   y: h - 18, lines: 2 },
+        { x: w - segW,   y: h - 18, lines: 2 },
+        { x: w * 0.5 - segW / 2, y: h - 14, lines: 1 },
+        // top edge
+        { x: segW * 0.3, y: 22, lines: 2 },
+        { x: w - segW * 1.3, y: 22, lines: 2 },
+        // left edge
+        { x: 14, y: h * 0.35, lines: 2, vertical: true },
+        { x: 14, y: h * 0.7,  lines: 1, vertical: true },
+        // right edge
+        { x: w - 14, y: h * 0.4, lines: 2, vertical: true },
+        { x: w - 14, y: h * 0.75, lines: 1, vertical: true },
+      ];
+
+      clusters.forEach(c => {
+        for (let i = 0; i < c.lines; i++) {
+          ctx.beginPath();
+          ctx.strokeStyle = gold + (0.35 - i * 0.08) + ')';
+          ctx.lineWidth = 1.2 - i * 0.2;
+          if (c.vertical) {
+            for (let dy = -40; dy <= 40; dy += 2) {
+              const x = c.x + Math.sin(dy * 0.04 + t * 1.2 + i) * 5;
+              if (dy === -40) ctx.moveTo(x, c.y + dy);
+              else ctx.lineTo(x, c.y + dy);
+            }
+          } else {
+            for (let dx = 0; dx <= segW; dx += 2) {
+              const y = c.y + i * 8 + wave(dx, t, 0.035, 1.0 + i * 0.3);
+              if (dx === 0) ctx.moveTo(c.x + dx, y);
+              else ctx.lineTo(c.x + dx, y);
+            }
+          }
+          ctx.stroke();
+        }
+      });
+
+      requestAnimationFrame(drawWaves);
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+    requestAnimationFrame(drawWaves);
+  }
 })();
