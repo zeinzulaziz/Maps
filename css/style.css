@@ -30,7 +30,6 @@ svg path:focus-visible,
   --gold-dark: #a08040;
   --cream: #faf8f4;
   --cream-dark: #f0ece4;
-  --text: #19402D;
   --ink-light: #666;
   --white: #ffffff;
   --shadow: rgba(0,0,0,0.08);
@@ -604,8 +603,14 @@ body {
   border-bottom: none;
 }
 
-.search-result:hover {
+.search-result:hover,
+.search-result.active {
   background: rgba(201,169,110,0.1);
+}
+
+.search-result.active {
+  outline: 2px solid var(--green);
+  outline-offset: -2px;
 }
 
 .search-result-icon {
@@ -818,6 +823,12 @@ body {
 
 .filter-option:hover {
   background: rgba(201,169,110,0.08);
+}
+
+.filter-option:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: -2px;
+  border-radius: 4px;
 }
 
 .filter-option .filter-check {
