@@ -56,6 +56,7 @@
   let markers = [];
   let spots = [];
   let selectedMarkerEl = null;
+  let userMarker = null;
   let geoData = null;
   let isLoading = false;
   let currentSlide = 0;
@@ -941,10 +942,25 @@
       btn.classList.add('spinning');
       navigator.geolocation.getCurrentPosition(function(pos) {
         btn.classList.remove('spinning');
-        map.flyTo([pos.coords.latitude, pos.coords.longitude], 13, { duration: 1.2 });
-        L.circleMarker([pos.coords.latitude, pos.coords.longitude], {
-          radius: 8, color: '#009345', fillColor: '#009345', fillOpacity: 0.8, weight: 3, opacity: 1
-        }).addTo(map).bindPopup('📍 Your Location');
+        var lat = pos.coords.latitude;
+        var lng = pos.coords.longitude;
+        map.flyTo([lat, lng], 13, { duration: 1.2 });
+
+        if (userMarker) map.removeLayer(userMarker);
+
+        var markerHtml = '<div class="user-marker">' +
+          '<div class="user-marker-pulse"></div>' +
+          '<div class="user-marker-dot"></div>' +
+          '</div>';
+
+        var icon = L.divIcon({
+          className: 'user-marker-icon',
+          html: markerHtml,
+          iconSize: [24, 24],
+          iconAnchor: [12, 12]
+        });
+
+        userMarker = L.marker([lat, lng], { icon: icon, interactive: false }).addTo(map);
       }, function() {
         btn.classList.remove('spinning');
       }, { enableHighAccuracy: true, timeout: 10000 });
