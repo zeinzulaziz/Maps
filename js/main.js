@@ -111,6 +111,7 @@
     initLazyLoad();
     await loadGeoJSON();
     addMountainMarkers();
+    addFlyingBirds();
     await loadAllData();
     setupSearch();
     setupLegend();
@@ -692,6 +693,44 @@
       interactive: false
     });
     L.marker([-8.7482, 115.1671], { icon: airportIcon, interactive: false }).addTo(map);
+  }
+
+  function addFlyingBirds() {
+    var bc = '#8a7a68';
+    var svg = '<svg viewBox="0 0 48 16" xmlns="http://www.w3.org/2000/svg">' +
+      '<path class="wf" d="M22 6 C24 0 34 -1 42 2 C38 3 30 5 24 7 Z" fill="' + bc + '" opacity="0.4"/>' +
+      '<path class="wb" d="M8 9 C14 6 22 7 28 8 C32 8 34 7 36 8 L36 9 C34 10 32 10 28 10 C22 10 14 11 8 12 Z" fill="' + bc + '"/>' +
+      '<path class="wn" d="M20 7 C22 -1 36 -3 46 1 C40 2 32 4 24 7 Z" fill="' + bc + '"/>' +
+      '</svg>';
+    var n = 4;
+    for (var i = 0; i < n; i++) {
+      var el = document.createElement('div');
+      el.className = 'flying-bird';
+      el.innerHTML = svg;
+      el.style.width = (16 + Math.random() * 28) + 'px';
+      var d = 1.5 + Math.random() * 1.5;
+      el.style.setProperty('--flap-speed', d + 's');
+      document.getElementById('map').appendChild(el);
+      flyBird(el);
+    }
+    function flyBird(el) {
+      var w = window.innerWidth, h = window.innerHeight;
+      var sx = -120 + Math.random() * (w + 240);
+      var sy = 20 + Math.random() * h * 0.5;
+      var ex = -120 + Math.random() * (w + 240);
+      var ey = 20 + Math.random() * h * 0.5;
+      var dur = 4 + Math.random() * 7;
+      var s = 0.4 + Math.random() * 0.8;
+      gsap.set(el, { x: sx, y: sy, scaleX: s, scaleY: s, opacity: 0.25 + Math.random() * 0.3 });
+      gsap.to(el, {
+        x: ex, y: ey,
+        scaleX: ex > sx ? s : -s,
+        scaleY: s,
+        duration: dur,
+        ease: 'sine.inOut',
+        onComplete: function() { flyBird(el); }
+      });
+    }
   }
 
   function createMarkers(spotsData) {

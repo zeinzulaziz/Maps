@@ -1393,6 +1393,38 @@ text-transform: uppercase;
 
 .leaflet-control-zoom { border: none !important; box-shadow: none !important; }
 
+.flying-bird {
+  position: fixed;
+  z-index: 550;
+  pointer-events: none;
+  will-change: transform;
+}
+.flying-bird svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+.flying-bird .wb {
+  position: relative;
+}
+.flying-bird .wf {
+  transform-origin: 22px 6px;
+  animation: flap-far var(--flap-speed, 0.25s) ease-in-out infinite alternate;
+}
+.flying-bird .wn {
+  transform-origin: 20px 6px;
+  animation: flap-near var(--flap-speed, 0.25s) ease-in-out infinite alternate;
+}
+@keyframes flap-far {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(-15deg); }
+}
+@keyframes flap-near {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(15deg); }
+}
+
 .leaflet-control-zoom-slider {
   display: flex;
   flex-direction: column;
