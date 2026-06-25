@@ -1067,6 +1067,26 @@ text-transform: uppercase;
   color: #fff;
 }
 
+.btn-directions {
+  width: 42px;
+  border: 1px solid var(--green);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--green);
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.btn-directions:hover {
+  background: var(--green);
+  color: #fff;
+}
+
 /* Marker */
 .custom-marker {
   display: flex;

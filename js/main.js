@@ -1091,6 +1091,28 @@
       }
     });
 
+    document.getElementById('btn-directions').addEventListener('click', function() {
+      var title = document.getElementById('panel-title').textContent;
+      var found = markers.find(function(m) { return m.spot.name === title; });
+      if (!found) return;
+
+      var destLat = found.spot.lat;
+      var destLng = found.spot.lng;
+
+      if (userMarker) {
+        var ll = userMarker.getLatLng();
+        window.open('https://www.google.com/maps/dir/' + ll.lat + ',' + ll.lng + '/' + destLat + ',' + destLng, '_blank');
+      } else if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(pos) {
+          window.open('https://www.google.com/maps/dir/' + pos.coords.latitude + ',' + pos.coords.longitude + '/' + destLat + ',' + destLng, '_blank');
+        }, function() {
+          window.open('https://www.google.com/maps/dir/?api=1&destination=' + destLat + ',' + destLng, '_blank');
+        }, { timeout: 5000 });
+      } else {
+        window.open('https://www.google.com/maps/dir/?api=1&destination=' + destLat + ',' + destLng, '_blank');
+      }
+    });
+
     document.getElementById('btn-explore').addEventListener('click', function() {
       var title = document.getElementById('panel-title').textContent;
       var found = markers.find(function(m) { return m.spot.name === title; });
