@@ -1324,13 +1324,13 @@
       { scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(2)', delay: 3.5 });
   }
 
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-      navigator.serviceWorker.register('/sw.js').then(function(reg) {
-        reg.update();
-      }).catch(function() {});
-    });
-  }
+  // if ('serviceWorker' in navigator) {
+  //   window.addEventListener('load', function() {
+  //     navigator.serviceWorker.register('/sw.js').then(function(reg) {
+  //       reg.update();
+  //     }).catch(function() {});
+  //   });
+  // }
 
   window.addEventListener('DOMContentLoaded', init);
 })();
