@@ -924,7 +924,7 @@
       closePanel();
       showDecorations();
       resetAllFilters();
-      map.panTo([-8.4095, 115.1889], { animate: true, duration: 1 });
+      map.fitBounds(BALI_BOUNDS, { padding: [30, 30], animate: true, duration: 1 });
     });
 
     document.getElementById('btn-refresh').addEventListener('click', function() {
