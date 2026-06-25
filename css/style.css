@@ -362,8 +362,8 @@ body {
   border-radius: 20px;
   border: 1px solid var(--cream-dark);
   box-shadow: 0 2px 12px var(--shadow);
-  padding: 0 0.8rem;
-  height: 2rem;
+  padding: 0.5rem 0.8rem;
+  height: auto;
   min-width: 30%;
   max-width: 100%;
   transition: all 0.3s ease;
