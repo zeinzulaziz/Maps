@@ -90,8 +90,8 @@ body {
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 35vw;
-  height: 35vh;
+  width: 40rem;
+  height: 40rem;
   z-index: 2;
   pointer-events: none;
 }
@@ -1144,7 +1144,7 @@ text-transform: uppercase;
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   #main-header { padding: 0.4rem 0.5rem; align-items: flex-start; }
   .logo { gap: 0.35rem;}
   .logo-divider, .logo-sub { display: none; }
@@ -1253,7 +1253,7 @@ text-transform: uppercase;
   .deco-title { left: 50%; top: 4rem; transform: translateX(-50%); }
   .deco-title strong { font-size: 1.2rem; letter-spacing: 4px; }
   .deco-subtitle { bottom: 4rem; left: 0.5rem; }
-  #temple { height: 100%; width: 100%; bottom: 4rem; }
+  #temple { display: none; }
   #temple svg { opacity: 1; }
 
   .leaflet-control-zoom {
@@ -1481,7 +1481,52 @@ text-transform: uppercase;
   display: none;
 }
 
-@media (max-width: 768px) {
+.community-badge {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 998;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  pointer-events: none;
+}
+
+.community-badge svg {
+  width: 100px;
+  height: 50px;
+}
+
+.community-svg {
+  width: 22rem;
+  height: auto;
+  opacity: 0.7;
+}
+
+.community-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.community-tagline {
+  font-size: 0.55rem;
+  font-weight: 400;
+  color: var(--gold);
+  letter-spacing: 0.3px;
+  opacity: 0.6;
+}
+
+.community-sub {
+  font-size: 0.42rem;
+  color: var(--gold);
+  opacity: 0.5;
+  margin-top: 1px;
+}
+
+@media (max-width: 767px) {
   #legend-panel {
     left: 0.5rem;
     right: 0.5rem;
@@ -1549,4 +1594,21 @@ text-transform: uppercase;
     height: 36px;
     font-size: 0.9rem;
   }
+
+  .community-badge {
+    bottom: 3rem;
+    right: 0.8rem;
+  }
+
+  .community-badge svg {
+    width: 70px;
+    height: 35px;
+  }
+
+  .community-svg {
+    width: 300px;
+  }
+
+  .community-tagline { font-size: 0.45rem; }
+  .community-sub { font-size: 0.36rem; }
 }
