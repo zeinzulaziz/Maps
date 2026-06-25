@@ -206,11 +206,11 @@ body {
 
 @-webkit-keyframes cloud-drift {
   0% { -webkit-transform: translateX(0); transform: translateX(0); }
-  100% { -webkit-transform: translateX(calc(-100% - 200px)); transform: translateX(calc(-100% - 200px)); }
+  100% { -webkit-transform: translateX(calc(-100vw - 300px)); transform: translateX(calc(-100vw - 300px)); }
 }
 @keyframes cloud-drift {
   0% { transform: translateX(0); }
-  100% { transform: translateX(calc(-100% - 200px)); }
+  100% { transform: translateX(calc(-100vw - 300px)); }
 }
 
 .deco-cloud {
@@ -228,51 +228,51 @@ body {
 
 .cloud-1 {
   top: 20px;
-  right: -160px;
-  width: 140px;
-  height: 58px;
-  -webkit-animation: cloud-drift 50s linear infinite;
-  animation: cloud-drift 50s linear infinite;
+  right: -200px;
+  width: 160px;
+  height: 66px;
+  -webkit-animation: cloud-drift 80s linear infinite;
+  animation: cloud-drift 80s linear infinite;
 }
 
 .cloud-2 {
-  top: 55px;
-  right: -100px;
-  width: 90px;
-  height: 38px;
-  -webkit-animation: cloud-drift 38s linear infinite;
-  animation: cloud-drift 38s linear infinite;
-  animation-delay: -12s;
+  top: 60px;
+  right: -140px;
+  width: 100px;
+  height: 42px;
+  -webkit-animation: cloud-drift 55s linear infinite;
+  animation: cloud-drift 55s linear infinite;
+  animation-delay: -20s;
 }
 
 .cloud-3 {
-  top: 10px;
-  right: -120px;
-  width: 110px;
-  height: 46px;
-  -webkit-animation: cloud-drift 60s linear infinite;
-  animation: cloud-drift 60s linear infinite;
-  animation-delay: -28s;
+  top: 8px;
+  right: -180px;
+  width: 130px;
+  height: 54px;
+  -webkit-animation: cloud-drift 95s linear infinite;
+  animation: cloud-drift 95s linear infinite;
+  animation-delay: -40s;
 }
 
 .cloud-4 {
-  top: 70px;
-  right: -80px;
-  width: 70px;
-  height: 30px;
-  -webkit-animation: cloud-drift 32s linear infinite;
-  animation: cloud-drift 32s linear infinite;
-  animation-delay: -5s;
+  top: 75px;
+  right: -100px;
+  width: 80px;
+  height: 34px;
+  -webkit-animation: cloud-drift 45s linear infinite;
+  animation: cloud-drift 45s linear infinite;
+  animation-delay: -8s;
 }
 
 .cloud-5 {
-  top: 40px;
-  right: -110px;
-  width: 100px;
-  height: 42px;
-  -webkit-animation: cloud-drift 42s linear infinite;
-  animation: cloud-drift 42s linear infinite;
-  animation-delay: -18s;
+  top: 38px;
+  right: -150px;
+  width: 120px;
+  height: 50px;
+  -webkit-animation: cloud-drift 65s linear infinite;
+  animation: cloud-drift 65s linear infinite;
+  animation-delay: -30s;
 }
 
 /* Floral corner ornaments */
@@ -1404,25 +1404,6 @@ text-transform: uppercase;
   height: auto;
   display: block;
   overflow: visible;
-}
-.flying-bird .wb {
-  position: relative;
-}
-.flying-bird .wf {
-  transform-origin: 22px 6px;
-  animation: flap-far var(--flap-speed, 0.25s) ease-in-out infinite alternate;
-}
-.flying-bird .wn {
-  transform-origin: 20px 6px;
-  animation: flap-near var(--flap-speed, 0.25s) ease-in-out infinite alternate;
-}
-@keyframes flap-far {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(-15deg); }
-}
-@keyframes flap-near {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(15deg); }
 }
 
 .leaflet-control-zoom-slider {

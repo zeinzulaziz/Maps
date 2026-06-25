@@ -696,38 +696,47 @@
   }
 
   function addFlyingBirds() {
-    var bc = '#8a7a68';
-    var svg = '<svg viewBox="0 0 48 16" xmlns="http://www.w3.org/2000/svg">' +
-      '<path class="wf" d="M22 6 C24 0 34 -1 42 2 C38 3 30 5 24 7 Z" fill="' + bc + '" opacity="0.4"/>' +
-      '<path class="wb" d="M8 9 C14 6 22 7 28 8 C32 8 34 7 36 8 L36 9 C34 10 32 10 28 10 C22 10 14 11 8 12 Z" fill="' + bc + '"/>' +
-      '<path class="wn" d="M20 7 C22 -1 36 -3 46 1 C40 2 32 4 24 7 Z" fill="' + bc + '"/>' +
+    var bc = '#5a4e3e';
+    var seagullSvg = '<svg viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">' +
+      '<path fill="' + bc + '" d="M70 210 C140 145 210 135 290 165 C330 180 360 195 395 225 C415 242 430 250 448 248 C438 235 432 220 432 205 C432 190 450 180 490 170 C580 145 690 150 820 210 C700 170 600 175 510 200 C470 212 445 208 405 185 C310 130 210 125 70 210Z"/>' +
       '</svg>';
-    var n = 4;
+    var n = 8 + Math.floor(Math.random() * 12);
     for (var i = 0; i < n; i++) {
       var el = document.createElement('div');
       el.className = 'flying-bird';
-      el.innerHTML = svg;
-      el.style.width = (16 + Math.random() * 28) + 'px';
-      var d = 1.5 + Math.random() * 1.5;
-      el.style.setProperty('--flap-speed', d + 's');
+      el.innerHTML = seagullSvg;
+      el.style.width = (10 + Math.random() * 55) + 'px';
       document.getElementById('map').appendChild(el);
       flyBird(el);
     }
+    function randEdge() {
+      return Math.floor(Math.random() * 4);
+    }
+    function edgePos(edge) {
+      var w = window.innerWidth, h = window.innerHeight;
+      switch (edge) {
+        case 0: return { x: Math.random() * w, y: -80 };
+        case 1: return { x: w + 80, y: Math.random() * h };
+        case 2: return { x: Math.random() * w, y: h + 80 };
+        case 3: return { x: -80, y: Math.random() * h };
+      }
+    }
     function flyBird(el) {
       var w = window.innerWidth, h = window.innerHeight;
-      var sx = -120 + Math.random() * (w + 240);
-      var sy = 20 + Math.random() * h * 0.5;
-      var ex = -120 + Math.random() * (w + 240);
-      var ey = 20 + Math.random() * h * 0.5;
-      var dur = 4 + Math.random() * 7;
-      var s = 0.4 + Math.random() * 0.8;
-      gsap.set(el, { x: sx, y: sy, scaleX: s, scaleY: s, opacity: 0.25 + Math.random() * 0.3 });
+      var spawnEdge = randEdge();
+      var exitEdge = (spawnEdge + 1 + Math.floor(Math.random() * 3)) % 4;
+      var start = edgePos(spawnEdge);
+      var end = edgePos(exitEdge);
+      var dur = 5 + Math.random() * 16;
+      var s = 0.25 + Math.random() * 0.8;
+      var opa = 0.12 + Math.random() * 0.35;
+      var facingRight = end.x > start.x;
+      gsap.set(el, { x: start.x, y: start.y, scaleX: facingRight ? s : -s, scaleY: s, opacity: 0 });
+      gsap.to(el, { opacity: opa, duration: 1.5 + Math.random() * 2.5, ease: 'power2.out' });
       gsap.to(el, {
-        x: ex, y: ey,
-        scaleX: ex > sx ? s : -s,
-        scaleY: s,
+        x: end.x, y: end.y,
         duration: dur,
-        ease: 'sine.inOut',
+        ease: 'none',
         onComplete: function() { flyBird(el); }
       });
     }
