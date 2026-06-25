@@ -1687,6 +1687,7 @@ text-transform: uppercase;
   .mountain-icon { transform: scale(0.65); transform-origin: bottom center; }
   .mountain-label { font-size: 0.32rem; bottom: -8px; }
   .airport-icon { transform: scale(0.6); transform-origin: bottom center; }
+  .community-badge { display: none; }
 
   .controls button { width: 2rem; height: 2rem; font-size: 1rem; }
   .spot-count { font-size: 0.5rem; max-width: 4rem; }
