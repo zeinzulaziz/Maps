@@ -307,6 +307,7 @@
       <button id="btn-locate" title="My Location"><i class="fas fa-crosshairs"></i></button>
       <button id="btn-refresh" title="Refresh Data"><i class="fas fa-sync-alt"></i></button>
       <button id="btn-reset" title="Reset View"><i class="fas fa-undo"></i></button>
+      <button id="btn-favorites" title="Show Favorites"><i class="far fa-heart"></i></button>
       <span id="spot-count" class="spot-count">Loading data...</span>
     </div>
   </header>
@@ -360,9 +361,14 @@
         <i class="fas fa-map-marker-alt"></i>
         <span id="panel-coords"></span>
       </div>
-      <a class="btn-explore" id="btn-explore" href="#" target="_blank" rel="noopener">
-        <i class="fas fa-compass"></i> View Details
-      </a>
+      <div class="panel-actions">
+        <a class="btn-explore" id="btn-explore" href="#" target="_blank" rel="noopener">
+          <i class="fas fa-compass"></i> View Details
+        </a>
+        <button class="btn-bookmark" id="btn-bookmark" title="Save to favorites">
+          <i class="far fa-heart"></i>
+        </button>
+      </div>
     </div>
   </div>
 

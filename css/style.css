@@ -380,6 +380,12 @@ body {
   border-color: var(--gold);
 }
 
+.controls button.active {
+  background: var(--green);
+  color: #fff;
+  border-color: var(--green);
+}
+
 .controls button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
@@ -1022,6 +1028,41 @@ text-transform: uppercase;
 }
 
 .btn-explore:hover {
+  background: var(--green);
+  color: #fff;
+}
+
+.panel-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: stretch;
+}
+
+.panel-actions .btn-explore {
+  flex: 1;
+}
+
+.btn-bookmark {
+  width: 42px;
+  border: 1px solid var(--green);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--green);
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.btn-bookmark:hover {
+  background: var(--green);
+  color: #fff;
+}
+
+.btn-bookmark.bookmarked {
   background: var(--green);
   color: #fff;
 }
