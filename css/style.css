@@ -1086,20 +1086,16 @@ text-transform: uppercase;
   margin-bottom: 1rem;
 }
 
-.panel-coords {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  color: var(--ink-light);
-  font-size: 0.75rem;
-  margin-bottom: 1.2rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--cream-dark);
-}
-
-.panel-coords i {
+.panel-interest {
+  display: inline-block;
+  background: rgba(0,147,69,0.1);
   color: var(--green);
   font-size: 0.7rem;
+  font-weight: 500;
+  padding: 0.25rem 0.65rem;
+  border-radius: 20px;
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.3px;
 }
 
 .btn-explore {

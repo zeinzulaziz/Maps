@@ -965,7 +965,13 @@
     document.getElementById('panel-title').textContent = spot.name;
     document.getElementById('panel-desc').textContent = spot.description;
     document.getElementById('panel-rating').textContent = '0';
-    document.getElementById('panel-coords').textContent = spot.lat.toFixed(4) + 'S, ' + spot.lng.toFixed(4) + 'E';
+    var interestEl = document.getElementById('panel-interest');
+    if (spot.interest) {
+      interestEl.textContent = spot.interest;
+      interestEl.style.display = 'inline-block';
+    } else {
+      interestEl.style.display = 'none';
+    }
     document.getElementById('panel-duration').textContent = spot.duration || '';
     if (spot.location) {
       document.getElementById('panel-duration').textContent = (spot.duration || '') + ' \u2014 ' + spot.location;
