@@ -502,7 +502,39 @@
       zoomAnimation: true,
       fadeAnimation: false
     });
-    L.control.zoom({ position: 'topright' }).addTo(map);
+    var ZoomSlider = L.Control.extend({
+      options: { position: 'topright' },
+      onAdd: function(map) {
+        var c = L.DomUtil.create('div', 'leaflet-control-zoom-slider');
+        c.innerHTML = '<button class="zslider-plus" title="Perbesar" type="button">+</button>' +
+          '<div class="zslider-track"><div class="zslider-thumb"></div></div>' +
+          '<button class="zslider-minus" title="Perkecil" type="button">-</button>';
+        L.DomEvent.disableClickPropagation(c);
+        var t = c.querySelector('.zslider-track');
+        var h = c.querySelector('.zslider-thumb');
+        function z2p(z) { return (z - map.getMinZoom()) / (map.getMaxZoom() - map.getMinZoom()); }
+        function p2z(p) { return Math.round(map.getMinZoom() + p * (map.getMaxZoom() - map.getMinZoom())); }
+        function up() { h.style.bottom = (z2p(map.getZoom()) * 100) + '%'; }
+        map.on('zoom', up); up();
+        var d = false;
+        function gp(e) {
+          var r = t.getBoundingClientRect();
+          var y = (e.clientY || (e.touches && e.touches[0].clientY)) - r.top;
+          return Math.max(0, Math.min(1, 1 - y / r.height));
+        }
+        t.addEventListener('mousedown', function(e) { d = true; e.preventDefault(); map.setZoom(p2z(gp(e)), { animate: true }); });
+        document.addEventListener('mousemove', function(e) { if (!d) return; e.preventDefault(); map.setZoom(p2z(gp(e)), { animate: true }); });
+        document.addEventListener('mouseup', function() { d = false; });
+        t.addEventListener('touchstart', function(e) { d = true; e.preventDefault(); map.setZoom(p2z(gp(e)), { animate: true }); }, { passive: false });
+        document.addEventListener('touchmove', function(e) { if (!d) return; e.preventDefault(); map.setZoom(p2z(gp(e)), { animate: true }); }, { passive: false });
+        document.addEventListener('touchend', function() { d = false; });
+        c.querySelector('.zslider-plus').addEventListener('click', function() { map.zoomIn({ animate: true }); });
+        c.querySelector('.zslider-minus').addEventListener('click', function() { map.zoomOut({ animate: true }); });
+        c.addEventListener('dragstart', function(e) { e.preventDefault(); });
+        return c;
+      }
+    });
+    new ZoomSlider().addTo(map);
     L.control.scale({ position: 'bottomleft', imperial: false }).addTo(map);
     tileLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(map);
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Elevation/World_Hillshade/MapServer/tile/{z}/{y}/{x}', {

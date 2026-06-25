@@ -1393,6 +1393,64 @@ text-transform: uppercase;
 
 .leaflet-control-zoom { border: none !important; box-shadow: none !important; }
 
+.leaflet-control-zoom-slider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  background: rgba(250,248,244,0.95);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--cream-dark);
+  border-radius: 6px;
+  box-shadow: 0 2px 8px var(--shadow);
+  padding: 5px;
+}
+.zslider-plus,
+.zslider-minus {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: var(--white);
+  border-radius: 4px;
+  color: var(--text);
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  font-family: var(--font-main);
+  line-height: 1;
+}
+.zslider-plus:hover,
+.zslider-minus:hover {
+  background: var(--green);
+  color: #fff;
+}
+.zslider-track {
+  position: relative;
+  width: 4px;
+  height: 130px;
+  background: var(--cream-dark);
+  border-radius: 2px;
+  cursor: pointer;
+  touch-action: none;
+}
+.zslider-thumb {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 14px;
+  background: var(--green);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  transition: bottom 0.05s linear;
+  pointer-events: none;
+}
+
 .leaflet-top {
     bottom: 1rem;
     top: unset;
@@ -1511,7 +1569,8 @@ text-transform: uppercase;
   #temple { display: none; }
   #temple svg { opacity: 1; }
 
-  .leaflet-control-zoom {
+  .leaflet-control-zoom,
+  .leaflet-control-zoom-slider {
     position: fixed !important;
     bottom: 6.5rem !important;
     right: 0.5rem !important;
@@ -1523,6 +1582,23 @@ text-transform: uppercase;
     height: 1.8rem !important;
     line-height: 1.8rem !important;
     font-size: 0.9rem !important;
+  }
+  .leaflet-control-zoom-slider {
+    padding: 4px;
+    gap: 3px;
+  }
+  .leaflet-control-zoom-slider .zslider-plus,
+  .leaflet-control-zoom-slider .zslider-minus {
+    width: 24px;
+    height: 24px;
+    font-size: 0.9rem;
+  }
+  .leaflet-control-zoom-slider .zslider-track {
+    height: 90px;
+  }
+  .leaflet-control-zoom-slider .zslider-thumb {
+    width: 12px;
+    height: 12px;
   }
 
   .legend-toggle {
