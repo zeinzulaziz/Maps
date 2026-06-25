@@ -24,12 +24,13 @@ svg path:focus-visible,
   --green: #009345;
   --green-light: #4db87a;
   --green-dark: #006b32;
+  --text: #19402D;
   --gold: #c9a96e;
   --gold-light: #dfc89a;
   --gold-dark: #a08040;
   --cream: #faf8f4;
   --cream-dark: #f0ece4;
-  --ink: #1a1a1a;
+  --text: #19402D;
   --ink-light: #666;
   --white: #ffffff;
   --shadow: rgba(0,0,0,0.08);
@@ -44,7 +45,7 @@ svg path:focus-visible,
 body {
   font-family: var(--font-main);
   background: var(--cream);
-  color: var(--ink);
+  color: var(--text);
   overflow: hidden;
   width: 100vw;
   height: 100vh;
@@ -273,7 +274,7 @@ body {
   font-size: 1.5rem;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--ink-light);
+  color: var(--gold);
   font-weight: 400;
 }
 
@@ -289,7 +290,7 @@ body {
   border: 1px solid var(--cream-dark);
   background: rgba(250,248,244,0.95);
   backdrop-filter: blur(10px);
-  color: var(--ink);
+  color: var(--text);
   font-size: 0.85rem;
   cursor: pointer;
   display: flex;
@@ -372,7 +373,7 @@ body {
   background: transparent;
   font-family: var(--font-main);
   font-size: 1rem;
-  color: var(--ink);
+  color: var(--text);
   padding: 0 0.5rem;
   outline: none;
   width: 100%;
@@ -468,7 +469,7 @@ body {
 .search-result-name {
   font-size: 0.85rem;
   font-weight: 400;
-  color: var(--ink);
+  color: var(--text);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -548,7 +549,7 @@ body {
   font-family: var(--font-main);
   font-size: 0.875rem;
   font-weight: 300;
-  color: var(--ink);
+  color: var(--text);
   cursor: pointer;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
   white-space: nowrap;
@@ -642,7 +643,7 @@ body {
   cursor: pointer;
   transition: background 0.15s ease;
   font-size: .75rem;
-  color: var(--ink);
+  color: var(--text);
   user-select: none;
 }
 
@@ -736,7 +737,7 @@ body {
   border-radius: 50%;
   border: 1px solid var(--cream-dark);
   background: rgba(250,248,244,0.9);
-  color: var(--ink);
+  color: var(--text);
   font-size: 0.8rem;
   cursor: pointer;
   display: flex;
@@ -799,7 +800,7 @@ body {
   backdrop-filter: blur(4px);
   border: none;
   border-radius: 50%;
-  color: var(--ink);
+  color: var(--text);
   font-size: 0.75rem;
   cursor: pointer;
   display: none;
@@ -860,7 +861,7 @@ body {
   align-items: center;
   gap: 0.3rem;
   box-shadow: 0 2px 8px var(--shadow);
-  color: var(--ink);
+  color: var(--text);
 }
 
 .panel-rating i { color: var(--gold); }
@@ -882,10 +883,10 @@ body {
 .panel-content { padding: 1rem 1.5rem 1.5rem; }
 
 .panel-area {
-color: #00834D;
-font-size: 12px;
+color: var(--green);
+font-size: .725rem; /* 11.6px */
 font-style: normal;
-font-weight: 700;
+font-weight: 400;
 line-height: 110%; /* 13.2px */
 letter-spacing: 2.4px;
 text-transform: uppercase;
@@ -897,7 +898,7 @@ text-transform: uppercase;
   margin-top: 0.4rem;
   margin-bottom: 0.5rem;
   line-height: 1.2;
-  color: var(--ink);
+  color: var(--text);
   letter-spacing: 0.5px;
 }
 
@@ -986,7 +987,7 @@ text-transform: uppercase;
   border-radius: 3px;
   font-size: 0.75rem;
   font-weight: 400;
-  color: var(--ink);
+  color: var(--text);
   white-space: nowrap;
   max-width: 120px;
   overflow: hidden;
@@ -1002,7 +1003,7 @@ text-transform: uppercase;
 .marker-label:hover {
   max-width: 300px;
   overflow: visible;
-  background: var(--ink);
+  background: var(--text);
   color: #fff;
   padding: 3px 8px;
   z-index: 1000;
@@ -1090,7 +1091,7 @@ text-transform: uppercase;
   font-family: var(--font-main), serif !important;
   font-size: 0.9rem !important;
   font-weight: 500 !important;
-  color: var(--ink) !important;
+  color: var(--text) !important;
   box-shadow: 0 4px 12px var(--shadow) !important;
   letter-spacing: 0.5px !important;
 }
@@ -1103,7 +1104,7 @@ text-transform: uppercase;
 .leaflet-control-zoom a {
   font-family: var(--font-main), serif !important;
   background: rgba(250,248,244,0.95) !important;
-  color: var(--ink) !important;
+  color: var(--text) !important;
   border: 1px solid var(--cream-dark) !important;
   border-radius: 2px !important;
   box-shadow: 0 2px 8px var(--shadow) !important;
@@ -1419,7 +1420,7 @@ text-transform: uppercase;
 .legend-name {
   font-size: 0.7rem;
   font-weight: 700;
-  color: var(--ink);
+  color: var(--text);
   margin-bottom: 0.1rem;
   letter-spacing: 0.3px;
 }

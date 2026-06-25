@@ -309,6 +309,7 @@
         var lng = coords[1] || 115.1889;
         var interestNames = getTermNames(item, 'interest');
         var locationNames = getTermNames(item, 'location');
+        var durationNames = getTermNames(item, 'duration');
         var primaryInterest = interestNames.length > 0 ? interestNames[0].name : '';
 
         return {
@@ -321,6 +322,7 @@
           price: item.meta.price || '',
           location: locationNames.map(function(l) { return l.name; }).join(', '),
           interest: interestNames.map(function(i) { return i.name; }).join(', '),
+          duration: durationNames.map(function(d) { return d.name; }).join(', '),
           link: item.link,
           images: getGalleryImage(item),
           rating: 4.5,
@@ -667,9 +669,9 @@
     document.getElementById('panel-desc').textContent = spot.description;
     document.getElementById('panel-rating').textContent = '0';
     document.getElementById('panel-coords').textContent = spot.lat.toFixed(4) + 'S, ' + spot.lng.toFixed(4) + 'E';
-    document.getElementById('panel-category').textContent = spot.interest || spot.category;
+    document.getElementById('panel-duration').textContent = spot.duration || '';
     if (spot.location) {
-      document.getElementById('panel-category').textContent = (spot.interest || spot.category) + ' \u2014 ' + spot.location;
+      document.getElementById('panel-duration').textContent = (spot.duration || '') + ' \u2014 ' + spot.location;
     }
 
     var priceWrap = document.getElementById('panel-price-wrap');
