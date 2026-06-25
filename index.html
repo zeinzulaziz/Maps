@@ -7,13 +7,15 @@
   <meta name="description" content="Journey Exploring Discovery - Interactive Bali tourism map">
   <link rel="icon" href="https://b2016199.smushcdn.com/2016199/wp-content/uploads/2026/04/cropped-favicon-32x32.png?lossy=1&strip=1&avif=1" sizes="32x32">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="css/style.css?v=7">
+  <link rel="stylesheet" href="css/style.css?v=8">
   <link href="https://use.typekit.net/tbe2zvv.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-  <div id="loading-screen">
+  <a href="#map" class="skip-link">Skip to map</a>
+
+  <div id="loading-screen" role="status" aria-live="polite" aria-label="Loading application">
     <div class="loader-logo">
       <svg class="loader-logo-svg" viewBox="0 0 80 66" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M60.6431 10.4732C60.586 9.99187 60.2437 9.60078 60.1867 9.29993C60.1296 8.99909 60.5004 8.93892 60.5004 8.66817C60.5004 8.39742 60.1296 8.45758 59.5876 8.45758C59.0457 8.45758 59.1312 8.24698 58.7604 8.18683C58.3896 8.12665 58.304 7.70548 58.3325 7.46481C58.361 7.22414 58.5037 7.13389 58.3325 7.13389C58.1614 7.13389 57.8476 7.34448 57.587 7.22414C57.3265 7.10379 57.163 7.13389 57.163 7.13389C57.163 7.13389 57.1345 6.89322 57.0204 6.74279C56.9062 6.59237 56.7921 6.74279 56.3643 6.80297C55.9364 6.86314 55.8223 6.47204 56.2216 6.44195C56.621 6.41187 56.9918 6.47203 57.3912 6.41187C57.7905 6.3517 57.5053 6.02078 57.1915 5.9907C56.8777 5.96062 56.5354 5.75003 56.022 5.59961C55.5085 5.44919 55.6226 5.20851 55.3944 5.05809C55.1662 4.90767 54.0537 4.8475 53.9111 4.667C53.7685 4.4865 54.2534 4.36615 54.339 4.15556C54.4245 3.94497 54.339 3.91489 53.6829 3.79454C53.0268 3.6742 50.9445 2.80176 50.2028 2.68143C49.4611 2.56109 47.5785 2.53101 46.5516 2.59118C45.5246 2.65136 44.6974 2.53101 44.3266 2.47084C43.9558 2.41067 43.6135 2.47084 43.642 2.26025C43.6705 2.04965 43.4993 1.86915 43.0429 1.7789C42.5865 1.68865 41.6167 1.64973 40.818 1.64973C40.0192 1.64973 36.9956 1.50815 36.6818 1.83907C36.368 2.17 35.9972 2.17 35.7119 2.01957C35.4267 1.86915 34.0575 1.83907 34.0575 1.83907C34.0575 1.83907 33.7152 2.38059 33.3158 2.50092C32.9165 2.62125 31.8896 2.32042 31.4046 2.32042C30.9197 2.32042 30.663 2.62126 30.663 2.62126C30.663 2.62126 29.9784 2.41067 29.7501 2.62126C29.5219 2.83186 28.7232 2.95218 28.0101 3.16278C27.297 3.37337 26.156 3.67422 25.9563 3.67422C25.7566 3.67422 25.5569 3.76447 25.3002 3.87428C25.0435 3.9841 24.5586 4.00515 24.2162 3.91489C23.8739 3.82462 23.1038 3.88481 22.8185 4.09539C22.5333 4.30598 22.0769 4.57673 21.6775 4.57673C21.2781 4.57673 21.107 4.96783 20.7647 5.05808C20.4224 5.14833 19.7948 5.08815 19.1958 5.35892C18.5968 5.62967 18.1118 6.23136 18.1118 6.23136C18.1118 6.23136 17.4843 6.41186 16.9708 6.68262C16.4574 6.95337 15.7157 7.8559 15.2593 8.15675C14.8029 8.45759 14.7458 8.54784 14.1753 9.14953C13.6048 9.75122 13.3196 10.1423 12.5779 10.7741C11.8363 11.4058 11.6081 11.7969 11.1231 12.3084C10.6382 12.8198 10.6382 13.1206 10.2388 13.2109C9.8395 13.3012 9.69687 13.7825 9.69687 14.3541C9.69687 14.9257 9.01226 14.9558 8.55585 15.3168C8.09944 15.6778 7.41483 17.0617 6.95267 17.904C6.49052 18.7464 5.50365 19.1074 5.04724 19.6188C4.59083 20.1303 4.8761 20.9425 4.30559 21.9052C3.73508 22.8679 3.64951 23.5598 3.56393 23.8306C3.47836 24.1014 2.96489 24.1014 2.96489 24.673C2.96489 25.2446 3.44983 25.3649 3.44983 25.3649C3.44983 25.3649 3.3072 26.117 2.90785 26.3878C2.5085 26.6585 2.22324 27.0195 2.67965 27.4407C3.13606 27.8619 2.85079 27.8619 2.76522 28.3132C2.67965 28.7644 2.65112 29.4864 2.50492 29.7572C2.35872 30.028 2.50492 31.4419 2.50492 31.9834C2.50492 32.525 2.96491 32.6754 2.96491 32.6754C2.96491 32.6754 2.90787 34.4203 2.82228 35.1423C2.73671 35.8643 3.02195 38.5719 3.07901 38.963C3.13607 39.3541 3.44985 40.2867 3.99183 41.1892C4.53381 42.0917 5.01874 43.3252 5.93154 44.0773C6.84436 44.8294 6.75878 45.6417 7.27223 45.7921C7.78568 45.9425 7.64307 46.1832 7.72864 46.4539C7.81421 46.7247 8.32766 47.2662 8.55587 47.3565C8.78407 47.4467 8.9267 47.8679 9.0408 47.8963C9.15491 47.9247 9.35458 48.1687 9.38311 48.2891C9.41164 48.4094 10.0677 48.3492 10.2389 48.3492C10.41 48.3492 10.41 48.8306 10.6097 48.8908C10.8094 48.9509 11.2658 48.8908 11.2658 48.8908L11.4655 48.1386C11.4655 48.1386 11.0661 47.6874 10.6953 47.5069C10.3244 47.3264 10.0962 46.8751 10.0962 46.8751C10.0962 46.8751 10.7808 47.2963 11.0661 47.4166C11.3513 47.537 12.1501 48.0484 12.2642 47.9882C12.3783 47.9281 12.2642 47.6272 12.5209 47.5971C12.7776 47.567 13.0914 47.8378 13.177 47.6272C13.2625 47.4166 12.7491 46.7247 12.5209 46.123C12.2927 45.5213 12.3212 45.2806 12.3497 44.8595C12.3783 44.4383 12.2927 44.2578 11.8363 44.0773C11.3799 43.8968 10.8094 43.4455 10.6953 43.1748C10.5812 42.904 10.4956 42.8439 10.9805 42.9943C11.4654 43.1447 11.3514 43.6862 11.5795 43.6862C11.8077 43.6862 11.9504 43.5358 11.9789 43.1748C12.0074 42.8138 11.5795 42.543 11.1231 42.3926C10.6667 42.2422 10.7808 41.9714 10.5241 41.5803C10.2674 41.1892 9.55424 40.5875 9.21193 40.5875C8.86963 40.5875 8.86963 40.4672 8.55585 39.8655C8.24207 39.2638 8.49881 38.7524 8.49881 38.3914C8.49881 38.0304 7.95683 37.549 7.72862 37.188C7.50042 36.827 7.72862 36.5863 7.64305 36.3156C7.55748 36.0448 7.58601 35.6237 7.61452 35.2025C7.64305 34.7813 7.50042 33.8186 7.61452 32.9763C7.72863 32.1339 7.64305 31.7127 7.78567 31.2615C7.9283 30.8102 7.84271 30.3288 8.01387 29.8174C8.18502 29.306 8.07091 29.1255 8.01387 28.7344C7.95683 28.3433 8.29912 27.9221 8.29912 27.9221C8.29912 27.9221 8.12797 27.5912 8.12797 27.2001C8.12797 26.809 8.29912 26.3878 8.47028 25.9366L8.81258 25.034C8.81258 25.034 9.24046 24.9438 9.24046 24.673C9.24046 24.4023 9.46867 24.312 9.4972 24.1014C9.52572 23.8908 9.6113 23.6502 9.9536 23.1086C10.2959 22.5671 10.6382 22.0858 10.8379 21.815C11.0376 21.5443 10.9805 21.0629 11.3228 20.6117C11.6651 20.1604 11.7507 19.8295 11.8933 19.4986C12.036 19.1676 12.0074 18.8367 12.2356 18.7164C12.4638 18.596 12.8347 18.235 13.1199 17.9342C13.4052 17.6333 13.9186 17.1219 14.5462 16.5202C15.1737 15.9185 16.5715 14.7453 16.5715 14.7453L16.9708 14.7152C16.9708 14.7152 17.5984 13.9932 18.2545 13.6021C18.9106 13.211 19.4811 13.0004 19.8234 12.8199C20.1657 12.6394 20.1371 12.1881 20.7647 11.8873C21.3922 11.5864 22.3051 11.2254 22.7044 10.9847C23.1038 10.7441 23.3034 10.8042 23.5602 10.8042C23.8169 10.8042 25.2146 10.2326 26.3842 9.81145C27.5537 9.39028 30.5774 8.48775 32.945 8.03648C35.3126 7.58522 36.8529 7.55514 39.135 7.34455C41.417 7.13395 46.0666 7.64539 50.1457 8.30723C54.2248 8.96908 55.9364 10.0521 57.6479 10.6839C59.3594 11.3156 59.7302 11.4661 60.3007 11.4661C60.8712 11.4661 60.7001 10.9546 60.6431 10.4732Z" fill="#009345"/>
@@ -30,10 +32,10 @@
     </div>
   </div>
 
-  <div id="map"></div>
+  <div id="map" role="application" aria-label="Bali tourism map"></div>
 
   <!-- Water sketch waves overlay -->
-  <svg id="water-waves" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg id="water-waves" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <!-- Top-left -->
     <path d="M60 110 Q100 105 140 110 Q180 115 220 108" stroke="#c9a96e" stroke-width="1.8" opacity="0.5"/>
     <path d="M80 145 Q120 140 160 145 Q200 150 240 143" stroke="#c9a96e" stroke-width="1.2" opacity="0.35"/>
@@ -65,7 +67,7 @@
   </svg>
 
   <!-- Bali temple sketch background - Pura Ulun Danu Bratan -->
-  <div id="temple">
+  <div id="temple" aria-hidden="true">
     <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMax meet" fill="none" xmlns="http://www.w3.org/2000/svg">
 
       <!-- Lake water line -->
@@ -153,7 +155,7 @@
     </svg>
   </div>
 
-  <div id="map-decorations">
+  <div id="map-decorations" aria-hidden="true">
     <!-- Floating clouds -->
     <div class="deco-cloud cloud-1">
       <svg viewBox="0 0 120 50" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -285,9 +287,9 @@
     </div>
   </div>
 
-  <header id="main-header">
+  <header id="main-header" role="banner">
     <div class="logo">
-      <svg class="logo-svg" viewBox="0 0 80 66" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg class="logo-svg" viewBox="0 0 80 66" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M60.6431 10.4732C60.586 9.99187 60.2437 9.60078 60.1867 9.29993C60.1296 8.99909 60.5004 8.93892 60.5004 8.66817C60.5004 8.39742 60.1296 8.45758 59.5876 8.45758C59.0457 8.45758 59.1312 8.24698 58.7604 8.18683C58.3896 8.12665 58.304 7.70548 58.3325 7.46481C58.361 7.22414 58.5037 7.13389 58.3325 7.13389C58.1614 7.13389 57.8476 7.34448 57.587 7.22414C57.3265 7.10379 57.163 7.13389 57.163 7.13389C57.163 7.13389 57.1345 6.89322 57.0204 6.74279C56.9062 6.59237 56.7921 6.74279 56.3643 6.80297C55.9364 6.86314 55.8223 6.47204 56.2216 6.44195C56.621 6.41187 56.9918 6.47203 57.3912 6.41187C57.7905 6.3517 57.5053 6.02078 57.1915 5.9907C56.8777 5.96062 56.5354 5.75003 56.022 5.59961C55.5085 5.44919 55.6226 5.20851 55.3944 5.05809C55.1662 4.90767 54.0537 4.8475 53.9111 4.667C53.7685 4.4865 54.2534 4.36615 54.339 4.15556C54.4245 3.94497 54.339 3.91489 53.6829 3.79454C53.0268 3.6742 50.9445 2.80176 50.2028 2.68143C49.4611 2.56109 47.5785 2.53101 46.5516 2.59118C45.5246 2.65136 44.6974 2.53101 44.3266 2.47084C43.9558 2.41067 43.6135 2.47084 43.642 2.26025C43.6705 2.04965 43.4993 1.86915 43.0429 1.7789C42.5865 1.68865 41.6167 1.64973 40.818 1.64973C40.0192 1.64973 36.9956 1.50815 36.6818 1.83907C36.368 2.17 35.9972 2.17 35.7119 2.01957C35.4267 1.86915 34.0575 1.83907 34.0575 1.83907C34.0575 1.83907 33.7152 2.38059 33.3158 2.50092C32.9165 2.62125 31.8896 2.32042 31.4046 2.32042C30.9197 2.32042 30.663 2.62126 30.663 2.62126C30.663 2.62126 29.9784 2.41067 29.7501 2.62126C29.5219 2.83186 28.7232 2.95218 28.0101 3.16278C27.297 3.37337 26.156 3.67422 25.9563 3.67422C25.7566 3.67422 25.5569 3.76447 25.3002 3.87428C25.0435 3.9841 24.5586 4.00515 24.2162 3.91489C23.8739 3.82462 23.1038 3.88481 22.8185 4.09539C22.5333 4.30598 22.0769 4.57673 21.6775 4.57673C21.2781 4.57673 21.107 4.96783 20.7647 5.05808C20.4224 5.14833 19.7948 5.08815 19.1958 5.35892C18.5968 5.62967 18.1118 6.23136 18.1118 6.23136C18.1118 6.23136 17.4843 6.41186 16.9708 6.68262C16.4574 6.95337 15.7157 7.8559 15.2593 8.15675C14.8029 8.45759 14.7458 8.54784 14.1753 9.14953C13.6048 9.75122 13.3196 10.1423 12.5779 10.7741C11.8363 11.4058 11.6081 11.7969 11.1231 12.3084C10.6382 12.8198 10.6382 13.1206 10.2388 13.2109C9.8395 13.3012 9.69687 13.7825 9.69687 14.3541C9.69687 14.9257 9.01226 14.9558 8.55585 15.3168C8.09944 15.6778 7.41483 17.0617 6.95267 17.904C6.49052 18.7464 5.50365 19.1074 5.04724 19.6188C4.59083 20.1303 4.8761 20.9425 4.30559 21.9052C3.73508 22.8679 3.64951 23.5598 3.56393 23.8306C3.47836 24.1014 2.96489 24.1014 2.96489 24.673C2.96489 25.2446 3.44983 25.3649 3.44983 25.3649C3.44983 25.3649 3.3072 26.117 2.90785 26.3878C2.5085 26.6585 2.22324 27.0195 2.67965 27.4407C3.13606 27.8619 2.85079 27.8619 2.76522 28.3132C2.67965 28.7644 2.65112 29.4864 2.50492 29.7572C2.35872 30.028 2.50492 31.4419 2.50492 31.9834C2.50492 32.525 2.96491 32.6754 2.96491 32.6754C2.96491 32.6754 2.90787 34.4203 2.82228 35.1423C2.73671 35.8643 3.02195 38.5719 3.07901 38.963C3.13607 39.3541 3.44985 40.2867 3.99183 41.1892C4.53381 42.0917 5.01874 43.3252 5.93154 44.0773C6.84436 44.8294 6.75878 45.6417 7.27223 45.7921C7.78568 45.9425 7.64307 46.1832 7.72864 46.4539C7.81421 46.7247 8.32766 47.2662 8.55587 47.3565C8.78407 47.4467 8.9267 47.8679 9.0408 47.8963C9.15491 47.9247 9.35458 48.1687 9.38311 48.2891C9.41164 48.4094 10.0677 48.3492 10.2389 48.3492C10.41 48.3492 10.41 48.8306 10.6097 48.8908C10.8094 48.9509 11.2658 48.8908 11.2658 48.8908L11.4655 48.1386C11.4655 48.1386 11.0661 47.6874 10.6953 47.5069C10.3244 47.3264 10.0962 46.8751 10.0962 46.8751C10.0962 46.8751 10.7808 47.2963 11.0661 47.4166C11.3513 47.537 12.1501 48.0484 12.2642 47.9882C12.3783 47.9281 12.2642 47.6272 12.5209 47.5971C12.7776 47.567 13.0914 47.8378 13.177 47.6272C13.2625 47.4166 12.7491 46.7247 12.5209 46.123C12.2927 45.5213 12.3212 45.2806 12.3497 44.8595C12.3783 44.4383 12.2927 44.2578 11.8363 44.0773C11.3799 43.8968 10.8094 43.4455 10.6953 43.1748C10.5812 42.904 10.4956 42.8439 10.9805 42.9943C11.4654 43.1447 11.3514 43.6862 11.5795 43.6862C11.8077 43.6862 11.9504 43.5358 11.9789 43.1748C12.0074 42.8138 11.5795 42.543 11.1231 42.3926C10.6667 42.2422 10.7808 41.9714 10.5241 41.5803C10.2674 41.1892 9.55424 40.5875 9.21193 40.5875C8.86963 40.5875 8.86963 40.4672 8.55585 39.8655C8.24207 39.2638 8.49881 38.7524 8.49881 38.3914C8.49881 38.0304 7.95683 37.549 7.72862 37.188C7.50042 36.827 7.72862 36.5863 7.64305 36.3156C7.55748 36.0448 7.58601 35.6237 7.61452 35.2025C7.64305 34.7813 7.50042 33.8186 7.61452 32.9763C7.72863 32.1339 7.64305 31.7127 7.78567 31.2615C7.9283 30.8102 7.84271 30.3288 8.01387 29.8174C8.18502 29.306 8.07091 29.1255 8.01387 28.7344C7.95683 28.3433 8.29912 27.9221 8.29912 27.9221C8.29912 27.9221 8.12797 27.5912 8.12797 27.2001C8.12797 26.809 8.29912 26.3878 8.47028 25.9366L8.81258 25.034C8.81258 25.034 9.24046 24.9438 9.24046 24.673C9.24046 24.4023 9.46867 24.312 9.4972 24.1014C9.52572 23.8908 9.6113 23.6502 9.9536 23.1086C10.2959 22.5671 10.6382 22.0858 10.8379 21.815C11.0376 21.5443 10.9805 21.0629 11.3228 20.6117C11.6651 20.1604 11.7507 19.8295 11.8933 19.4986C12.036 19.1676 12.0074 18.8367 12.2356 18.7164C12.4638 18.596 12.8347 18.235 13.1199 17.9342C13.4052 17.6333 13.9186 17.1219 14.5462 16.5202C15.1737 15.9185 16.5715 14.7453 16.5715 14.7453L16.9708 14.7152C16.9708 14.7152 17.5984 13.9932 18.2545 13.6021C18.9106 13.211 19.4811 13.0004 19.8234 12.8199C20.1657 12.6394 20.1371 12.1881 20.7647 11.8873C21.3922 11.5864 22.3051 11.2254 22.7044 10.9847C23.1038 10.7441 23.3034 10.8042 23.5602 10.8042C23.8169 10.8042 25.2146 10.2326 26.3842 9.81145C27.5537 9.39028 30.5774 8.48775 32.945 8.03648C35.3126 7.58522 36.8529 7.55514 39.135 7.34455C41.417 7.13395 46.0666 7.64539 50.1457 8.30723C54.2248 8.96908 55.9364 10.0521 57.6479 10.6839C59.3594 11.3156 59.7302 11.4661 60.3007 11.4661C60.8712 11.4661 60.7001 10.9546 60.6431 10.4732Z" fill="#009345"/>
         <path d="M48.7198 18.1747C48.2919 17.8739 47.2365 17.0917 46.3522 16.851C45.4679 16.6103 44.8118 15.8281 44.0702 15.4972C43.3285 15.1663 41.2462 13.4214 40.7042 12.9701C40.1622 12.5189 38.9927 11.7066 38.7074 11.6164C38.4222 11.5261 38.251 11.4058 38.1654 11.2253C38.0799 11.0448 37.7661 10.8342 37.4808 10.8342C37.1956 10.8342 37.1385 10.5634 36.8818 10.5033C36.6251 10.4431 35.969 9.72107 35.7693 9.60073C35.5696 9.48038 35.2273 9.90157 34.9706 9.90157C34.7139 9.90157 34.7139 10.3227 34.7139 10.3227H34.4571C34.4571 10.3227 34.4571 10.5333 34.2289 10.9244C34.0007 11.3155 33.5443 11.4659 33.3161 11.5562C33.0879 11.6464 32.5745 12.188 32.2322 12.5189C31.8898 12.8498 30.4921 13.0303 30.5206 13.3312C30.5492 13.632 30.321 13.9329 29.8646 14.1134C29.4082 14.2939 28.7806 14.5345 28.1816 14.8053C27.5825 15.076 26.6127 15.7379 26.6127 15.7379C26.6127 15.7379 26.2989 15.768 25.9281 16.1591C25.5572 16.5502 25.0438 16.9413 24.3592 17.3925C23.6745 17.8438 22.9614 17.8137 22.9614 18.0845C22.9614 18.3552 22.9614 18.5658 22.7047 18.5658C22.448 18.5658 21.5922 18.8065 21.5922 18.8065C21.5922 18.8065 21.5637 19.5887 21.4781 19.9497C21.3925 20.3107 20.7079 20.5814 20.5653 21.0628C20.4227 21.5441 20.7935 21.845 21.364 21.9051C21.9345 21.9653 22.0771 22.206 22.3624 22.1157C22.6476 22.0255 23.104 22.206 23.3893 22.1157C23.6745 22.0255 24.0454 22.0556 24.4447 21.9653C24.8441 21.8751 25.4431 21.5141 25.8425 21.1531C26.2418 20.792 26.2133 20.792 26.47 20.4611C26.7267 20.1302 27.7251 19.5887 28.3242 18.987C28.9232 18.3853 29.7219 18.0243 29.9786 17.8438C30.2354 17.6633 30.6632 17.7234 30.977 17.6633C31.2908 17.6031 32.1465 17.2722 32.6315 17.0616C33.1164 16.851 33.2305 16.2794 33.5158 16.1892C33.801 16.0989 34.343 16.129 34.4001 15.8474C34.4571 15.5659 34.5142 15.5574 34.5997 15.407C34.6853 15.2566 34.9706 14.7752 34.9706 14.7752C34.9706 14.7752 35.4555 14.8655 36.0545 14.9256C36.6535 14.9858 37.709 15.8474 37.709 15.8474C37.709 15.8474 37.7375 16.3396 38.3365 16.7307C38.9356 17.1218 39.7343 17.3925 39.7343 17.3925C39.7343 17.3925 40.0481 17.7234 40.2192 18.0243C40.3904 18.3251 41.2461 18.6561 41.2461 18.6561C41.2461 18.6561 41.5028 18.9569 41.8737 19.1976C42.2445 19.4382 42.7865 19.7692 43.2429 19.8594C43.6993 19.9497 44.0416 20.4611 44.7833 20.7319C45.5249 21.0026 46.78 21.9352 46.78 21.9352L48.1207 22.1157C48.1207 22.1157 48.2348 21.8149 48.0637 21.6344C47.8925 21.4539 47.7214 21.3335 47.9781 21.3636C48.2348 21.3937 48.5486 21.9352 48.7483 21.6945C48.948 21.4539 48.4345 21.3335 48.6342 21.153C48.8339 20.9725 49.1191 21.153 49.1191 21.153L49.0906 20.8221C49.0906 20.8221 49.3473 20.8823 49.4329 20.1603C49.5185 19.4382 49.1477 18.4755 48.7198 18.1747Z" fill="#009345"/>
         <path d="M77.9014 27.7425C77.5021 26.0277 76.5893 23.3502 76.0473 22.2672C75.5053 21.1841 74.8492 20.2515 74.621 20.0409C74.3928 19.8303 74.3643 19.1685 73.9649 18.7473C73.5656 18.3261 73.1092 17.935 72.938 17.4838C72.7669 17.0325 72.0823 16.6715 72.0252 16.3707C71.9682 16.0698 71.4832 15.4381 71.198 15.2876C70.9127 15.1372 70.599 14.5957 70.3137 14.5957C70.0285 14.5957 69.7432 14.8665 69.7432 14.8665C69.7432 14.8665 69.3439 14.716 69.1727 14.8665C69.0015 15.0169 68.2599 15.0169 68.0032 15.0169C67.7464 15.0169 67.4041 15.5283 67.832 15.6486C68.2599 15.769 68.8304 16.0999 69.1727 16.491C69.515 16.8821 69.9144 17.4537 69.8573 17.7545C69.8003 18.0554 69.1157 17.6041 68.9445 17.0626C68.7734 16.5211 68.4025 16.4308 68.4025 16.8219C68.4025 17.213 68.5452 17.5439 68.6022 17.7244C68.6592 17.9049 68.3455 18.4765 68.6592 18.5066C68.973 18.5367 69.2868 18.5969 69.2868 19.0481C69.2868 19.4994 68.8875 19.4693 69.2868 19.8905C69.6862 20.3117 70.1711 20.5523 70.3993 21.2443C70.6275 21.9362 70.9413 22.2671 71.0554 22.7184C71.1695 23.1697 71.3692 23.4404 71.5688 23.3201C71.7685 23.1998 71.9111 23.9819 71.9111 23.9819C71.9111 23.9819 71.4833 24.1925 71.74 24.9145C71.9967 25.6366 72.1679 26.6895 72.4817 27.2009C72.7954 27.7124 72.9951 27.8929 72.9666 28.6149C72.9381 29.3369 73.3374 29.4572 73.3659 30.3598C73.3945 31.2623 73.1663 31.533 73.5656 32.2551C73.965 32.9771 74.0791 33.1877 73.965 34.3309C73.8509 35.4741 74.0505 35.8652 73.5941 36.2863C73.1377 36.7075 72.9951 36.9482 72.9951 36.9482C72.9951 36.9482 72.9951 37.9932 72.7954 38.3883C72.5958 38.7833 72.824 38.8134 72.6813 39.1744C72.5387 39.5354 71.8826 39.2346 71.74 39.746C71.5974 40.2574 71.3406 40.6485 71.2551 40.829C71.1695 41.0095 71.5118 41.1299 71.5118 41.4307C71.5118 41.7316 71.0554 41.8218 71.0554 42.0625C71.0554 42.3032 70.7987 42.6341 70.7987 42.8447C70.7987 43.0553 70.6846 43.2358 70.2567 43.2057C69.8288 43.1756 69.6862 43.687 69.6577 44.0781C69.6291 44.4692 69.2298 45.462 68.5452 46.4247C67.8605 47.3874 66.3202 48.8013 65.6071 49.1623C64.8939 49.5233 64.4946 49.8543 64.466 50.0649C64.4375 50.2755 63.9241 50.3055 63.5532 50.6966C63.1824 51.0877 61.642 51.8097 61.2997 51.9301C60.9574 52.0504 60.3299 52.3513 60.3299 52.5318C60.3299 52.7123 60.1872 53.1034 59.6738 53.2538C59.1604 53.4042 55.937 54.9385 55.3094 55.2093C54.6819 55.48 53.655 55.7508 53.4268 55.6906C53.1986 55.6304 53.6264 55.2694 53.9687 55.2995C54.311 55.3296 54.5678 55.3296 54.5963 54.9084C54.6248 54.4873 54.0828 54.4572 53.712 54.6978C53.3412 54.9385 52.9704 55.1491 52.3998 55.0889C51.8293 55.0287 51.5726 55.3296 50.5742 55.6906C49.5758 56.0516 49.5473 55.9614 48.2922 56.1118C47.0371 56.2622 45.839 56.2321 45.2971 56.4427C44.7551 56.6533 44.156 56.7135 43.1006 56.7135C42.0452 56.7135 41.9025 56.8037 40.0484 56.7736C38.1943 56.7436 36.5683 56.7736 35.1421 56.5931C33.7158 56.4126 33.6017 55.811 31.8046 55.6605C30.0075 55.5101 28.4957 55.0588 27.8966 54.8182C27.2976 54.5775 27.1265 54.036 26.6415 54.1262C26.1566 54.2165 25.4833 54.057 24.7874 53.9156C24.0672 53.7694 21.2502 53.314 20.9935 53.314C20.7368 53.314 20.7083 53.4343 20.5942 53.6148C20.4801 53.7953 20.1092 53.9457 20.1948 54.3067C20.2804 54.6678 20.366 54.758 20.5942 54.758C20.8224 54.758 21.1932 54.8783 20.965 55.0288C20.7368 55.1792 20.4516 55.5101 20.6227 55.811C20.7939 56.1118 21.2217 56.5029 21.2217 56.5029C21.2217 56.5029 21.3358 57.2249 21.8493 57.5558C22.3627 57.8867 22.9903 57.8567 23.1615 57.977C23.3326 58.0973 23.5608 58.3982 23.5608 58.3982C23.5608 58.3982 23.9887 58.3982 24.2739 58.5787C24.5592 58.7592 24.7874 59.0299 25.1582 59.1804C25.5291 59.3308 26.8412 59.4812 27.2691 59.5113C27.697 59.5414 28.5242 59.8422 29.5226 60.2634C30.521 60.6846 31.2912 60.9553 32.1469 61.0456C33.0027 61.1358 34.2863 61.2863 34.2863 61.2863C34.2863 61.2863 35.7126 61.4066 36.2545 61.4668C36.7965 61.5269 37.7093 61.4066 38.2513 61.6172C38.7933 61.8278 40.7901 61.7977 41.2465 61.8579C41.7029 61.918 42.4445 62.0384 43.2718 62.0985C44.099 62.1587 45.9532 62.249 46.6092 62.0985C47.2653 61.9481 47.4935 61.4968 48.007 61.6172C48.5204 61.7375 48.7771 61.6473 49.1195 61.4066C49.4618 61.1659 49.5759 61.0456 50.1749 60.8952C50.7739 60.7448 50.8595 60.3236 51.2589 60.5041C51.6582 60.6846 52.0576 60.6846 52.0576 60.6846C52.0576 60.6846 50.9166 61.1358 50.289 61.3163C49.6614 61.4968 49.69 61.6172 49.69 61.6172C49.69 61.6172 50.5172 61.7676 51.0021 61.7375C51.4871 61.7074 51.8864 61.196 52.6851 61.0155C53.4838 60.835 54.197 60.5342 54.9101 60.4138C55.6232 60.2935 56.8213 60.2032 56.8213 60.2032C56.8213 60.2032 57.2492 59.5113 57.9338 59.5113C58.6184 59.5113 58.8751 59.6617 59.1319 59.3609C59.3886 59.06 59.7309 58.8194 60.1302 58.8494C60.5296 58.8795 61.1857 58.2699 61.8703 57.7474C62.5549 57.2249 62.6975 56.8639 63.0969 56.6232C63.4962 56.3825 64.6943 55.2694 65.4645 54.9987C66.2347 54.7279 66.4914 54.3368 66.4914 54.3368C66.4914 54.3368 66.4629 53.9758 67.2616 53.705C68.0603 53.4343 69.7147 51.9902 70.5705 51.178C71.4263 50.3657 72.7384 48.9517 73.3089 48.0793C73.8794 47.2069 74.9634 45.0709 75.3057 44.3188C75.648 43.5667 76.4467 42.1527 76.5323 41.521C76.6179 40.8892 77.0457 39.9566 77.3595 38.9939C77.6733 38.0312 78.3713 35.0529 78.3713 33.7893C78.3713 32.5258 78.3008 29.4573 77.9014 27.7425Z" fill="#009345"/>
@@ -298,53 +300,53 @@
       <span class="logo-sub">Tourism Map</span>
     </div>
     <div class="search-wrapper" id="search-wrapper">
-      <i class="fas fa-search search-icon"></i>
-      <input type="text" id="search-input" class="search-input" placeholder="Search spot, village, location..." autocomplete="off">
-      <button id="search-clear" class="search-clear" title="Clear"><i class="fas fa-times"></i></button>
-      <div id="search-dropdown" class="search-dropdown hidden"></div>
+      <i class="fas fa-search search-icon" aria-hidden="true"></i>
+      <input type="text" id="search-input" class="search-input" placeholder="Search spot, village, location..." autocomplete="off" role="combobox" aria-label="Search tourism spots" aria-expanded="false" aria-controls="search-dropdown" aria-autocomplete="list">
+      <button id="search-clear" class="search-clear" title="Clear" aria-label="Clear search"><i class="fas fa-times" aria-hidden="true"></i></button>
+      <div id="search-dropdown" class="search-dropdown hidden" role="listbox" aria-label="Search results"></div>
     </div>
-    <div class="controls">
-      <button id="btn-locate" title="My Location"><i class="fas fa-crosshairs"></i></button>
-      <button id="btn-refresh" title="Refresh Data"><i class="fas fa-sync-alt"></i></button>
-      <button id="btn-reset" title="Reset View"><i class="fas fa-undo"></i></button>
-      <button id="btn-favorites" title="Show Favorites"><i class="far fa-heart"></i></button>
-      <span id="spot-count" class="spot-count">Loading data...</span>
+    <div class="controls" role="toolbar" aria-label="Map controls">
+      <button id="btn-locate" title="My Location" aria-label="Center map on my location"><i class="fas fa-crosshairs" aria-hidden="true"></i></button>
+      <button id="btn-refresh" title="Refresh Data" aria-label="Refresh tourism data"><i class="fas fa-sync-alt" aria-hidden="true"></i></button>
+      <button id="btn-reset" title="Reset View" aria-label="Reset map view"><i class="fas fa-undo" aria-hidden="true"></i></button>
+      <button id="btn-favorites" title="Show Favorites" aria-label="Show favorites" aria-pressed="false"><i class="far fa-heart" aria-hidden="true"></i></button>
+      <span id="spot-count" class="spot-count" role="status" aria-live="polite">Loading data...</span>
     </div>
   </header>
 
-  <div id="filter-bar">
+  <div id="filter-bar" role="search" aria-label="Filter tourism spots">
     <div class="filter-selects">
       <div class="filter-dropdown" data-taxonomy="interest">
-        <button class="filter-trigger"><i class="fas fa-heart"></i> <span>Interest</span><span class="filter-count"></span><i class="fas fa-chevron-down filter-arrow"></i></button>
-        <div class="filter-options"></div>
+        <button class="filter-trigger" aria-expanded="false" aria-haspopup="listbox"><i class="fas fa-heart" aria-hidden="true"></i> <span>Interest</span><span class="filter-count"></span><i class="fas fa-chevron-down filter-arrow" aria-hidden="true"></i></button>
+        <div class="filter-options" role="listbox" aria-label="Interest filter"></div>
       </div>
       <div class="filter-dropdown" data-taxonomy="season">
-        <button class="filter-trigger"><i class="fas fa-cloud-sun"></i> <span>Season</span><span class="filter-count"></span><i class="fas fa-chevron-down filter-arrow"></i></button>
-        <div class="filter-options"></div>
+        <button class="filter-trigger" aria-expanded="false" aria-haspopup="listbox"><i class="fas fa-cloud-sun" aria-hidden="true"></i> <span>Season</span><span class="filter-count"></span><i class="fas fa-chevron-down filter-arrow" aria-hidden="true"></i></button>
+        <div class="filter-options" role="listbox" aria-label="Season filter"></div>
       </div>
       <div class="filter-dropdown" data-taxonomy="location">
-        <button class="filter-trigger"><i class="fas fa-map-pin"></i> <span>Location</span><span class="filter-count"></span><i class="fas fa-chevron-down filter-arrow"></i></button>
-        <div class="filter-options"></div>
+        <button class="filter-trigger" aria-expanded="false" aria-haspopup="listbox"><i class="fas fa-map-pin" aria-hidden="true"></i> <span>Location</span><span class="filter-count"></span><i class="fas fa-chevron-down filter-arrow" aria-hidden="true"></i></button>
+        <div class="filter-options" role="listbox" aria-label="Location filter"></div>
       </div>
       <div class="filter-dropdown" data-taxonomy="duration">
-        <button class="filter-trigger"><i class="fas fa-clock"></i> <span>Duration</span><span class="filter-count"></span><i class="fas fa-chevron-down filter-arrow"></i></button>
-        <div class="filter-options"></div>
+        <button class="filter-trigger" aria-expanded="false" aria-haspopup="listbox"><i class="fas fa-clock" aria-hidden="true"></i> <span>Duration</span><span class="filter-count"></span><i class="fas fa-chevron-down filter-arrow" aria-hidden="true"></i></button>
+        <div class="filter-options" role="listbox" aria-label="Duration filter"></div>
       </div>
-      <button class="filter-reset" id="btn-filter-reset" title="Reset Filters">
-        <i class="fas fa-times"></i>
+      <button class="filter-reset" id="btn-filter-reset" title="Reset Filters" aria-label="Reset all filters">
+        <i class="fas fa-times" aria-hidden="true"></i>
       </button>
     </div>
   </div>
 
-  <div id="spot-panel" class="hidden">
-    <button id="close-panel"><i class="fas fa-times"></i></button>
+  <div id="spot-panel" class="hidden" role="dialog" aria-label="Tourism spot details" aria-modal="false">
+    <button id="close-panel" aria-label="Close panel"><i class="fas fa-times" aria-hidden="true"></i></button>
     <div class="panel-image">
       <div class="panel-slider" id="panel-slider">
         <div class="panel-slider-track" id="panel-slider-track"></div>
       </div>
-      <button class="slider-arrow slider-prev" id="slider-prev"><i class="fas fa-chevron-left"></i></button>
-      <button class="slider-arrow slider-next" id="slider-next"><i class="fas fa-chevron-right"></i></button>
-      <div class="slider-dots" id="slider-dots"></div>
+      <button class="slider-arrow slider-prev" id="slider-prev" aria-label="Previous image"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
+      <button class="slider-arrow slider-next" id="slider-next" aria-label="Next image"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+      <div class="slider-dots" id="slider-dots" role="tablist" aria-label="Image slides"></div>
       <div class="panel-rating">
         <i class="fas fa-star"></i>
         <span id="panel-rating">0</span>
@@ -354,87 +356,87 @@
       </div>
     </div>
     <div class="panel-content">
-      <span class="panel-area" id="panel-duration"></span>
-      <h2 id="panel-title"></h2>
+      <span class="panel-area" id="panel-duration" aria-label="Duration and location"></span>
+      <h2 id="panel-title" aria-live="polite"></h2>
       <p id="panel-desc"></p>
       <div class="panel-coords">
-        <i class="fas fa-map-marker-alt"></i>
-        <span id="panel-coords"></span>
+        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+        <span id="panel-coords" aria-label="Coordinates"></span>
       </div>
-      <div class="panel-actions">
-        <a class="btn-explore" id="btn-explore" href="#" target="_blank" rel="noopener">
-          <i class="fas fa-compass"></i> View Details
+      <div class="panel-actions" role="toolbar" aria-label="Spot actions">
+        <a class="btn-explore" id="btn-explore" href="#" target="_blank" rel="noopener" aria-label="View full details">
+          <i class="fas fa-compass" aria-hidden="true"></i> View Details
         </a>
-        <button class="btn-directions" id="btn-directions" title="Get Directions">
-          <i class="fas fa-route"></i>
+        <button class="btn-directions" id="btn-directions" title="Get Directions" aria-label="Get directions to this spot">
+          <i class="fas fa-route" aria-hidden="true"></i>
         </button>
-        <button class="btn-bookmark" id="btn-bookmark" title="Save to favorites">
-          <i class="far fa-heart"></i>
+        <button class="btn-bookmark" id="btn-bookmark" title="Save to favorites" aria-label="Save to favorites" aria-pressed="false">
+          <i class="far fa-heart" aria-hidden="true"></i>
         </button>
       </div>
     </div>
   </div>
 
-  <div id="legend-panel" class="hidden">
+  <div id="legend-panel" class="hidden" role="dialog" aria-label="Location guide">
     <div class="legend-header">
       <div class="legend-title-wrap">
-        <i class="fas fa-map-marked-alt"></i>
+        <i class="fas fa-map-marked-alt" aria-hidden="true"></i>
         <span>Location Guide</span>
       </div>
-      <button id="legend-close" class="legend-close" title="Close"><i class="fas fa-times"></i></button>
+      <button id="legend-close" class="legend-close" title="Close" aria-label="Close location guide"><i class="fas fa-times" aria-hidden="true"></i></button>
     </div>
-    <div class="legend-list">
-      <div class="legend-item" data-lat="-8.580071" data-lng="115.139204">
-        <img src="asset/Nyambu.svg" alt="Nyambu" class="legend-icon">
+    <div class="legend-list" role="list" aria-label="Available locations">
+      <div class="legend-item" data-lat="-8.580071" data-lng="115.139204" role="listitem" tabindex="0">
+        <img src="asset/Nyambu.svg" alt="" class="legend-icon" aria-hidden="true">
         <div class="legend-info">
           <div class="legend-name">Nyambu</div>
           <div class="legend-desc">Rice farming & subak village</div>
         </div>
       </div>
-      <div class="legend-item" data-lat="-8.236222" data-lng="115.025031">
-        <img src="asset/Pedawa.svg" alt="Pedawa" class="legend-icon">
+      <div class="legend-item" data-lat="-8.236222" data-lng="115.025031" role="listitem" tabindex="0">
+        <img src="asset/Pedawa.svg" alt="" class="legend-icon" aria-hidden="true">
         <div class="legend-info">
           <div class="legend-name">Pedawa</div>
           <div class="legend-desc">Traditional Bali Aga village</div>
         </div>
       </div>
-      <div class="legend-item" data-lat="-8.444435" data-lng="115.538783">
-        <img src="asset/Dukuh,_Sibetan.svg" alt="Sibetan" class="legend-icon">
+      <div class="legend-item" data-lat="-8.444435" data-lng="115.538783" role="listitem" tabindex="0">
+        <img src="asset/Dukuh,_Sibetan.svg" alt="" class="legend-icon" aria-hidden="true">
         <div class="legend-info">
           <div class="legend-name">Sibetan</div>
           <div class="legend-desc">Salak fruit center</div>
         </div>
       </div>
-      <div class="legend-item" data-lat="-8.295690" data-lng="115.226900">
-        <img src="asset/Kiadan,_Pelaga.svg" alt="Pelaga" class="legend-icon">
+      <div class="legend-item" data-lat="-8.295690" data-lng="115.226900" role="listitem" tabindex="0">
+        <img src="asset/Kiadan,_Pelaga.svg" alt="" class="legend-icon" aria-hidden="true">
         <div class="legend-info">
           <div class="legend-name">Kiadan Pelaga</div>
           <div class="legend-desc">Highlands & coffee</div>
         </div>
       </div>
-      <div class="legend-item" data-lat="-8.733330" data-lng="115.533330">
-        <img src="asset/Nusa_Penida.svg" alt="Nusa Penida" class="legend-icon">
+      <div class="legend-item" data-lat="-8.733330" data-lng="115.533330" role="listitem" tabindex="0">
+        <img src="asset/Nusa_Penida.svg" alt="" class="legend-icon" aria-hidden="true">
         <div class="legend-info">
           <div class="legend-name">Nusa Penida</div>
           <div class="legend-desc">Turtle conservation & diving</div>
         </div>
       </div>
-      <div class="legend-item" data-lat="-8.403367" data-lng="114.617401">
-        <img src="asset/Perancak.svg" alt="Perancak" class="legend-icon">
+      <div class="legend-item" data-lat="-8.403367" data-lng="114.617401" role="listitem" tabindex="0">
+        <img src="asset/Perancak.svg" alt="" class="legend-icon" aria-hidden="true">
         <div class="legend-info">
           <div class="legend-name">Perancak</div>
           <div class="legend-desc">Turtle beach & river</div>
         </div>
       </div>
-      <div class="legend-item" data-lat="-8.477500" data-lng="115.566390">
-        <img src="asset/Tenganan_Pegringsingan.svg" alt="Tenganan" class="legend-icon">
+      <div class="legend-item" data-lat="-8.477500" data-lng="115.566390" role="listitem" tabindex="0">
+        <img src="asset/Tenganan_Pegringsingan.svg" alt="" class="legend-icon" aria-hidden="true">
         <div class="legend-info">
           <div class="legend-name">Tenganan</div>
           <div class="legend-desc">Bali Aga village & geringsing</div>
         </div>
       </div>
-      <div class="legend-item" data-lat="-8.150000" data-lng="115.120000">
-        <img src="asset/Adat_Dalem_Tamblingan.svg" alt="Tamblingan" class="legend-icon">
+      <div class="legend-item" data-lat="-8.150000" data-lng="115.120000" role="listitem" tabindex="0">
+        <img src="asset/Adat_Dalem_Tamblingan.svg" alt="" class="legend-icon" aria-hidden="true">
         <div class="legend-info">
           <div class="legend-name">Tamblingan</div>
           <div class="legend-desc">Sacred lake & ancient temple</div>
@@ -442,12 +444,12 @@
       </div>
     </div>
   </div>
-  <button id="legend-toggle" class="legend-toggle" title="Location Guide">
-    <i class="fas fa-book-open"></i>
+  <button id="legend-toggle" class="legend-toggle" title="Location Guide" aria-label="Toggle location guide" aria-expanded="false" aria-controls="legend-panel">
+    <i class="fas fa-book-open" aria-hidden="true"></i>
   </button>
 
-  <div id="offline-banner" class="offline-banner">
-    <i class="fas fa-wifi-slash"></i>
+  <div id="offline-banner" class="offline-banner" role="alert" aria-live="assertive">
+    <i class="fas fa-wifi-slash" aria-hidden="true"></i>
     <span>Offline — using cached data</span>
   </div>
 
@@ -461,6 +463,6 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="js/main.js?v=5"></script>
+  <script src="js/main.js?v=6"></script>
 </body>
 </html>
