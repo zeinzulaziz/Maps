@@ -1847,3 +1847,22 @@ text-transform: uppercase;
   .community-tagline { font-size: 0.45rem; }
   .community-sub { font-size: 0.36rem; }
 }
+
+/* Lazy Loading */
+.panel-slider-track img.lazy {
+  filter: blur(8px);
+  transition: filter 0.3s ease;
+}
+
+.panel-slider-track img.loaded {
+  filter: none;
+}
+
+/* Search More */
+.search-more {
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  color: var(--gold, #c9a96e);
+  text-align: center;
+  border-top: 1px solid rgba(201, 169, 110, 0.15);
+}

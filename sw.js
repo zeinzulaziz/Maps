@@ -1,4 +1,4 @@
-const CACHE_NAME = 'jed-map-v3';
+const CACHE_NAME = 'jed-map-v4';
 const STATIC_ASSETS = [
   '/',
   '/index.html',

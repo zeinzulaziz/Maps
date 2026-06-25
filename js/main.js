@@ -108,6 +108,7 @@
   async function init() {
     simulateLoading();
     initMap();
+    initLazyLoad();
     await loadGeoJSON();
     addMountainMarkers();
     await loadAllData();
@@ -636,12 +637,29 @@
   function createMarkers(spotsData) {
     markers.forEach(function(m) { map.removeLayer(m.layer); });
     markers = [];
-    spotsData.forEach(function(spot) {
-      var markerIcon = createMarkerIcon(spot.location, spot.name);
-      var layer = L.marker([spot.lat, spot.lng], { icon: markerIcon }).addTo(map);
-      layer.on('click', function() { animateToMarker(spot, layer); });
-      markers.push({ layer: layer, spot: spot });
-    });
+    var BATCH_SIZE = 20;
+    var index = 0;
+
+    function addBatch() {
+      var end = Math.min(index + BATCH_SIZE, spotsData.length);
+      for (var i = index; i < end; i++) {
+        var spot = spotsData[i];
+        var markerIcon = createMarkerIcon(spot.location, spot.name);
+        var layer = L.marker([spot.lat, spot.lng], { icon: markerIcon }).addTo(map);
+        layer.on('click', (function(s, l) {
+          return function() { animateToMarker(s, l); };
+        })(spot, layer));
+        markers.push({ layer: layer, spot: spot });
+      }
+      index = end;
+      if (index < spotsData.length) {
+        requestAnimationFrame(addBatch);
+      }
+    }
+
+    if (spotsData.length > 0) {
+      requestAnimationFrame(addBatch);
+    }
   }
 
   function hideDecorations() {
@@ -698,13 +716,52 @@
     document.getElementById('slider-next').style.display = totalSlides > 1 ? 'flex' : 'none';
   }
 
+  var lazyObserver = null;
+  var lazyImageQueue = [];
+  var lazyImageTimer = null;
+
+  function initLazyLoad() {
+    if (!('IntersectionObserver' in window)) return;
+    lazyObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var img = entry.target;
+          var src = img.dataset.src;
+          if (src) {
+            img.src = src;
+            img.removeAttribute('data-src');
+            img.classList.add('loaded');
+            lazyObserver.unobserve(img);
+          }
+        }
+      });
+    }, { rootMargin: '200px' });
+  }
+
+  function observeLazyImage(img) {
+    if (lazyObserver) {
+      lazyObserver.observe(img);
+    } else {
+      img.src = img.dataset.src;
+    }
+  }
+
   function buildSliderTrack(images) {
     var track = document.getElementById('panel-slider-track');
     track.innerHTML = '';
-    images.forEach(function(src) {
+
+    images.forEach(function(src, i) {
       var img = document.createElement('img');
-      img.src = src;
       img.alt = '';
+      if (i <= 1) {
+        img.src = src;
+        img.classList.add('loaded');
+      } else {
+        img.dataset.src = src;
+        img.src = PLACEHOLDER_IMG || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+        img.classList.add('lazy');
+        observeLazyImage(img);
+      }
       track.appendChild(img);
     });
     setupSliderTouch();
@@ -869,27 +926,38 @@
   function renderSearchResults(results, query) {
     var dropdown = document.getElementById('search-dropdown');
     var input = document.getElementById('search-input');
+    var VISIBLE_LIMIT = 50;
+
     if (results.length === 0) {
-      dropdown.innerHTML = '<div class="search-empty"><i class="fas fa-search"></i>No results found for "' + query + '"</div>';
-    dropdown.classList.remove('hidden');
-    input.setAttribute('aria-expanded', 'true');
+      dropdown.innerHTML = '<div class="search-empty"><i class="fas fa-search" aria-hidden="true"></i>No results found for "' + escapeHtml(query) + '"</div>';
+      dropdown.classList.remove('hidden');
       input.setAttribute('aria-expanded', 'true');
       return;
     }
+
+    var visibleResults = results.slice(0, VISIBLE_LIMIT);
+    var hasMore = results.length > VISIBLE_LIMIT;
+
     var html = '';
-    results.forEach(function(spot) {
+    visibleResults.forEach(function(spot) {
       var meta = spot.interest || spot.category || '';
       if (spot.location) meta += (meta ? ' \u2014 ' : '') + spot.location;
-      html += '<div class="search-result" data-lat="' + spot.lat + '" data-lng="' + spot.lng + '" data-id="' + spot.id + '">' +
-        '<div class="search-result-icon"><i class="fas fa-map-marker-alt"></i></div>' +
+      html += '<div class="search-result" data-lat="' + spot.lat + '" data-lng="' + spot.lng + '" data-id="' + spot.id + '" role="option">' +
+        '<div class="search-result-icon"><i class="fas fa-map-marker-alt" aria-hidden="true"></i></div>' +
         '<div class="search-result-info">' +
           '<div class="search-result-name">' + highlightMatch(spot.name, query) + '</div>' +
-          '<div class="search-result-meta">' + meta + '</div>' +
+          '<div class="search-result-meta">' + escapeHtml(meta) + '</div>' +
         '</div>' +
       '</div>';
     });
+
+    if (hasMore) {
+      html += '<div class="search-more">Showing ' + VISIBLE_LIMIT + ' of ' + results.length + ' results</div>';
+    }
+
     dropdown.innerHTML = html;
     dropdown.classList.remove('hidden');
+    input.setAttribute('aria-expanded', 'true');
 
     dropdown.querySelectorAll('.search-result').forEach(function(el) {
       el.addEventListener('click', function() {
@@ -909,6 +977,12 @@
     });
   }
 
+  function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  }
+
   function closeSearch() {
     var dropdown = document.getElementById('search-dropdown');
     var input = document.getElementById('search-input');
@@ -921,14 +995,21 @@
     clear.classList.remove('visible');
   }
 
+  function debounce(fn, delay) {
+    var timer = null;
+    return function() {
+      var ctx = this, args = arguments;
+      clearTimeout(timer);
+      timer = setTimeout(function() { fn.apply(ctx, args); }, delay);
+    };
+  }
+
   function setupSearch() {
     var input = document.getElementById('search-input');
     var clear = document.getElementById('search-clear');
     var wrapper = document.getElementById('search-wrapper');
 
-    input.addEventListener('input', function() {
-      var val = this.value.trim();
-      clear.classList.toggle('visible', val.length > 0);
+    var debouncedSearch = debounce(function(val) {
       if (val.length >= 2) {
         var results = searchSpots(val);
         renderSearchResults(results, val);
@@ -936,6 +1017,12 @@
         document.getElementById('search-dropdown').classList.add('hidden');
         input.setAttribute('aria-expanded', 'false');
       }
+    }, 200);
+
+    input.addEventListener('input', function() {
+      var val = this.value.trim();
+      clear.classList.toggle('visible', val.length > 0);
+      debouncedSearch(val);
     });
 
     input.addEventListener('focus', function() {
