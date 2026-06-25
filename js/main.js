@@ -282,11 +282,13 @@
       });
     });
 
-    document.addEventListener('click', function() {
-      document.querySelectorAll('.filter-dropdown.open').forEach(function(d) {
-        d.classList.remove('open');
-        d.querySelector('.filter-trigger').setAttribute('aria-expanded', 'false');
-      });
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.filter-dropdown')) {
+        document.querySelectorAll('.filter-dropdown.open').forEach(function(d) {
+          d.classList.remove('open');
+          d.querySelector('.filter-trigger').setAttribute('aria-expanded', 'false');
+        });
+      }
     });
   }
 
