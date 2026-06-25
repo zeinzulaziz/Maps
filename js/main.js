@@ -859,8 +859,8 @@
     spotPanel.classList.remove('hidden');
 
     var tl = gsap.timeline();
-    tl.fromTo(spotPanel, { clipPath: 'inset(0 100% 0 0)', opacity: 0 },
-      { clipPath: 'inset(0 0% 0 0)', opacity: 1, duration: 0.5, ease: 'power3.out' });
+    tl.fromTo(spotPanel, { x: '100%', opacity: 0 },
+      { x: '0%', opacity: 1, duration: 0.5, ease: 'power3.out' });
     tl.fromTo('.slider-dots', { opacity: 0 }, { opacity: 1, duration: 0.25, ease: 'power1.out' }, '-=0.2');
     tl.fromTo('.panel-area', { y: 8, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3, ease: 'power2.out' }, '-=0.2');
     tl.fromTo('#panel-title', { y: 6, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3, ease: 'power2.out' }, '-=0.15');
@@ -875,7 +875,7 @@
 
   function closePanel() {
     stopAutoSlide();
-    gsap.to(spotPanel, { clipPath: 'inset(0 0 0 100%)', opacity: 0, duration: 0.4, ease: 'power3.in',
+    gsap.to(spotPanel, { x: '100%', opacity: 0, duration: 0.4, ease: 'power3.in',
       onComplete: function() { spotPanel.classList.add('hidden'); gsap.set(spotPanel, { clearProps: 'all' }); showDecorations(); }
     });
     if (selectedMarkerEl) {
