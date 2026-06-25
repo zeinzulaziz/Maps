@@ -1579,6 +1579,34 @@ text-transform: uppercase;
   display: none;
 }
 
+.offline-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background: var(--gold-dark);
+  color: var(--white);
+  padding: 0.5rem 1rem;
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transform: translateY(-100%);
+  transition: transform 0.3s ease;
+}
+
+.offline-banner.show {
+  transform: translateY(0);
+}
+
+.offline-banner i {
+  font-size: 0.85rem;
+}
+
 .community-badge {
   position: fixed;
   bottom: 1.5rem;

@@ -10,6 +10,11 @@
     'duration': '#8e44ad'
   };
 
+  const CACHE_KEYS = {
+    spots: 'jed_spots_cache',
+    taxonomy: 'jed_taxonomy_cache'
+  };
+
   const LOCATION_ASSETS = {
     'Nyambu': 'asset/Nyambu.svg',
     'Pedawa': 'asset/Pedawa.svg',
@@ -195,8 +200,14 @@
           return { id: item.id, name: decodeEntities(item.name), slug: item.slug };
         });
       });
+      saveToCache(CACHE_KEYS.taxonomy, taxonomyData);
     } catch (e) {
-      console.warn('Gagal load taxonomy terms:', e);
+      console.warn('Gagal load taxonomy dari API, coba cache:', e);
+      var cached = loadFromCache(CACHE_KEYS.taxonomy);
+      if (cached) {
+        taxonomyData = cached;
+        showOfflineBanner();
+      }
     }
   }
 
@@ -330,12 +341,23 @@
           rawItem: item
         };
       });
+      saveToCache(CACHE_KEYS.spots, spots);
+      hideOfflineBanner();
       createMarkers(spots);
       buildFilterUI();
       updateSpotCount(spots.length);
     } catch (e) {
-      console.error('Gagal load data:', e);
-      showErrorState();
+      console.error('Gagal load dari API, coba cache:', e);
+      var cached = loadFromCache(CACHE_KEYS.spots);
+      if (cached && cached.length > 0) {
+        spots = cached;
+        showOfflineBanner();
+        createMarkers(spots);
+        buildFilterUI();
+        updateSpotCount(spots.length);
+      } else {
+        showErrorState();
+      }
     }
     showLoadingState(false);
   }
@@ -357,6 +379,34 @@
   function showErrorState() {
     var countEl = document.getElementById('spot-count');
     if (countEl) countEl.textContent = 'Failed to load data';
+  }
+
+  function saveToCache(key, data) {
+    try {
+      localStorage.setItem(key, JSON.stringify(data));
+    } catch (e) {
+      console.warn('Gagal simpan ke cache:', e);
+    }
+  }
+
+  function loadFromCache(key) {
+    try {
+      var data = localStorage.getItem(key);
+      return data ? JSON.parse(data) : null;
+    } catch (e) {
+      console.warn('Gagal load dari cache:', e);
+      return null;
+    }
+  }
+
+  function showOfflineBanner() {
+    var banner = document.getElementById('offline-banner');
+    if (banner) banner.classList.add('show');
+  }
+
+  function hideOfflineBanner() {
+    var banner = document.getElementById('offline-banner');
+    if (banner) banner.classList.remove('show');
   }
 
   function updateSpotCount(count) {
