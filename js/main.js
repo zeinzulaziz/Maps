@@ -792,10 +792,12 @@
   }
 
   function hideDecorations() {
-    gsap.to('.deco-floral', { opacity: 0, duration: 0.4, ease: 'power2.in' });
-    gsap.to('.deco-vine', { opacity: 0, duration: 0.3, ease: 'power2.in' });
-    gsap.to('.deco-divider', { opacity: 0, duration: 0.3, ease: 'power2.in' });
-    gsap.to('.deco-text', { opacity: 0, duration: 0.3, ease: 'power2.in' });
+    gsap.to('.deco-floral', { opacity: 0, duration: 0.3, ease: 'power2.in', stagger: 0.04 });
+    gsap.to('.deco-vine', { opacity: 0, duration: 0.25, ease: 'power2.in', stagger: 0.03 });
+    gsap.to('.deco-divider', { opacity: 0, duration: 0.25, ease: 'power2.in', delay: 0.05 });
+    gsap.to('.deco-text', { opacity: 0, duration: 0.25, ease: 'power2.in', stagger: 0.06 });
+    gsap.to('#temple', { opacity: 0, duration: 0.4, ease: 'power2.in' });
+    gsap.to('.community-badge', { opacity: 0, duration: 0.35, ease: 'power2.in' });
   }
 
   function showDecorations() {
@@ -803,6 +805,8 @@
     gsap.to('.deco-vine', { opacity: 0.6, duration: 0.5, ease: 'power2.out', stagger: 0.05 });
     gsap.to('.deco-divider', { opacity: 0.5, duration: 0.5, ease: 'power2.out' });
     gsap.to('.deco-text', { opacity: 0.6, duration: 0.5, ease: 'power2.out' });
+    gsap.to('#temple', { opacity: 1, duration: 0.5, ease: 'power2.out' });
+    gsap.to('.community-badge', { opacity: 1, duration: 0.5, ease: 'power2.out' });
   }
 
   function animateToMarker(spot, layer) {
@@ -1306,6 +1310,12 @@
   }
 
   function setupEvents() {
+    map.on('click', function() {
+      if (!spotPanel.classList.contains('hidden')) {
+        closePanel();
+      }
+    });
+
     document.getElementById('map').addEventListener('mouseenter', function(e) {
       if (e.target.classList && e.target.classList.contains('marker-label')) {
         e.target.textContent = e.target.getAttribute('data-full');

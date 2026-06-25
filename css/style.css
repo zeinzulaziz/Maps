@@ -891,6 +891,7 @@ body {
   box-shadow: 0 8px 40px var(--shadow-dark);
   pointer-events: auto;
   border: 1px solid var(--cream-dark);
+  will-change: transform, opacity;
 }
 
 #spot-panel.hidden {
