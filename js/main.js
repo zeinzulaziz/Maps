@@ -606,11 +606,12 @@ function icon(name, cls) {
         var name = feature.properties.alt_name || feature.properties.name || '';
         layer.bindTooltip(name, { sticky: true, className: 'kab-tooltip-elegant' });
         layer.on('mouseover', function() {
-          gsap.to(this._path, { attr: { 'stroke-width': 3 }, duration: 0.2 });
+          this._path.style.transition = 'stroke-width 0.2s ease, opacity 0.2s ease';
+          this._path.setAttribute('stroke-width', '3');
           this.bringToFront();
         });
         layer.on('mouseout', function() {
-          gsap.to(this._path, { attr: { 'stroke-width': 1.5 }, duration: 0.2 });
+          this._path.setAttribute('stroke-width', '1.5');
         });
       }
     }).addTo(map);

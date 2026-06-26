@@ -441,7 +441,7 @@ body {
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 8px var(--shadow);
-  transition: all 0.3s ease;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .controls button:hover {
@@ -500,7 +500,7 @@ body {
   height: auto;
   min-width: 30%;
   max-width: 100%;
-  transition: all 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
   font-weight: 300;
 }
 
@@ -832,7 +832,7 @@ body {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: all 0.2s ease;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
   font-size: 0.5rem;
   color: transparent;
 }
@@ -857,7 +857,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  transition: color 0.3s ease, background 0.3s ease;
   font-size: 1rem;
   flex-shrink: 0;
   align-self: flex-end;
@@ -909,7 +909,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
   box-shadow: 0 2px 6px var(--shadow);
 }
 
@@ -974,7 +974,7 @@ body {
   align-items: center;
   justify-content: center;
   z-index: 3;
-  transition: all 0.2s ease;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
@@ -1007,7 +1007,7 @@ body {
   border-radius: 50%;
   background: rgba(255,255,255,0.5);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .slider-dot.active {
@@ -1103,7 +1103,7 @@ text-transform: uppercase;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  transition: all 0.3s ease;
+  transition: background 0.3s ease, color 0.3s ease;
   letter-spacing: 1px;
   text-transform: uppercase;
   text-decoration: none;
@@ -1135,7 +1135,7 @@ text-transform: uppercase;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  transition: background 0.3s ease, color 0.3s ease;
   flex-shrink: 0;
 }
 
@@ -1160,7 +1160,7 @@ text-transform: uppercase;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  transition: background 0.3s ease, color 0.3s ease;
   flex-shrink: 0;
 }
 
@@ -1215,7 +1215,7 @@ text-transform: uppercase;
   pointer-events: auto;
   z-index: 10;
   cursor: default;
-  transition: all 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .marker-label:hover {
@@ -1421,7 +1421,7 @@ text-transform: uppercase;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease;
   font-family: var(--font-main);
   line-height: 1;
 }
