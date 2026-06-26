@@ -578,7 +578,7 @@ function icon(name, cls) {
     });
     new ZoomSlider().addTo(map);
     L.control.scale({ position: 'bottomleft', imperial: false }).addTo(map);
-    tileLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(map);
+    tileLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { maxZoom: 19, detectRetina: true }).addTo(map);
     var hillshadeLayer = null;
     map.on('zoomend', function() {
       if (map.getZoom() >= 12 && !hillshadeLayer) {
