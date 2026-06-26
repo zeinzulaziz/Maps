@@ -883,11 +883,11 @@ body {
   transition: color 0.3s ease, background 0.3s ease;
   font-size: 1rem;
   flex-shrink: 0;
-  align-self: flex-end;
+  align-self: flex-end;line-height: 1.5;
+  color: #e74c3c;
 }
 
 .filter-reset:hover {
-  color: #e74c3c;
   background: rgba(231,76,60,0.08);
   border-radius: calc(6rem/16);
 }
@@ -1038,13 +1038,43 @@ body {
   transform: translateY(-50%);
   z-index: 1100;
   width: calc(340rem/16);
-  background: var(--cream);
-  border-radius: calc(4rem/16);
-  overflow: hidden;
-  box-shadow: 0 calc(8rem/16) calc(40rem/16) var(--shadow-dark);
+  background: #f5efe6;
+  overflow: visible;
   pointer-events: auto;
-  border: calc(1rem/16) solid var(--cream-dark);
   will-change: transform, opacity;
+  filter: drop-shadow(calc(2rem/16) calc(4rem/16) calc(8rem/16) rgba(0,0,0,0.15));
+}
+
+#spot-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.4) 0%, transparent 50%),
+    linear-gradient(225deg, rgba(0,0,0,0.03) 0%, transparent 50%);
+  border-radius: calc(2rem/16);
+  pointer-events: none;
+  z-index: 0;
+}
+
+#spot-panel::after {
+  content: "";
+  position: absolute;
+  top: calc(-3rem/16);
+  bottom: calc(-3rem/16);
+  left: calc(-6rem/16);
+  width: calc(8rem/16);
+  background: #f5efe6;
+  clip-path: polygon(
+    100% 0%, 60% 2%, 80% 5%, 40% 8%, 70% 12%, 30% 15%,
+    60% 18%, 20% 22%, 50% 25%, 10% 28%, 45% 32%, 15% 35%,
+    55% 38%, 25% 42%, 65% 45%, 5% 48%, 40% 52%, 20% 55%,
+    60% 58%, 10% 62%, 50% 65%, 30% 68%, 70% 72%, 15% 75%,
+    55% 78%, 35% 82%, 75% 85%, 20% 88%, 60% 92%, 40% 95%,
+    80% 98%, 100% 100%
+  );
+  z-index: -1;
+  filter: drop-shadow(calc(-1rem/16) 0 calc(1rem/16) rgba(0,0,0,0.08));
 }
 
 #spot-panel.hidden {
@@ -1082,8 +1112,10 @@ body {
 
 .panel-image {
   position: relative;
+  z-index: 1;
   height: calc(200rem/16);
   overflow: hidden;
+  border-radius: calc(2rem/16) calc(2rem/16) 0 0;
 }
 
 .panel-slider {
@@ -1208,7 +1240,7 @@ body {
   font-family: var(--font-main);
 }
 
-.panel-content { padding: 1rem 1.5rem 1.5rem; }
+.panel-content { padding: 1rem 1.5rem 1.5rem; position: relative; z-index: 1; }
 
 .panel-area {
 color: var(--green);
@@ -1755,6 +1787,8 @@ text-transform: uppercase;
     transform: none;
   }
 
+  #spot-panel::after { display: none; }
+
   #close-panel {
     width: 1.6rem;
     height: 1.6rem;
@@ -1875,12 +1909,42 @@ text-transform: uppercase;
   flex-direction: column;
   width: 260px;
   max-height: calc(100vh - 6rem);
-  background: var(--cream);
-  border: 1px solid var(--gold-light);
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.04);
-  overflow: hidden;
+  background: #f5efe6;
+  overflow: visible;
   transition: opacity 0.3s ease, transform 0.3s ease;
+  filter: drop-shadow(calc(2rem/16) calc(4rem/16) calc(8rem/16) rgba(0,0,0,0.15));
+}
+
+#legend-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.4) 0%, transparent 50%),
+    linear-gradient(225deg, rgba(0,0,0,0.03) 0%, transparent 50%);
+  border-radius: calc(2rem/16);
+  pointer-events: none;
+  z-index: 0;
+}
+
+#legend-panel::after {
+  content: "";
+  position: absolute;
+  top: calc(-3rem/16);
+  bottom: calc(-3rem/16);
+  right: calc(-6rem/16);
+  width: calc(8rem/16);
+  background: #f5efe6;
+  clip-path: polygon(
+    0% 0%, 40% 2%, 20% 5%, 60% 8%, 30% 12%, 70% 15%,
+    40% 18%, 80% 22%, 50% 25%, 90% 28%, 55% 32%, 85% 35%,
+    45% 38%, 75% 42%, 35% 45%, 95% 48%, 60% 52%, 80% 55%,
+    40% 58%, 90% 62%, 50% 65%, 70% 68%, 30% 72%, 85% 75%,
+    45% 78%, 65% 82%, 25% 85%, 80% 88%, 40% 92%, 60% 95%,
+    20% 98%, 0% 100%
+  );
+  z-index: -1;
+  filter: drop-shadow(calc(1rem/16) 0 calc(1rem/16) rgba(0,0,0,0.08));
 }
 
 #legend-panel.hidden {
@@ -1897,6 +1961,9 @@ text-transform: uppercase;
   background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
   color: var(--white);
   border-bottom: 2px solid var(--gold);
+  border-radius: calc(2rem/16) calc(2rem/16) 0 0;
+  position: relative;
+  z-index: 1;
 }
 
 .legend-title-wrap {
@@ -1937,6 +2004,8 @@ text-transform: uppercase;
   max-height: calc(100vh - 10rem);
   scrollbar-width: thin;
   scrollbar-color: var(--gold-light) transparent;
+  position: relative;
+  z-index: 1;
 }
 
 .legend-list::-webkit-scrollbar {
@@ -2121,6 +2190,8 @@ text-transform: uppercase;
     max-height: none;
     border-radius: 10px;
   }
+
+  #legend-panel::after { display: none; }
 
   .legend-header {
     padding: 0.4rem 0.6rem;
