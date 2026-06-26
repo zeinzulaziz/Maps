@@ -1,6 +1,5 @@
 const CACHE_NAME = 'jed-map-v5';
 const STATIC_ASSETS = [
-  '/',
   '/index.html',
   '/css/style.min.css',
   '/js/main.min.js',
