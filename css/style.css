@@ -446,6 +446,12 @@ body {
   transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
+.controls button i {
+    line-height: 1;
+    height: 1rem;
+    width: 1rem;
+}
+
 .controls button:hover {
   background: var(--gold);
   color: #fff;
@@ -1736,7 +1742,7 @@ text-transform: uppercase;
 
   .filter-trigger i:first-child { font-size: 0.7rem; }
   .gg-chevron-down { --ggs: 0.65; }
-  .filter-count { font-size: 0.55rem; padding: 0.05rem 0.25rem; min-width: 14px; }
+  .filter-count { font-size: 0.55rem; padding: 0.05rem 0.25rem; min-width: 14px; position: absolute; top: -0.2rem; right: -0.2rem; }
 
   .filter-selects .filter-dropdown:nth-of-type(4) .filter-options{ left: unset; right: 0; }
 
