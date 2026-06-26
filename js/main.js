@@ -43,7 +43,7 @@
     'GIANYAR': { fill: '#e8e4d8', border: '#c8c0a8' },
     'KLUNGKUNG': { fill: '#ece8dc', border: '#ccc4ac' },
     'BULELENG': { fill: '#e4e0d4', border: '#c4bca4' },
-    'KARANG ASEM': { fill: '#e0dcd0', border: '#c0b8a0' },
+    'KARANGASEM': { fill: '#e0dcd0', border: '#c0b8a0' },
     'BANGLI': { fill: '#e8e4d8', border: '#c8c0a8' },
     'KOTA DENPASAR': { fill: '#f4f0e4', border: '#d4ccb4' }
   };
@@ -585,7 +585,7 @@
         return { fillColor: c.fill, weight: 1.5, opacity: 0.8, color: c.border, fillOpacity: 0.6 };
       },
       onEachFeature: function(feature, layer) {
-        var name = feature.properties.name || feature.properties.alt_name || '';
+        var name = feature.properties.alt_name || feature.properties.name || '';
         layer.bindTooltip(name, { sticky: true, className: 'kab-tooltip-elegant' });
         layer.on('mouseover', function() {
           gsap.to(this._path, { attr: { 'stroke-width': 3 }, duration: 0.2 });

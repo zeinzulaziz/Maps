@@ -14,7 +14,7 @@
         "prov_id": "51",
         "prov_name": "BALI",
         "name": "JEMBRANA",
-        "alt_name": "KABUPATEN JEMBRANA",
+        "alt_name": "Jembrana Regency",
         "uuid": "0ef10160-a253-471d-92b6-8d256e6f034f",
         "color": "#aaaaaa"
       },
@@ -1138,7 +1138,7 @@
         "prov_id": "51",
         "prov_name": "BALI",
         "name": "TABANAN",
-        "alt_name": "KABUPATEN TABANAN",
+        "alt_name": "Tabanan Regency",
         "uuid": "f844eec7-5138-497c-a182-fff159c658d9",
         "color": "#aaaaaa"
       },
@@ -2278,7 +2278,7 @@
         "prov_id": "51",
         "prov_name": "BALI",
         "name": "BADUNG",
-        "alt_name": "KABUPATEN BADUNG",
+        "alt_name": "Badung Regency",
         "uuid": "46b426f4-ef81-486e-bfc6-d5e2fc09bc41",
         "color": "#aaaaaa"
       },
@@ -3938,7 +3938,7 @@
         "prov_id": "51",
         "prov_name": "BALI",
         "name": "GIANYAR",
-        "alt_name": "KABUPATEN GIANYAR",
+        "alt_name": "Gianyar Regency",
         "uuid": "eca01c29-8731-4072-8202-7be5b0f62d3b",
         "color": "#aaaaaa"
       },
@@ -4910,7 +4910,7 @@
         "prov_id": "51",
         "prov_name": "BALI",
         "name": "KLUNGKUNG",
-        "alt_name": "KABUPATEN KLUNGKUNG",
+        "alt_name": "Klungkung Regency",
         "uuid": "4cd14b20-1d06-4de3-8d86-2046967aee26",
         "color": "#aaaaaa"
       },
@@ -6014,7 +6014,7 @@
         "prov_id": "51",
         "prov_name": "BALI",
         "name": "BANGLI",
-        "alt_name": "KABUPATEN BANGLI",
+        "alt_name": "Bangli Regency",
         "uuid": "218556bd-88ea-4c69-81f6-8bfd4249faf2",
         "color": "#aaaaaa"
       },
@@ -7193,8 +7193,8 @@
       "properties": {
         "prov_id": "51",
         "prov_name": "BALI",
-        "name": "KARANG ASEM",
-        "alt_name": "KABUPATEN KARANG ASEM",
+        "name": "KARANGASEM",
+        "alt_name": "Karangasem Regency",
         "uuid": "46950146-2da7-4f8d-a7b2-829eca5d55eb",
         "color": "#aaaaaa"
       },
@@ -8318,7 +8318,7 @@
         "prov_id": "51",
         "prov_name": "BALI",
         "name": "BULELENG",
-        "alt_name": "KABUPATEN BULELENG",
+        "alt_name": "Buleleng Regency",
         "uuid": "1738b7a8-fc72-4c53-a745-be655256cb3d",
         "color": "#aaaaaa"
       },
@@ -10654,7 +10654,7 @@
         "prov_id": "51",
         "prov_name": "BALI",
         "name": "KOTA DENPASAR",
-        "alt_name": "KOTA DENPASAR",
+        "alt_name": "Denpasar City",
         "uuid": "af24d240-4608-4e2e-a313-146d4eb2998b",
         "color": "#aaaaaa"
       },
