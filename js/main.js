@@ -24,7 +24,30 @@
     'Adat Dalem Tamblingan': 'asset/Adat_Dalem_Tamblingan.svg'
   };
 
-  // Icon mapping removed - filters no longer use icons
+  // Custom SVG Icons - Zero network request, lightweight
+const ICONS = {
+  search: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>',
+  close: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>',
+  my_location: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4"/></svg>',
+  refresh: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>',
+  undo: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg>',
+  bookmark: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>',
+  bookmark_filled: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>',
+  chevron_left: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>',
+  chevron_right: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>',
+  star: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>',
+  explore: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>',
+  directions: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><path d="M18 6 9 15"/></svg>',
+  map: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>',
+  menu_book: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
+  wifi_off: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="2" y1="2" x2="22" y2="22"/><path d="M8.5 16.5a5 5 0 0 1 7 0"/><path d="M2 8.82a15 15 0 0 1 4.17-2.65"/><path d="M10.66 5c4.01-.36 8.14.9 11.34 3.76"/><path d="M16.85 11.25a10 10 0 0 1 2.22 1.68"/><path d="M5 12.55a10 10 0 0 1 5.17-2.39"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>',
+  check: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>',
+  location_on: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3" fill="white"/></svg>'
+};
+
+function icon(name, cls) {
+  return '<i class="icon' + (cls ? ' ' + cls : '') + '" aria-hidden="true">' + (ICONS[name] || '') + '</i>';
+}
 
   const BALI_BOUNDS = L.latLngBounds(
     L.latLng(-8.85, 114.4),
@@ -229,7 +252,7 @@
         opt.setAttribute('role', 'checkbox');
         opt.setAttribute('tabindex', '0');
         opt.setAttribute('aria-checked', 'false');
-        opt.innerHTML = '<span class="filter-check"><span class="material-symbols-outlined">check</span></span>' + term.name;
+        opt.innerHTML = '<span class="filter-check">' + icon('check') + '</span>' + term.name;
 
         function toggleOption() {
           var isSelected = opt.classList.toggle('selected');
@@ -474,11 +497,11 @@
     if (!btn) return;
     if (isBookmarked(spotId)) {
       btn.classList.add('bookmarked');
-      btn.innerHTML = '<span class="material-symbols-outlined" aria-hidden="true">bookmark</span>';
+      btn.innerHTML = icon('bookmark_filled');
       btn.setAttribute('aria-pressed', 'true');
     } else {
       btn.classList.remove('bookmarked');
-      btn.innerHTML = '<span class="material-symbols-outlined" aria-hidden="true">bookmark</span>';
+      btn.innerHTML = icon('bookmark');
       btn.setAttribute('aria-pressed', 'false');
     }
   }
@@ -1058,7 +1081,7 @@
     var favBtn = document.getElementById('btn-favorites');
     if (favBtn) {
       favBtn.classList.remove('active');
-      favBtn.innerHTML = '<span class="material-symbols-outlined">bookmark</span>';
+      favBtn.innerHTML = icon('bookmark');
     }
     document.querySelectorAll('.filter-option.selected').forEach(function(opt) {
       opt.classList.remove('selected');
@@ -1097,7 +1120,7 @@
     var VISIBLE_LIMIT = 50;
 
     if (results.length === 0) {
-      dropdown.innerHTML = '<div class="search-empty"><span class="material-symbols-outlined" aria-hidden="true">search</span>No results found for "' + escapeHtml(query) + '"</div>';
+      dropdown.innerHTML = '<div class="search-empty">' + icon('search') + 'No results found for "' + escapeHtml(query) + '"</div>';
       dropdown.classList.remove('hidden');
       input.setAttribute('aria-expanded', 'true');
       return;
@@ -1112,7 +1135,7 @@
       var meta = spot.interest || spot.category || '';
       if (spot.location) meta += (meta ? ' \u2014 ' : '') + spot.location;
       html += '<div class="search-result" id="search-result-' + i + '" data-lat="' + spot.lat + '" data-lng="' + spot.lng + '" data-id="' + spot.id + '" role="option">' +
-        '<div class="search-result-icon"><span class="material-symbols-outlined" aria-hidden="true">location_on</span></div>' +
+        '<div class="search-result-icon">' + icon('location_on') + '</div>' +
         '<div class="search-result-info">' +
           '<div class="search-result-name">' + highlightMatch(spot.name, query) + '</div>' +
           '<div class="search-result-meta">' + escapeHtml(meta) + '</div>' +
@@ -1363,9 +1386,9 @@
       this.classList.toggle('active', showFavoritesOnly);
       this.setAttribute('aria-pressed', showFavoritesOnly ? 'true' : 'false');
       if (showFavoritesOnly) {
-        this.innerHTML = '<span class="material-symbols-outlined" aria-hidden="true">bookmark</span>';
+        this.innerHTML = icon('bookmark_filled');
       } else {
-        this.innerHTML = '<span class="material-symbols-outlined" aria-hidden="true">bookmark</span>';
+        this.innerHTML = icon('bookmark');
       }
       applyFilters();
     });
