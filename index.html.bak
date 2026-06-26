@@ -18,7 +18,8 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="css/style.css">
 
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
 </head>
 <body>
   <a href="#map" class="skip-link">Skip to map</a>
@@ -279,16 +280,16 @@
       <span class="logo-sub">Tourism Map</span>
     </div>
     <div class="search-wrapper" id="search-wrapper">
-      <span class="material-symbols-outlined search-icon" aria-hidden="true">search</span>
+      <i class="fas fa-search search-icon" aria-hidden="true"></i>
       <input type="text" id="search-input" class="search-input" placeholder="Search spot, village, location..." autocomplete="off" role="combobox" aria-label="Search tourism spots" aria-expanded="false" aria-controls="search-dropdown" aria-autocomplete="list">
-      <button id="search-clear" class="search-clear" title="Clear" aria-label="Clear search"><span class="material-symbols-outlined" aria-hidden="true">close</span></button>
+      <button id="search-clear" class="search-clear" title="Clear" aria-label="Clear search"><i class="fas fa-times" aria-hidden="true"></i></button>
       <div id="search-dropdown" class="search-dropdown hidden" role="listbox" aria-label="Search results"></div>
     </div>
     <div class="controls" role="toolbar" aria-label="Map controls">
-      <button id="btn-locate" title="My Location" aria-label="Center map on my location"><span class="material-symbols-outlined" aria-hidden="true">my_location</span></button>
-      <button id="btn-refresh" title="Refresh Data" aria-label="Refresh tourism data"><span class="material-symbols-outlined" aria-hidden="true">refresh</span></button>
-      <button id="btn-reset" title="Reset View" aria-label="Reset map view"><span class="material-symbols-outlined" aria-hidden="true">undo</span></button>
-      <button id="btn-favorites" title="Show Favorites" aria-label="Show favorites" aria-pressed="false"><span class="material-symbols-outlined" aria-hidden="true">bookmark</span></button>
+      <button id="btn-locate" title="My Location" aria-label="Center map on my location"><i class="fas fa-crosshairs" aria-hidden="true"></i></button>
+      <button id="btn-refresh" title="Refresh Data" aria-label="Refresh tourism data"><i class="fas fa-sync-alt" aria-hidden="true"></i></button>
+      <button id="btn-reset" title="Reset View" aria-label="Reset map view"><i class="fas fa-undo" aria-hidden="true"></i></button>
+      <button id="btn-favorites" title="Show Favorites" aria-label="Show favorites" aria-pressed="false"><i class="far fa-heart" aria-hidden="true"></i></button>
       <span id="spot-count" class="spot-count" role="status" aria-live="polite">Loading data...</span>
     </div>
   </header>
@@ -296,38 +297,38 @@
   <div id="filter-bar" role="search" aria-label="Filter tourism spots">
     <div class="filter-selects">
       <div class="filter-dropdown" data-taxonomy="interest">
-        <button class="filter-trigger" aria-expanded="false" aria-haspopup="listbox"><span>Interest</span><span class="filter-count"></span></button>
+        <button class="filter-trigger" aria-expanded="false" aria-haspopup="listbox"><i class="fas fa-heart" aria-hidden="true"></i> <span>Interest</span><span class="filter-count"></span><i class="fas fa-chevron-down filter-arrow" aria-hidden="true"></i></button>
         <div class="filter-options" role="listbox" aria-label="Interest filter"></div>
       </div>
       <div class="filter-dropdown" data-taxonomy="season">
-        <button class="filter-trigger" aria-expanded="false" aria-haspopup="listbox"><span>Season</span><span class="filter-count"></span></button>
+        <button class="filter-trigger" aria-expanded="false" aria-haspopup="listbox"><i class="fas fa-cloud-sun" aria-hidden="true"></i> <span>Season</span><span class="filter-count"></span><i class="fas fa-chevron-down filter-arrow" aria-hidden="true"></i></button>
         <div class="filter-options" role="listbox" aria-label="Season filter"></div>
       </div>
       <div class="filter-dropdown" data-taxonomy="location">
-        <button class="filter-trigger" aria-expanded="false" aria-haspopup="listbox"><span>Location</span><span class="filter-count"></span></button>
+        <button class="filter-trigger" aria-expanded="false" aria-haspopup="listbox"><i class="fas fa-map-pin" aria-hidden="true"></i> <span>Location</span><span class="filter-count"></span><i class="fas fa-chevron-down filter-arrow" aria-hidden="true"></i></button>
         <div class="filter-options" role="listbox" aria-label="Location filter"></div>
       </div>
       <div class="filter-dropdown" data-taxonomy="duration">
-        <button class="filter-trigger" aria-expanded="false" aria-haspopup="listbox"><span>Duration</span><span class="filter-count"></span></button>
+        <button class="filter-trigger" aria-expanded="false" aria-haspopup="listbox"><i class="fas fa-clock" aria-hidden="true"></i> <span>Duration</span><span class="filter-count"></span><i class="fas fa-chevron-down filter-arrow" aria-hidden="true"></i></button>
         <div class="filter-options" role="listbox" aria-label="Duration filter"></div>
       </div>
       <button class="filter-reset" id="btn-filter-reset" title="Reset Filters" aria-label="Reset all filters">
-        Reset
+        <i class="fas fa-times" aria-hidden="true"></i>
       </button>
     </div>
   </div>
 
   <div id="spot-panel" class="hidden" role="dialog" aria-label="Tourism spot details" aria-modal="false">
-    <button id="close-panel" aria-label="Close panel"><span class="material-symbols-outlined" aria-hidden="true">close</span></button>
+    <button id="close-panel" aria-label="Close panel"><i class="fas fa-times" aria-hidden="true"></i></button>
     <div class="panel-image">
       <div class="panel-slider" id="panel-slider">
         <div class="panel-slider-track" id="panel-slider-track"></div>
       </div>
-      <button class="slider-arrow slider-prev" id="slider-prev" aria-label="Previous image"><span class="material-symbols-outlined" aria-hidden="true">chevron_left</span></button>
-      <button class="slider-arrow slider-next" id="slider-next" aria-label="Next image"><span class="material-symbols-outlined" aria-hidden="true">chevron_right</span></button>
+      <button class="slider-arrow slider-prev" id="slider-prev" aria-label="Previous image"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
+      <button class="slider-arrow slider-next" id="slider-next" aria-label="Next image"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
       <div class="slider-dots" id="slider-dots" role="tablist" aria-label="Image slides"></div>
       <div class="panel-rating">
-        <span class="material-symbols-outlined">star</span>
+        <i class="fas fa-star"></i>
         <span id="panel-rating">0</span>
       </div>
       <div class="panel-price" id="panel-price-wrap" style="display:none">
@@ -341,13 +342,13 @@
       <span class="panel-interest" id="panel-interest" aria-label="Interest"></span>
       <div class="panel-actions" role="toolbar" aria-label="Spot actions">
         <a class="btn-explore" id="btn-explore" href="#" target="_blank" rel="noopener" aria-label="View full details">
-          <span class="material-symbols-outlined" aria-hidden="true">explore</span> View Details
+          <i class="fas fa-compass" aria-hidden="true"></i> View Details
         </a>
         <button class="btn-directions" id="btn-directions" title="Get Directions" aria-label="Get directions to this spot">
-          <span class="material-symbols-outlined" aria-hidden="true">directions</span>
+          <i class="fas fa-route" aria-hidden="true"></i>
         </button>
         <button class="btn-bookmark" id="btn-bookmark" title="Save to favorites" aria-label="Save to favorites" aria-pressed="false">
-          <span class="material-symbols-outlined" aria-hidden="true">bookmark</span>
+          <i class="far fa-heart" aria-hidden="true"></i>
         </button>
       </div>
     </div>
@@ -355,11 +356,11 @@
 
   <div id="legend-panel" class="hidden" role="dialog" aria-label="Location guide">
     <div class="legend-header">
-<div class="legend-title-wrap">
-          <span class="material-symbols-outlined" aria-hidden="true">map</span>
-          <span>Location Guide</span>
-        </div>
-      <button id="legend-close" class="legend-close" title="Close" aria-label="Close location guide"><span class="material-symbols-outlined" aria-hidden="true">close</span></button>
+      <div class="legend-title-wrap">
+        <i class="fas fa-map-marked-alt" aria-hidden="true"></i>
+        <span>Location Guide</span>
+      </div>
+      <button id="legend-close" class="legend-close" title="Close" aria-label="Close location guide"><i class="fas fa-times" aria-hidden="true"></i></button>
     </div>
     <div class="legend-list" role="list" aria-label="Available locations">
       <div class="legend-item" data-lat="-8.580071" data-lng="115.139204" role="listitem" tabindex="0">
@@ -421,11 +422,11 @@
     </div>
   </div>
   <button id="legend-toggle" class="legend-toggle" title="Location Guide" aria-label="Toggle location guide" aria-expanded="false" aria-controls="legend-panel">
-    <span class="material-symbols-outlined" aria-hidden="true">menu_book</span>
+    <i class="fas fa-book-open" aria-hidden="true"></i>
   </button>
 
   <div id="offline-banner" class="offline-banner" role="alert" aria-live="assertive">
-    <span class="material-symbols-outlined" aria-hidden="true">wifi_off</span>
+    <i class="fas fa-wifi-slash" aria-hidden="true"></i>
     <span>Offline — using cached data</span>
   </div>
 

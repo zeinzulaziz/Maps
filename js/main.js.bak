@@ -24,7 +24,12 @@
     'Adat Dalem Tamblingan': 'asset/Adat_Dalem_Tamblingan.svg'
   };
 
-  // Icon mapping removed - filters no longer use icons
+  const TERM_ICONS = {
+    'interest': 'fa-heart',
+    'season': 'fa-cloud-sun',
+    'location': 'fa-map-pin',
+    'duration': 'fa-clock'
+  };
 
   const BALI_BOUNDS = L.latLngBounds(
     L.latLng(-8.85, 114.4),
@@ -229,7 +234,7 @@
         opt.setAttribute('role', 'checkbox');
         opt.setAttribute('tabindex', '0');
         opt.setAttribute('aria-checked', 'false');
-        opt.innerHTML = '<span class="filter-check"><span class="material-symbols-outlined">check</span></span>' + term.name;
+        opt.innerHTML = '<span class="filter-check"><i class="fas fa-check"></i></span>' + term.name;
 
         function toggleOption() {
           var isSelected = opt.classList.toggle('selected');
@@ -474,11 +479,11 @@
     if (!btn) return;
     if (isBookmarked(spotId)) {
       btn.classList.add('bookmarked');
-      btn.innerHTML = '<span class="material-symbols-outlined" aria-hidden="true">bookmark</span>';
+      btn.innerHTML = '<i class="fas fa-heart" aria-hidden="true"></i>';
       btn.setAttribute('aria-pressed', 'true');
     } else {
       btn.classList.remove('bookmarked');
-      btn.innerHTML = '<span class="material-symbols-outlined" aria-hidden="true">bookmark</span>';
+      btn.innerHTML = '<i class="far fa-heart" aria-hidden="true"></i>';
       btn.setAttribute('aria-pressed', 'false');
     }
   }
@@ -1058,7 +1063,7 @@
     var favBtn = document.getElementById('btn-favorites');
     if (favBtn) {
       favBtn.classList.remove('active');
-      favBtn.innerHTML = '<span class="material-symbols-outlined">bookmark</span>';
+      favBtn.innerHTML = '<i class="far fa-heart"></i>';
     }
     document.querySelectorAll('.filter-option.selected').forEach(function(opt) {
       opt.classList.remove('selected');
@@ -1097,7 +1102,7 @@
     var VISIBLE_LIMIT = 50;
 
     if (results.length === 0) {
-      dropdown.innerHTML = '<div class="search-empty"><span class="material-symbols-outlined" aria-hidden="true">search</span>No results found for "' + escapeHtml(query) + '"</div>';
+      dropdown.innerHTML = '<div class="search-empty"><i class="fas fa-search" aria-hidden="true"></i>No results found for "' + escapeHtml(query) + '"</div>';
       dropdown.classList.remove('hidden');
       input.setAttribute('aria-expanded', 'true');
       return;
@@ -1112,7 +1117,7 @@
       var meta = spot.interest || spot.category || '';
       if (spot.location) meta += (meta ? ' \u2014 ' : '') + spot.location;
       html += '<div class="search-result" id="search-result-' + i + '" data-lat="' + spot.lat + '" data-lng="' + spot.lng + '" data-id="' + spot.id + '" role="option">' +
-        '<div class="search-result-icon"><span class="material-symbols-outlined" aria-hidden="true">location_on</span></div>' +
+        '<div class="search-result-icon"><i class="fas fa-map-marker-alt" aria-hidden="true"></i></div>' +
         '<div class="search-result-info">' +
           '<div class="search-result-name">' + highlightMatch(spot.name, query) + '</div>' +
           '<div class="search-result-meta">' + escapeHtml(meta) + '</div>' +
@@ -1363,9 +1368,9 @@
       this.classList.toggle('active', showFavoritesOnly);
       this.setAttribute('aria-pressed', showFavoritesOnly ? 'true' : 'false');
       if (showFavoritesOnly) {
-        this.innerHTML = '<span class="material-symbols-outlined" aria-hidden="true">bookmark</span>';
+        this.innerHTML = '<i class="fas fa-heart" aria-hidden="true"></i>';
       } else {
-        this.innerHTML = '<span class="material-symbols-outlined" aria-hidden="true">bookmark</span>';
+        this.innerHTML = '<i class="far fa-heart" aria-hidden="true"></i>';
       }
       applyFilters();
     });
