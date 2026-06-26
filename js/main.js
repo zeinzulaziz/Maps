@@ -892,6 +892,8 @@ function icon(name, cls) {
     track.innerHTML = '';
 
     images.forEach(function(src, i) {
+      var slide = document.createElement('div');
+      slide.className = 'panel-slide';
       var img = document.createElement('img');
       img.alt = spotName + ' - image ' + (i + 1) + ' of ' + images.length;
       if (i <= 1) {
@@ -903,7 +905,8 @@ function icon(name, cls) {
         img.classList.add('lazy');
         observeLazyImage(img);
       }
-      track.appendChild(img);
+      slide.appendChild(img);
+      track.appendChild(slide);
     });
     setupSliderTouch();
   }
