@@ -527,7 +527,7 @@ function icon(name, cls) {
           });
         }, 300);
       }
-      progressBar.style.width = progress + '%';
+      progressBar.style.transform = 'scaleX(' + (progress / 100) + ')';
     }, 100);
   }
 
