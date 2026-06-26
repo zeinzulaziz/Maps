@@ -1467,6 +1467,14 @@ function icon(name, cls) {
         map.panTo([found.spot.lat, found.spot.lng], { animate: true, duration: 0.8 });
       }
     });
+
+    var lastRefresh = 0;
+    document.addEventListener('visibilitychange', function() {
+      if (!document.hidden && Date.now() - lastRefresh > 300000) {
+        lastRefresh = Date.now();
+        loadAllData();
+      }
+    });
   }
 
   function setupKeyboardNav() {
