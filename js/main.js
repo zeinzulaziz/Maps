@@ -197,7 +197,7 @@ function icon(name, cls) {
     while (true) {
       var separator = url.includes('?') ? '&' : '?';
       var pageUrl = url + separator + 'per_page=' + perPage + '&page=' + page + '&_embed' + cacheBuster;
-      var resp = await fetch(pageUrl, { cache: 'no-store' });
+      var resp = await fetch(pageUrl);
       if (!resp.ok) break;
       var data = await resp.json();
       if (!data || data.length === 0) break;
@@ -1535,13 +1535,13 @@ function icon(name, cls) {
       { scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(2)', delay: 3.5 });
   }
 
-  // if ('serviceWorker' in navigator) {
-  //   window.addEventListener('load', function() {
-  //     navigator.serviceWorker.register('/sw.js').then(function(reg) {
-  //       reg.update();
-  //     }).catch(function() {});
-  //   });
-  // }
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/sw.js').then(function(reg) {
+        reg.update();
+      }).catch(function() {});
+    });
+  }
 
   window.addEventListener('DOMContentLoaded', init);
 
