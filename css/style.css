@@ -1541,6 +1541,10 @@ text-transform: uppercase;
     white-space: nowrap;
   }
 
+  .filter-trigger i:not(.filter-arrow){
+    display: none;
+  }
+
   .filter-trigger i:first-child { font-size: 0.7rem; }
   .filter-arrow { font-size: 0.55rem; }
   .filter-count { font-size: 0.55rem; padding: 0.05rem 0.25rem; min-width: 14px; }
@@ -1611,6 +1615,12 @@ text-transform: uppercase;
   }
 
   .panel-image { height: 200px; }
+  #panel-desc {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
   .slider-arrow { width: 1.6rem; height: 1.6rem; font-size: 0.65rem; }
   .slider-prev { left: 0.3rem; }
   .slider-next { right: 0.3rem; }
@@ -2026,6 +2036,7 @@ text-transform: uppercase;
   .community-badge {
     bottom: 3rem;
     right: 0.8rem;
+    display: none;
   }
 
   .community-badge svg {
